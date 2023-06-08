@@ -1,0 +1,6 @@
+
+abstract class AppTeacherWebStates{}
+class AppTeacherWebInitialState extends AppTeacherWebStates{}
+class AppTeacherWebChangePasswordVisibilityState extends AppTeacherWebStates{}
+class AppTeacherWebChangeConfirmPasswordVisibilityState extends AppTeacherWebStates{}
+class AppTeacherWebChangeClassState extends AppTeacherWebStates{}

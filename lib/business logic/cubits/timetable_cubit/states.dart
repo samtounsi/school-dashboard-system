@@ -1,0 +1,20 @@
+abstract class TimetableStates{}
+class TimetableInitialState extends TimetableStates{}
+class TimetableChangeClassState extends TimetableStates{}
+class TimetableChangeSectionState extends TimetableStates{}
+class TimetableChangeArabicTeacherState extends TimetableStates{}
+class TimetableChangeEnglishTeacherState extends TimetableStates{}
+class TimetableChangeFrenchTeacherState extends TimetableStates{}
+class TimetableChangeMathTeacherState extends TimetableStates{}
+class TimetableChangePhysicsTeacherState extends TimetableStates{}
+class TimetableChangeChemistryTeacherState extends TimetableStates{}
+class TimetableChangeArtTeacherState extends TimetableStates{}
+class TimetableChangeMusicTeacherState extends TimetableStates{}
+class TimetableChangeSportsTeacherState extends TimetableStates{}
+class TimetableChangeSocialTeacherState extends TimetableStates{}
+class TimetableChangeCultureTeacherState extends TimetableStates{}
+class TimetableChangeReligionTeacherState extends TimetableStates{}
+class TimetableChangePhilosophyTeacherState extends TimetableStates{}
+class TimetableChangeScienceTeacherState extends TimetableStates{}
+class TimetableChangeTechnologyTeacherState extends TimetableStates{}
+
