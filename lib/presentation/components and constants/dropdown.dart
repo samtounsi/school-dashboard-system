@@ -33,7 +33,7 @@ Widget buildDropdown(
         ),
         Container(
           padding: EdgeInsets.only(left: 10),
-          width: 250,
+          width: 200,
           decoration: BoxDecoration(
               color: Colors.white,
               border: Border.all(color: Colors.grey),

@@ -34,164 +34,173 @@ class ShowTimetable extends StatelessWidget {
       listener: (context, state) {},
       builder: (context, state) {
         return Scaffold(
-          body: Card(
-            child: Padding(
-              padding:
-                  EdgeInsetsDirectional.only(start: 15, end: 15, top: 18),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Text(
-                    'Time table',
-                    style: TextStyle(
-                        color: AppColors.lightOrange,
-                        fontSize: 50,
-                        fontWeight: FontWeight.bold),
-                  ),
-                  Padding(
-                    padding: EdgeInsetsDirectional.only(start: 60),
-                    child: Row(
+          body: SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Card(
+              elevation: 0,
+              borderOnForeground: false,
+              color: Colors.transparent,
+              child: Padding(
+                padding:
+                    EdgeInsetsDirectional.only(start: 15, end: 15, top: 18),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: EdgeInsetsDirectional.symmetric(horizontal: 500.0),
+                      child: Text(
+                        'Time table',
+                        style: TextStyle(
+                            color: AppColors.lightOrange,
+                            fontSize: 50,
+                            fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsetsDirectional.only(start: 60),
+                      child: Row(
+                        children: [
+                          buildDropdown(
+                              label: 'Class',
+                              list: ['7th grade', '8th grade', '9th grade'],
+                              onChanged: (value) {
+                                ShowTimetableCubit.get(context)
+                                    .changeClass(value!);
+                                classValue =
+                                    ShowTimetableCubit.get(context).classValue;
+                              },
+                              maxLength: 3,
+                              value: classValue),
+                          SizedBox(
+                            width: 20,
+                          ),
+                          buildDropdown(
+                              // dropDownValueText: 'select section',
+                              label: 'Section',
+                              list: sections,
+                              onChanged: (value) {
+                                ShowTimetableCubit.get(context)
+                                    .changeSection(value!);
+                                sectionValue = ShowTimetableCubit.get(context)
+                                    .sectionValue;
+                              },
+                              maxLength: sections.length,
+                              value: sectionValue),
+                          SizedBox(
+                            width: 20,
+                          ),
+                          Padding(
+                            padding: EdgeInsetsDirectional.only(top: 40),
+                            child: defaultTextButton(
+                                text: 'show table',
+                                function: () {
+                                  ShowTimetableCubit.get(context).getTable(
+                                      grade: classValue, section: sectionValue);
+                                },
+                                radius: 10,
+                                height: 52,
+                                textSize: 20,
+                                textColor: AppColors.darkBlue,
+                                fontWeight: FontWeight.bold,
+                                background: AppColors.borderColor),
+                          )
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        buildDropdown(
-                            label: 'Class',
-                            list: ['7th grade', '8th grade', '9th grade'],
-                            onChanged: (value) {
-                              ShowTimetableCubit.get(context)
-                                  .changeClass(value!);
-                              classValue =
-                                  ShowTimetableCubit.get(context).classValue;
-                            },
-                            maxLength: 3,
-                            value: classValue),
-                        SizedBox(
-                          width: 20,
+                        DataTable(
+                          columns: getColumns(columns),
+                          rows: getRows(ShowTimetableCubit.get(context).lesson),
+                          border: TableBorder.all(width: 1, color: AppColors.darkBlue),
+                          columnSpacing: 80,
+                          dataRowHeight: 80,
+                          headingRowColor: MaterialStateColor.resolveWith(
+                              (states) => AppColors.lightOrange),
+                          // dataRowColor: MaterialStateColor.resolveWith((states) => AppColors.lightOrange),
                         ),
-                        buildDropdown(
-                            // dropDownValueText: 'select section',
-                            label: 'Section',
-                            list: sections,
-                            onChanged: (value) {
-                              ShowTimetableCubit.get(context)
-                                  .changeSection(value!);
-                              sectionValue = ShowTimetableCubit.get(context)
-                                  .sectionValue;
-                            },
-                            maxLength: sections.length,
-                            value: sectionValue),
                         SizedBox(
-                          width: 20,
+                          width: 30,
                         ),
                         Padding(
-                          padding: EdgeInsetsDirectional.only(top: 40),
-                          child: defaultTextButton(
-                              text: 'show table',
-                              function: () {
-                                ShowTimetableCubit.get(context).getTable(
-                                    grade: classValue, section: sectionValue);
-                              },
-                              radius: 10,
-                              height: 52,
-                              textSize: 20,
-                              textColor: AppColors.darkBlue,
-                              fontWeight: FontWeight.bold,
-                              background: AppColors.borderColor),
-                        )
+                          padding:
+                              EdgeInsetsDirectional.symmetric(horizontal: 10),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              SizedBox(
+                                height: 20,
+                              ),
+                              Row(
+                                children: [
+                                  buildSubject('Arabic:Ar'),
+                                  buildSubject('English:E'),
+                                  buildSubject('French:F'),
+                                ],
+                              ),
+                              SizedBox(
+                                height: 20,
+                              ),
+                              Row(
+                                children: [
+                                  buildSubject('Art: A'),
+                                  buildSubject('Music:Mu'),
+                                  buildSubject('Sport:Sp')
+                                ],
+                              ),
+                              SizedBox(
+                                height: 20,
+                              ),
+                              Row(
+                                children: [
+                                  buildSubject('Science:S'),
+                                  buildSubject('Technology:T'),
+                                ],
+                              ),
+                              SizedBox(
+                                height: 20,
+                              ),
+                              Row(
+                                children: [
+                                  buildSubject('Math:M'),
+                                  buildSubject('Physics:P'),
+                                  buildSubject('Chemistry:Ch'),
+                                ],
+                              ),
+                              SizedBox(
+                                height: 20,
+                              ),
+                              Row(
+                                children: [
+                                  buildSubject('Social studies: Soc'),
+                                  buildSubject('Culture:C'),
+                                ],
+                              ),
+                              SizedBox(
+                                height: 20,
+                              ),
+                              Row(
+                                children: [
+                                  buildSubject('Religion:R'),
+                                  buildSubject('philosophy:Ph'),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
                       ],
                     ),
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      DataTable(
-                        columns: getColumns(columns),
-                        rows: getRows(ShowTimetableCubit.get(context).lesson),
-                        border: TableBorder.all(width: 1, color: AppColors.darkBlue),
-                        columnSpacing: 80,
-                        dataRowHeight: 80,
-                        headingRowColor: MaterialStateColor.resolveWith(
-                            (states) => AppColors.lightOrange),
-                        // dataRowColor: MaterialStateColor.resolveWith((states) => AppColors.lightOrange),
-                      ),
-                      SizedBox(
-                        width: 30,
-                      ),
-                      Padding(
-                        padding:
-                            EdgeInsetsDirectional.symmetric(horizontal: 10),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            SizedBox(
-                              height: 20,
-                            ),
-                            Row(
-                              children: [
-                                buildSubject('Arabic:Ar'),
-                                buildSubject('English:E'),
-                                buildSubject('French:F'),
-                              ],
-                            ),
-                            SizedBox(
-                              height: 20,
-                            ),
-                            Row(
-                              children: [
-                                buildSubject('Art: A'),
-                                buildSubject('Music:Mu'),
-                                buildSubject('Sport:Sp')
-                              ],
-                            ),
-                            SizedBox(
-                              height: 20,
-                            ),
-                            Row(
-                              children: [
-                                buildSubject('Science:S'),
-                                buildSubject('Technology:T'),
-                              ],
-                            ),
-                            SizedBox(
-                              height: 20,
-                            ),
-                            Row(
-                              children: [
-                                buildSubject('Math:M'),
-                                buildSubject('Physics:P'),
-                                buildSubject('Chemistry:Ch'),
-                              ],
-                            ),
-                            SizedBox(
-                              height: 20,
-                            ),
-                            Row(
-                              children: [
-                                buildSubject('Social studies: Soc'),
-                                buildSubject('Culture:C'),
-                              ],
-                            ),
-                            SizedBox(
-                              height: 20,
-                            ),
-                            Row(
-                              children: [
-                                buildSubject('Religion:R'),
-                                buildSubject('philosophy:Ph'),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 50,
-                  ),
-                ],
+                    SizedBox(
+                      height: 50,
+                    ),
+                  ],
+                ),
               ),
             ),
           ),

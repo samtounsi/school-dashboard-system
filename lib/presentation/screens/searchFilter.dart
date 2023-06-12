@@ -35,14 +35,17 @@ class _SearchStudentState extends State<SearchStudent> {
       listener: (context, state) {},
       builder: (context, state) {
         return Scaffold(
-          appBar: AppBar(
-            title: Text('Students'),
-            backgroundColor: AppColors.aqua,
-          ),
+          backgroundColor: Colors.transparent,
           body: Padding(
             padding: const EdgeInsets.all(12.0),
             child: Column(
               children: [
+                Text('Students',style: TextStyle(
+                  color: AppColors.aqua,
+                  fontSize: 45,
+                  fontWeight: FontWeight.bold
+                ),),
+                SizedBox(height: 30,),
                 Padding(
                   padding: const EdgeInsets.all(13.0),
                   child: Row(
@@ -55,14 +58,14 @@ class _SearchStudentState extends State<SearchStudent> {
                           child: TextField(
                             controller: gradeController,
                             decoration: InputDecoration(
-                              labelText: 'grade',
+                              labelText: 'Search by Grade',
                               // prefixIcon: Icon(Icons.search),
                               filled: true,
                               fillColor: Colors.white70,
-                              labelStyle: TextStyle(color: AppColors.aqua),
+                              labelStyle: TextStyle(color: Colors.black),
                               enabledBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(50.0),
-                                  borderSide: BorderSide(color: Colors.grey)),
+                                  borderSide: BorderSide(color: AppColors.aqua,width: 2)),
                             ),
                           ),
                         ),
@@ -74,14 +77,14 @@ class _SearchStudentState extends State<SearchStudent> {
                           child: TextField(
                             controller: sectionController,
                             decoration: InputDecoration(
-                              labelText: 'section',
+                              labelText: 'Search by Section',
                               // prefixIcon: Icon(Icons.search),
                               filled: true,
                               fillColor: Colors.white70,
-                              labelStyle: TextStyle(color: AppColors.aqua),
+                              labelStyle: TextStyle(color: Colors.black),
                               enabledBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(50.0),
-                                  borderSide: BorderSide(color: Colors.grey)),
+                                  borderSide: BorderSide(color:AppColors.aqua,width: 2)),
                             ),
                           ),
                         ),
@@ -93,14 +96,14 @@ class _SearchStudentState extends State<SearchStudent> {
                           child: TextField(
                             controller: nameController,
                             decoration: InputDecoration(
-                              labelText: 'name',
+                              labelText: 'Search by Name',
                               // prefixIcon: Icon(Icons.search),
                               filled: true,
                               fillColor: Colors.white70,
-                              labelStyle: TextStyle(color: AppColors.aqua),
+                              labelStyle: TextStyle(color: Colors.black),
                               enabledBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(50.0),
-                                  borderSide: BorderSide(color: Colors.grey)),
+                                  borderSide: BorderSide(color: AppColors.aqua,width: 2)),
                             ),
                           ),
                         ),
@@ -123,10 +126,11 @@ class _SearchStudentState extends State<SearchStudent> {
                                 sectionController.text,
                                 nameController.text);
                           },
-                          icon: Icon(Icons.search))
+                          icon: Icon(Icons.search,color: AppColors.aqua,size: 40,))
                     ],
                   ),
                 ),
+                SizedBox(height: 50,),
                 Expanded(
                   child: StudentCubit.get(context).foundUsers.isNotEmpty
                       ? GridView.count(
@@ -140,52 +144,32 @@ class _SearchStudentState extends State<SearchStudent> {
                                       navigateTo(context, StudentProfile());
                                     },
                                     child: Center(
-                                      child: Stack(children: [
-                                        Padding(
-                                          // key: ValueKey(_foundUsers[index]["id"]),
-                                          padding: EdgeInsets.all(30.0),
-                                          child: CircleAvatar(
-                                            backgroundColor:
-                                                AppColors.backgroundcolor,
-                                            radius: 150,
+                                      child: Column(children: [
+                                        Container(
+                                          decoration: BoxDecoration(
+                                            shape: BoxShape.circle,
+                                            color:AppColors.borderColor,
                                           ),
-                                        ),
-                                        Positioned(
-                                          bottom: 120,
-                                          right: 0.0,
-                                          left: 0.0,
-                                          child: Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.center,
-                                            children: [
-                                              Column(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                children: [
-                                                  CircleAvatar(
-                                                    radius: 50,
-                                                    backgroundColor:
-                                                        Colors.grey[300],
-                                                    backgroundImage: AssetImage(
-                                                        'images/profile.png'),
-                                                  ),
-                                                ],
-                                              ),
-                                              SizedBox(
-                                                height: 20,
-                                              ),
-                                              Column(
-                                                children: [
-                                                  Text(
-                                                    '${StudentCubit.get(context).foundUsers[index]['name']}',
-                                                    style:
-                                                        TextStyle(fontSize: 20),
-                                                  ),
-                                                ],
-                                              ),
-                                            ],
+                                          height: 250,
+                                          width: 300,
+                                          child: Center(
+                                            child: Column(
+                                              children: [
+                                                Spacer(),
+                                                CircleAvatar(
+                                                  radius: 60,
+                                                  foregroundColor: Colors.grey[300],
+                                                  backgroundImage: AssetImage('images/profile.png',),
+                                                ),
+                                                SizedBox(height: 30,),
+                                                Text(
+                                                  '${StudentCubit.get(context).foundUsers[index]['name']}',
+                                                  style:
+                                                  TextStyle(fontSize: 20,color: AppColors.aqua,fontWeight: FontWeight.bold),
+                                                ),
+                                                Spacer(),
+                                              ],
+                                            ),
                                           ),
                                         )
                                       ]),
@@ -196,7 +180,7 @@ class _SearchStudentState extends State<SearchStudent> {
                           child: Text(
                           'No results found',
                           style: TextStyle(
-                              fontSize: 30, fontWeight: FontWeight.w800),
+                              fontSize: 30, fontWeight: FontWeight.w800,color: AppColors.aqua),
                         )),
                 ),
               ],
@@ -207,3 +191,5 @@ class _SearchStudentState extends State<SearchStudent> {
     );
   }
 }
+
+

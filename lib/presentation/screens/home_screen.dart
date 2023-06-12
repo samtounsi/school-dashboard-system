@@ -18,37 +18,43 @@ class HomeScreen extends StatelessWidget {
     String newEnd;
     return BlocConsumer<WebHomeCubit, WebHomeStates>(
       listener: (context, state) {},
-      builder: (context, state) => Stack(
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              text(
-                'School Name',
-                size: 45,
-              ),
-            ],
-          ),
-          Padding(
-            padding: const EdgeInsets.all(60.0),
-            child: Row(
+      builder: (context, state) => SingleChildScrollView(
+        child: Column(
+          children: [
+            Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                Padding(
+                  padding: EdgeInsetsDirectional.only(top: 20),
+                  child: text(
+                    'HOGWARTS SCHOOL',
+                    color: AppColors.lightOrange,
+                    weight: FontWeight.bold,
+                    size: 45,
+                  ),
+                ),
+              ],
+            ),
+            Row(
+              children: [
+                SizedBox(width: 50,),
                 Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
+                    SizedBox(height: 20,),
                     card(
                         title: 'WE HAVE',
                         variable: '25 Students',
                         image: 'images/Student.png'),
-                    SizedBox(height: 120),
+                    SizedBox(height: 50),
                     card(
                         title: 'WE HAVE',
                         variable: '3 Teachers',
                         image: 'images/Teacher.png'),
                     SizedBox(
-                      height: 120,
+                      height: 50,
                     ),
                     card(
                         title: 'WE HAVE',
@@ -61,20 +67,23 @@ class HomeScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Container(
-                      width: 600,
-                      height: 550,
-                      decoration: BoxDecoration(
-                        color: AppColors.backgroundcolor,
-                        borderRadius: BorderRadius.circular(30),
-                      ),
-                      child: calendar(
-                        holidayPredicate: (day) {
-                          return WebHomeCubit.get(context).isHoliday(day) ||
-                              WebHomeCubit.get(context).isYearHoliday(day);
-                        },
-                        startRange: WebHomeCubit.get(context).startExam,
-                        endRange: WebHomeCubit.get(context).endExam,
+                    Padding(
+                      padding: EdgeInsetsDirectional.only(top: 80),
+                      child: Container(
+                        width: 450,
+                        height: 400,
+                        decoration: BoxDecoration(
+                          color: AppColors.backgroundcolor,
+                          borderRadius: BorderRadius.circular(30),
+                        ),
+                        child: calendar(
+                          holidayPredicate: (day) {
+                            return WebHomeCubit.get(context).isHoliday(day) ||
+                                WebHomeCubit.get(context).isYearHoliday(day);
+                          },
+                          startRange: WebHomeCubit.get(context).startExam,
+                          endRange: WebHomeCubit.get(context).endExam,
+                        ),
                       ),
                     ),
                     SizedBox(
@@ -82,7 +91,7 @@ class HomeScreen extends StatelessWidget {
                     ),
                     Container(
                       height: 100,
-                      width: 500,
+                      width: 450,
                       decoration: BoxDecoration(
                         color: AppColors.backgroundcolor,
                         borderRadius: BorderRadius.circular(17),
@@ -104,7 +113,7 @@ class HomeScreen extends StatelessWidget {
                           children: [
                             Icon(
                               Icons.add,
-                              size: 80,
+                              size: 50,
                               color: AppColors.darkAqua,
                             ),
                             SizedBox(
@@ -123,11 +132,11 @@ class HomeScreen extends StatelessWidget {
                       ),
                     ),
                     SizedBox(
-                      height: 7,
+                      height: 20,
                     ),
                     Container(
                       height: 100,
-                      width: 500,
+                      width: 450,
                       decoration: BoxDecoration(
                         color: AppColors.backgroundcolor,
                         borderRadius: BorderRadius.circular(17),
@@ -159,7 +168,7 @@ class HomeScreen extends StatelessWidget {
                           children: [
                             Icon(
                               Icons.edit,
-                              size: 80,
+                              size: 50,
                               color: AppColors.lightOrange,
                             ),
                             SizedBox(
@@ -182,8 +191,9 @@ class HomeScreen extends StatelessWidget {
                 Spacer(),
               ],
             ),
-          )
-        ],
+            SizedBox(height: 50,)
+          ],
+        ),
       ),
     );
   }
@@ -195,7 +205,7 @@ class HomeScreen extends StatelessWidget {
     required String image,
   }) {
     return Container(
-      height: 200,
+      height: 150,
       width: 420,
       decoration: BoxDecoration(
         color: color,

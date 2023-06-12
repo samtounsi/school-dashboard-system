@@ -143,10 +143,13 @@ class LogIn extends StatelessWidget {
                 )
               ],
             ),
-            SvgPicture.asset(
-              'images/login.svg',
-              width: 500.0,
-              height: 500.0,
+            Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: SvgPicture.asset(
+                'images/login.svg',
+                width: 500.0,
+                height: 500.0,
+              ),
             ),
           ],
         ));

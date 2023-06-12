@@ -23,7 +23,7 @@ class HeaderText extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-            width: 150,
+            width: 130,
             height: 80,
             padding: const EdgeInsets.all(20),
             decoration: BoxDecoration(

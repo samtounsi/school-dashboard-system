@@ -1,8 +1,9 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:web_schoolapp/business%20logic/cubits/student_cubit/states.dart';
 
 class StudentCubit extends Cubit<DashBoardState> {
-  StudentCubit() : super(InitialState());
+StudentCubit() : super(InitialState());
 
   static StudentCubit get(context) => BlocProvider.of(context);
   String? dropDown1;
@@ -80,13 +81,13 @@ class StudentCubit extends Cubit<DashBoardState> {
     {
       "class": "7th",
       "name": "Fatima Alkalif",
-      "section": "section 6",
+      "section": "section 1",
       "absent": false
     },
     {
       "class": "7th",
       "name": "Sama Tounsi",
-      "section": "section 6",
+      "section": "section 1",
       "absent": false
     },
     {
@@ -155,12 +156,83 @@ class StudentCubit extends Cubit<DashBoardState> {
     emit(StudentSectionState());
   }
 
-  bool? isChecked = false;
-  int cIndex = 0;
+  final List<String> nameAttendance = [];
 
-  void checkAttendance(bool value, int index) {
-    isChecked = value;
-    cIndex = index;
-    emit(CheckBoxState());
+  void toggleCheck(String name) {
+    final isExist = nameAttendance.contains(name);
+    if (isExist) {
+      nameAttendance.remove(name);
+    } else {
+      nameAttendance.add(name);
+    }
+    emit(ToggleState());
   }
+
+  bool isExist(String name) {
+    final isExist = nameAttendance.contains(name);
+    return isExist;
+  }
+
+bool isPassword = true;
+IconData suffix = Icons.visibility_outlined;
+void changePasswordVisibility()
+{
+  isPassword = !isPassword;
+  suffix = isPassword ? Icons.visibility_outlined : Icons.visibility_off_outlined ;
+
+  emit(StudentChangePasswordVisibilityState());
+}
+
+// bool? isChecked = false;
+// int cIndex = 0;
+//
+// void checkAttendance(bool value, int index) {
+//   isChecked = value;
+//   cIndex = index;
+//   emit(CheckBoxState());
+// }
+//
+// bool isSelected = false;
+// IconData check = Icons.check_box_outline_blank;
+//
+// void checkA(bool isAttendance) {
+//   isSelected = isAttendance;
+//   check = isSelected ? Icons.check_box : Icons.check_box_outline_blank;
+//
+//   emit(AttendanceState());
+// }
+//
+// Map<int, bool> selectedFlag = {};
+// bool isSelectionMode = false;
+//
+// void onLongPress(bool isSelected, int index) {
+//   selectedFlag[index] = !isSelected;
+//   isSelectionMode = selectedFlag.containsValue(true);
+//   emit(LongPressState());
+// }
+//
+// void onTap(bool isSelected, int index) {
+//   if (isSelectionMode) {
+//     selectedFlag[index] = !isSelected;
+//     isSelectionMode = selectedFlag.containsValue(true);
+//   } else {
+//     // Open Detail Page
+//   }
+//   emit(OnTapState());
+// }
+//
+// Widget buildSelectIcon(bool isSelected, Map data) {
+//   emit(ChangeIconState());
+//   if (isSelectionMode) {
+//     return Icon(
+//       isSelected ? Icons.check_box : Icons.check_box_outline_blank,
+//     );
+//
+//   } else {
+//     return CircleAvatar(
+//       child: Text('1'),
+//     );
+//   }
+//
+// }
 }

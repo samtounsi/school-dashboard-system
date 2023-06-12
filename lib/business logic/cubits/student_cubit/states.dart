@@ -8,4 +8,5 @@ class SearchFilteredState extends DashBoardState{}
 class AllDataState extends DashBoardState{}
 class ChangeGenderState extends DashBoardState{}
 class StudentSectionState extends DashBoardState{}
-class CheckBoxState extends DashBoardState{}
+class ToggleState extends DashBoardState{}
+class StudentChangePasswordVisibilityState extends DashBoardState{}

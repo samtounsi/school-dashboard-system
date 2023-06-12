@@ -14,87 +14,100 @@ class DashBoard extends StatelessWidget {
     return BlocConsumer<WebSchoolCubit, WebSchoolStates>(
       listener: (context, state) {},
       builder: (context, state) => Scaffold(
-        body: Row(children: [
-          Material(
-            elevation: 7,
-            child: Container(
-              decoration: BoxDecoration(
-                // gradient: LinearGradient(
-                //     begin: Alignment.topCenter,
-                //     end: Alignment.bottomCenter,
-                //     stops: [
-                //   0.3,
-                //   1,
-                // ],
-                //     colors: [
-                //   AppColors.aqua,
-                //   AppColors.darkBlue,
-                //   //Color(0xFFF0B976),
-                // ])
-                image: DecorationImage(
-                  image: AssetImage('images/OnBoard1.png'),
-                  fit: BoxFit.cover,
-                ),
-              ),
-              child: Stack(
-                children: [
-                  NavigationRail(
-                    extended: WebSchoolCubit.get(context).isExpanded,
-                    backgroundColor: Colors.white.withOpacity(0),
-                    unselectedIconTheme:
-                        IconThemeData(color: Colors.white, opacity: 0.9),
-                    unselectedLabelTextStyle: TextStyle(
-                      color: Colors.white,
-                      fontSize: webFont,
-                    ),
-                    selectedIconTheme: IconThemeData(
-                        color: Color.fromARGB(255, 21, 41, 68), opacity: 0.9),
-                    selectedLabelTextStyle: TextStyle(
-                      color: Color.fromARGB(255, 21, 41, 68),
-                      fontSize: webFont + 3,
-                      fontWeight: FontWeight.bold,
-                    ),
-                    destinations:
-                        WebSchoolCubit.get(context).dashBoardElements,
-                    selectedIndex: WebSchoolCubit.get(context).currentInd,
-                    onDestinationSelected: (ind) {
-                      WebSchoolCubit.get(context).ChangeScreen(ind);
-                    },
+        body: Center(
+          child: Row(children:<Widget> [
+            Material(
+              elevation: 7,
+              child: Container(
+                decoration: BoxDecoration(
+                  // gradient: LinearGradient(
+                  //     begin: Alignment.topCenter,
+                  //     end: Alignment.bottomCenter,
+                  //     stops: [
+                  //   0.3,
+                  //   1,
+                  // ],
+                  //     colors: [
+                  //   AppColors.aqua,
+                  //   AppColors.darkBlue,
+                  //   //Color(0xFFF0B976),
+                  // ])
+                  image: DecorationImage(
+                    image: AssetImage('images/OnBoard1.png'),
+                    fit: BoxFit.cover,
                   ),
-                  Column(
-                    children: [
-                      Spacer(),
-                      Padding(
-                        padding: const EdgeInsets.fromLTRB(10, 0, 0, 10),
-                        child: Container(
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            shape: BoxShape.circle,
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
-                            child: Center(
-                              child: IconButton(
-                                onPressed: () {
-                                  WebSchoolCubit.get(context).ShowHideRail();
+                ),
+                child: Stack(
+                  children: [
+                    LayoutBuilder(
+                      builder: (context,constraint){
+                        return SingleChildScrollView(
+                          child: ConstrainedBox(
+                            constraints: BoxConstraints(minHeight: constraint.maxHeight),
+                            child: IntrinsicHeight(
+                              child: NavigationRail(
+                                extended: WebSchoolCubit.get(context).isExpanded,
+                                backgroundColor: Colors.white.withOpacity(0),
+                                unselectedIconTheme:
+                                IconThemeData(color: Colors.white, opacity: 0.9),
+                                unselectedLabelTextStyle: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: webFont,
+                                ),
+                                selectedIconTheme: IconThemeData(
+                                    color: Color.fromARGB(255, 21, 41, 68), opacity: 0.9),
+                                selectedLabelTextStyle: TextStyle(
+                                  color: Color.fromARGB(255, 21, 41, 68),
+                                  fontSize: webFont + 3,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                                destinations:
+                                WebSchoolCubit.get(context).dashBoardElements,
+                                selectedIndex: WebSchoolCubit.get(context).currentInd,
+                                onDestinationSelected: (ind) {
+                                  WebSchoolCubit.get(context).ChangeScreen(ind);
                                 },
-                                icon: Icon(WebSchoolCubit.get(context).arrow),
+                              ),
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                    Column(
+                      children: [
+                        Spacer(),
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(10, 0, 0, 10),
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              shape: BoxShape.circle,
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
+                              child: Center(
+                                child: IconButton(
+                                  onPressed: () {
+                                    WebSchoolCubit.get(context).ShowHideRail();
+                                  },
+                                  icon: Icon(WebSchoolCubit.get(context).arrow),
+                                ),
                               ),
                             ),
                           ),
                         ),
-                      ),
-                    ],
-                  ),
-                ],
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
-          ),
-          Expanded(
-            child: WebSchoolCubit.get(context)
-                .screens[WebSchoolCubit.get(context).currentInd],
-          ),
-        ]),
+            Expanded(
+              child: WebSchoolCubit.get(context)
+                  .screens[WebSchoolCubit.get(context).currentInd],
+            ),
+          ]),
+        ),
       ),
     );
   }

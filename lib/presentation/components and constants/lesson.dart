@@ -14,7 +14,7 @@ Widget buildLesson(controller,label)
         type: TextInputType.text,
         circular: 10,
         labelTextColor: AppColors.lightOrange,
-        Width: 150,
+        Width: 130,
         verticalPadding: 30,
         label: label,
         validate: (value){

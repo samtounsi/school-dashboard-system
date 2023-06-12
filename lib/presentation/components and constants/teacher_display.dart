@@ -9,35 +9,31 @@ class TeacherShow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Stack(children: [
-        Padding(
-          padding: const EdgeInsets.all(30.0),
-          child: CircleAvatar(
-            backgroundColor: AppColors.borderColor,
-            radius: 150,
+      child: Column(children: [
+        Container(
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            color:AppColors.borderColor,
           ),
-        ),
-        Positioned(
-          bottom: 120,
-          right: 0.0,
-          left: 0.0,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              CircleAvatar(
-                radius: 50,
-                foregroundColor: Colors.grey[300],
-                backgroundImage: AssetImage('images/profile.png'),
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              Text(
-                'Teacher\'s name',
-                style: TextStyle(fontSize: 20, color: AppColors.darkBlue),
-              ),
-            ],
+          height: 250,
+          width: 300,
+          child: Center(
+            child: Column(
+              children: [
+                Spacer(),
+                CircleAvatar(
+                  radius: 60,
+                  foregroundColor: Colors.grey[300],
+                  backgroundImage: AssetImage('images/profile.png',),
+                ),
+                SizedBox(height: 30,),
+                Text(
+                  'Teacher\'s name',
+                  style: TextStyle(fontSize: 20, color: AppColors.darkBlue),
+                ),
+                Spacer(),
+              ],
+            ),
           ),
         )
       ]),

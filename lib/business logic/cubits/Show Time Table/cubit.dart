@@ -29,8 +29,8 @@ class  ShowTimetableCubit extends Cubit< ShowTimetableStates>{
       Lessons(day: 'Sun', first: '', second: '', third: '', fourth: '', fifth: '', sixth: '',),
       Lessons(day: 'Mon', first: '', second: '', third: '', fourth: '', fifth: '', sixth: '' ),
       Lessons(day: 'Tue', first: '', second: '', third: '', fourth: '', fifth: '', sixth: '' ),
-      Lessons(day: 'Tue',first: '', second: '', third: '', fourth: '', fifth: '', sixth: '' ),
-      Lessons(day: 'Tue', first: '', second: '', third: '', fourth: '', fifth: '', sixth: '' ),
+      Lessons(day: 'wed',first: '', second: '', third: '', fourth: '', fifth: '', sixth: '' ),
+      Lessons(day: 'Thu', first: '', second: '', third: '', fourth: '', fifth: '', sixth: '' ),
 
 
   ];
@@ -40,8 +40,8 @@ class  ShowTimetableCubit extends Cubit< ShowTimetableStates>{
       Lessons(day: 'Sun', first: 'first', second: 'second', third: 'third', fourth: 'fourth', fifth: 'fifth', sixth: 'sixth',),
       Lessons(day: 'Mon', first: 'first', second: 'second', third: 'third', fourth: 'fourth', fifth: 'fifth', sixth: 'sixth' ),
       Lessons(day: 'Tue', first: 'first', second: 'second', third: 'third', fourth: 'fourth', fifth: 'fifth', sixth: 'sixth',),
-      Lessons(day: 'Tue', first: 'first', second: 'second', third: 'third', fourth: 'fourth', fifth: 'fifth', sixth: 'sixth'),
-      Lessons(day: 'Tue', first: 'first', second: 'second', third: 'third', fourth: 'fourth', fifth: 'fifth', sixth: 'sixth'),
+      Lessons(day: 'Wed', first: 'first', second: 'second', third: 'third', fourth: 'fourth', fifth: 'fifth', sixth: 'sixth'),
+      Lessons(day: 'Thu', first: 'first', second: 'second', third: 'third', fourth: 'fourth', fifth: 'fifth', sixth: 'sixth'),
 
     ]);
     emit(ClassGetTableSuccessState());

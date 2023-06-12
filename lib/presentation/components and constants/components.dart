@@ -105,6 +105,7 @@ Widget defaultTextButton({
   Color textColor = Colors.white,
   FontWeight? fontWeight,
   Color borderColor = Colors.transparent,
+  borderWidth=3
 }) =>
     Container(
       height: height,
@@ -116,7 +117,7 @@ Widget defaultTextButton({
           shape: RoundedRectangleBorder(
             side: BorderSide(
               color: borderColor,
-              width: 3,
+              width: borderWidth,
             ),
             borderRadius: BorderRadius.circular(radius),
           ),

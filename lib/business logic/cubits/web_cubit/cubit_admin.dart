@@ -76,4 +76,8 @@ class WebSchoolCubit extends Cubit<WebSchoolStates> {
     NavigationRailDestination(
         icon: Icon(Icons.feedback), label: Text('Feedback')),
   ];
+
+
+
+
 }

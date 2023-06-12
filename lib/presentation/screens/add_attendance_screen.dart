@@ -3,10 +3,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
-import 'package:web_schoolapp/business%20logic/cubits/add_attendance_cubit/cubit.dart';
-import 'package:web_schoolapp/business%20logic/cubits/add_attendance_cubit/states.dart';
 import 'package:web_schoolapp/presentation/components%20and%20constants/components.dart';
 import 'package:web_schoolapp/presentation/components%20and%20constants/constants.dart';
+
+import '../../business logic/cubits/student_cubit/cubit.dart';
+import '../../business logic/cubits/student_cubit/states.dart';
 
 class AttendanceScreen extends StatefulWidget {
   const AttendanceScreen({Key? key}) : super(key: key);
@@ -39,7 +40,7 @@ class _AttendanceScreenState extends State<AttendanceScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<AttendanceCubit, DashBoardState>(
+    return BlocConsumer<StudentCubit, DashBoardState>(
       listener: (context, state) {},
       builder: (context, state) {
         return Form(
@@ -79,7 +80,7 @@ class _AttendanceScreenState extends State<AttendanceScreen> {
                               controller: dateOfBirth,
                               decoration: InputDecoration(
                                   border: OutlineInputBorder(),
-                                  labelText: "Date of Birth",
+                                  labelText: "Choose Date ",
                                   labelStyle: TextStyle(
                                     color: Color(0xFFA6CDCA),
                                   ) //label text of field
@@ -135,7 +136,7 @@ class _AttendanceScreenState extends State<AttendanceScreen> {
                         itemBuilder: (context, index) {
                           return InkWell(
                             onTap: () {
-                              AttendanceCubit.get(context).section(s[index]);
+                              StudentCubit.get(context).section(s[index]);
                             },
                             child: Container(
                               margin: const EdgeInsets.all(5),
@@ -158,30 +159,30 @@ class _AttendanceScreenState extends State<AttendanceScreen> {
                       height: 20,
                     ),
                     Expanded(
-                        child: AttendanceCubit.get(context)
+                        child: StudentCubit.get(context)
                                 .sectionUser
                                 .isNotEmpty
                             ? ListView.separated(
-                                itemCount: AttendanceCubit.get(context)
+                                itemCount: StudentCubit.get(context)
                                     .sectionUser
                                     .length,
                                 itemBuilder: (context, index) {
                                   return ListTile(
                                     title: Text(
-                                        '${AttendanceCubit.get(context).sectionUser[index]['name']}'),
+                                        '${StudentCubit.get(context).sectionUser[index]['name']}'),
                                     trailing: IconButton(
                                         onPressed: () {
                                           print(
-                                              '${AttendanceCubit.get(context).nameAttendance}');
-                                          AttendanceCubit.get(context)
+                                              '${StudentCubit.get(context).nameAttendance}');
+                                          StudentCubit.get(context)
                                               .toggleCheck(
-                                                  AttendanceCubit.get(context)
+                                              StudentCubit.get(context)
                                                           .sectionUser[index]
                                                       ['name']);
                                         },
-                                        icon: AttendanceCubit.get(context)
+                                        icon:StudentCubit.get(context)
                                                 .isExist(
-                                                    AttendanceCubit.get(context)
+                                            StudentCubit.get(context)
                                                             .sectionUser[index]
                                                         ['name'])
                                             ? Icon(

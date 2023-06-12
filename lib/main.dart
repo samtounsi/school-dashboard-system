@@ -1,9 +1,7 @@
-// ignore_for_file: unused_import, prefer_const_constructors
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:web_schoolapp/business%20logic/cubits/Show%20Time%20Table/cubit.dart';
-import 'package:web_schoolapp/business%20logic/cubits/add_attendance_cubit/cubit.dart';
 import 'package:web_schoolapp/business%20logic/cubits/event_cubit/cubit.dart';
 import 'package:web_schoolapp/business%20logic/cubits/home_cubit/cubit.dart';
 import 'package:web_schoolapp/business%20logic/cubits/login_cubit/cubit.dart';
@@ -12,6 +10,8 @@ import 'package:web_schoolapp/business%20logic/cubits/teacher_cubit/cubit.dart';
 import 'package:web_schoolapp/business%20logic/cubits/timetable_cubit/cubit.dart';
 import 'package:web_schoolapp/business%20logic/cubits/web_cubit/cubit_admin.dart';
 import 'package:web_schoolapp/business%20logic/cubits/web_cubit/cubit_staff.dart';
+import 'package:web_schoolapp/presentation/components%20and%20constants/constants.dart';
+import 'package:web_schoolapp/presentation/screens/layouts/layout1.dart';
 import 'package:web_schoolapp/presentation/screens/layouts/staff_layout.dart';
 import 'package:web_schoolapp/presentation/screens/login_screen.dart';
 
@@ -29,7 +29,6 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider(create:(context) => AppLoginCubit(),),
         BlocProvider(create:(context) => WebHomeCubit(),),
-        BlocProvider(create:(context) => AttendanceCubit(),),
         BlocProvider(create:(context) => EventWebCubit(),),
         BlocProvider(create:(context) => ShowTimetableCubit(),),
         BlocProvider(create:(context) => StudentCubit(),),
@@ -39,8 +38,11 @@ class MyApp extends StatelessWidget {
         BlocProvider(create:(context) => WebSchoolCubit(),),
       ],
       child: MaterialApp(
+        theme: ThemeData(
+          primarySwatch: buildMaterialColor(AppColors.darkBlue)
+        ),
         debugShowCheckedModeBanner: false,
-        home: LogIn(),
+        home: DashBoard(),
       ),
     );
   }
