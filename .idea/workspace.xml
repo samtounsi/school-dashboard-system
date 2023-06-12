@@ -5,50 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="16ed2272-f561-48d2-8ac4-a0c974b75fba" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/lib/presentation/components and constants/alert_dialog.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/presentation/screens/layouts/staff_profile.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/business logic/cubits/Show Time Table/cubit.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/business logic/cubits/Show Time Table/cubit.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/business logic/cubits/add_attendance_cubit/cubit.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/business logic/cubits/add_attendance_cubit/states.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/business logic/cubits/login_cubit/states.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/business logic/cubits/login_cubit/states.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/business logic/cubits/student_cubit/cubit.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/business logic/cubits/student_cubit/cubit.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/business logic/cubits/student_cubit/states.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/business logic/cubits/student_cubit/states.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/business logic/cubits/teacher_cubit/cubit.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/business logic/cubits/teacher_cubit/cubit.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/business logic/cubits/teacher_cubit/states.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/business logic/cubits/teacher_cubit/states.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/business logic/cubits/web_cubit/cubit_admin.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/business logic/cubits/web_cubit/cubit_admin.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/business logic/cubits/web_cubit/cubit_staff.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/business logic/cubits/web_cubit/cubit_staff.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/business logic/cubits/web_cubit/states_staff.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/business logic/cubits/web_cubit/states_staff.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/main.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/presentation/components and constants/components.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/components and constants/components.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/presentation/components and constants/dropdown.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/components and constants/dropdown.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/presentation/components and constants/headertext.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/components and constants/headertext.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/presentation/components and constants/lesson.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/components and constants/lesson.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/presentation/components and constants/teacher_display.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/components and constants/teacher_display.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/presentation/screens/add_attendance_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/screens/add_attendance_screen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/presentation/screens/add_event.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/screens/add_event.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/presentation/screens/add_staff.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/screens/add_staff.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/presentation/screens/add_student.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/screens/add_student.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/presentation/screens/add_teacher.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/screens/add_teacher.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/presentation/screens/feedBack.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/screens/feedBack.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/presentation/screens/home_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/screens/home_screen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/presentation/screens/layouts/layout1.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/screens/layouts/layout1.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/presentation/screens/login_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/screens/login_screen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/presentation/screens/profile_student.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/screens/profile_student.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/presentation/screens/searchFilter.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/screens/searchFilter.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/presentation/screens/show_staff.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/screens/show_staff.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/presentation/screens/show_teachers.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/screens/show_teachers.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/presentation/screens/showtimetable.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/screens/showtimetable.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/presentation/screens/teacher_profile.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/screens/teacher_profile.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/presentation/screens/time_table.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/screens/time_table.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/linux/flutter/generated_plugin_registrant.cc" beforeDir="false" afterPath="$PROJECT_DIR$/linux/flutter/generated_plugin_registrant.cc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/linux/flutter/generated_plugin_registrant.h" beforeDir="false" afterPath="$PROJECT_DIR$/linux/flutter/generated_plugin_registrant.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/linux/flutter/generated_plugins.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/linux/flutter/generated_plugins.cmake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/macos/Flutter/GeneratedPluginRegistrant.swift" beforeDir="false" afterPath="$PROJECT_DIR$/macos/Flutter/GeneratedPluginRegistrant.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/windows/flutter/generated_plugin_registrant.cc" beforeDir="false" afterPath="$PROJECT_DIR$/windows/flutter/generated_plugin_registrant.cc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/windows/flutter/generated_plugin_registrant.h" beforeDir="false" afterPath="$PROJECT_DIR$/windows/flutter/generated_plugin_registrant.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/windows/flutter/generated_plugins.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/windows/flutter/generated_plugins.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.dart_tool/dartpad/web_plugin_registrant.dart" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/dartpad/web_plugin_registrant.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.dart_tool/package_config.json" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/package_config.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.dart_tool/package_config_subset" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/package_config_subset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.flutter-plugins" beforeDir="false" afterPath="$PROJECT_DIR$/.flutter-plugins" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.flutter-plugins-dependencies" beforeDir="false" afterPath="$PROJECT_DIR$/.flutter-plugins-dependencies" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/src/main/java/io/flutter/plugins/GeneratedPluginRegistrant.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/src/main/java/io/flutter/plugins/GeneratedPluginRegistrant.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/4c047974a210d020bc36639e340fe5a6.cache.dill.track.dill" beforeDir="false" afterPath="$PROJECT_DIR$/build/4c047974a210d020bc36639e340fe5a6.cache.dill.track.dill" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/flutter_assets/NOTICES" beforeDir="false" afterPath="$PROJECT_DIR$/build/flutter_assets/NOTICES" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/flutter_assets/shaders/ink_sparkle.frag" beforeDir="false" afterPath="$PROJECT_DIR$/build/flutter_assets/shaders/ink_sparkle.frag" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Runner/GeneratedPluginRegistrant.h" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Runner/GeneratedPluginRegistrant.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Runner/GeneratedPluginRegistrant.m" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Runner/GeneratedPluginRegistrant.m" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,10 +33,14 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/lib/main.dart" root0="FORCE_HIGHLIGHTING" />
+  </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectId" id="2QwlYiIQX65jmceB8UyDgtFpTtz" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
