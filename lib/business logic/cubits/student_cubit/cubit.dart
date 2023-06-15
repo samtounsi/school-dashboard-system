@@ -94,7 +94,7 @@ StudentCubit() : super(InitialState());
       "class": "9th",
       "name": "Nour Ghanem",
       "section": "section 2",
-      "absent": false
+      "absent": true
     },
     {
       "class": "7th",
@@ -102,17 +102,17 @@ StudentCubit() : super(InitialState());
       "section": "section 1",
       "absent": false
     },
-    {"class": "9th", "name": "Razan", "section": "section 8", "absent": false},
+    {"class": "9th", "name": "Razan", "section": "section 8", "absent": true},
     {"class": "8th", "name": "iman", "section": "section 8", "absent": false},
-    {"class": "7th", "name": "alaa", "section": "section 10", "absent": false},
+    {"class": "7th", "name": "alaa", "section": "section 10", "absent": true},
     {"class": "9th", "name": "hassan", "section": "section 9", "absent": false},
     {"class": "8th", "name": "mona", "section": "section 1", "absent": false},
-    {"class": "7th", "name": "raneem", "section": "section 3", "absent": false},
+    {"class": "7th", "name": "raneem", "section": "section 3", "absent": true},
     {"class": "7th", "name": "ahmad", "section": "section 4", "absent": false},
     {"class": "9th", "name": "ola", "section": "section 5", "absent": false},
     {"class": "8th", "name": "maria", "section": "section 6", "absent": false},
-    {"class": "9th", "name": "ghader", "section": "section 8", "absent": false},
-    {"class": "7th", "name": "doha", "section": "section 7", "absent": false},
+    {"class": "9th", "name": "ghader", "section": "section 8", "absent": true},
+    {"class": "7th", "name": "doha", "section": "section 7", "absent": true},
     {
       "class": "8th",
       "name": "ghofran",
@@ -137,7 +137,9 @@ StudentCubit() : super(InitialState());
           .where((user) =>
               user["class"].contains(gradeValue) &&
               user["section"].contains(sectionValue) &&
-              user["name"].toLowerCase().contains(nameValue.toLowerCase()))
+              user["name"].toLowerCase().contains(nameValue.toLowerCase())
+
+      )
           .toList();
       foundUsers = results;
       emit(SearchFilteredState());
@@ -181,6 +183,14 @@ void changePasswordVisibility()
   suffix = isPassword ? Icons.visibility_outlined : Icons.visibility_off_outlined ;
 
   emit(StudentChangePasswordVisibilityState());
+}
+bool isActive=false;
+void activeCheck(bool active)
+{
+  isActive=active;
+
+  emit(ActiveState());
+
 }
 
 // bool? isChecked = false;

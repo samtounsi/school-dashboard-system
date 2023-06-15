@@ -74,6 +74,10 @@ flutter_svg
 2.19
 file:///C:/Users/LENOVO/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_svg-2.0.6/
 file:///C:/Users/LENOVO/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_svg-2.0.6/lib/
+fluttertoast
+2.12
+file:///C:/Users/LENOVO/AppData/Local/Pub/Cache/hosted/pub.dev/fluttertoast-8.2.2/
+file:///C:/Users/LENOVO/AppData/Local/Pub/Cache/hosted/pub.dev/fluttertoast-8.2.2/lib/
 http
 3.0
 file:///C:/Users/LENOVO/AppData/Local/Pub/Cache/hosted/pub.dev/http-1.0.0/
@@ -220,8 +224,8 @@ file:///C:/Users/LENOVO/AppData/Local/Pub/Cache/hosted/pub.dev/xml-6.3.0/
 file:///C:/Users/LENOVO/AppData/Local/Pub/Cache/hosted/pub.dev/xml-6.3.0/lib/
 web_schoolapp
 3.0
-file:///C:/Users/LENOVO/Documents/bitbucket/dashboard/
-file:///C:/Users/LENOVO/Documents/bitbucket/dashboard/lib/
+file:///C:/dash/dashboard/
+file:///C:/dash/dashboard/lib/
 sky_engine
 3.0
 file:///C:/src/flutter/bin/cache/pkg/sky_engine/

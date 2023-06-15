@@ -10,3 +10,4 @@ class ChangeGenderState extends DashBoardState{}
 class StudentSectionState extends DashBoardState{}
 class ToggleState extends DashBoardState{}
 class StudentChangePasswordVisibilityState extends DashBoardState{}
+class ActiveState extends DashBoardState{}

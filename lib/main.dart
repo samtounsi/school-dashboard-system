@@ -11,8 +11,10 @@ import 'package:web_schoolapp/business%20logic/cubits/timetable_cubit/cubit.dart
 import 'package:web_schoolapp/business%20logic/cubits/web_cubit/cubit_admin.dart';
 import 'package:web_schoolapp/business%20logic/cubits/web_cubit/cubit_staff.dart';
 import 'package:web_schoolapp/presentation/components%20and%20constants/constants.dart';
+import 'package:web_schoolapp/presentation/screens/attendanceDaysForStudent.dart';
 import 'package:web_schoolapp/presentation/screens/layouts/layout1.dart';
 import 'package:web_schoolapp/presentation/screens/layouts/staff_layout.dart';
+import 'package:web_schoolapp/presentation/screens/layouts/staff_profile.dart';
 import 'package:web_schoolapp/presentation/screens/login_screen.dart';
 
 void main() {
@@ -42,7 +44,7 @@ class MyApp extends StatelessWidget {
           primarySwatch: buildMaterialColor(AppColors.darkBlue)
         ),
         debugShowCheckedModeBanner: false,
-        home: DashBoard(),
+        home: AttendanceDaysStudent(),
       ),
     );
   }
