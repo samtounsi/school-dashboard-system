@@ -10,17 +10,49 @@ import 'package:web_schoolapp/business%20logic/cubits/teacher_cubit/cubit.dart';
 import 'package:web_schoolapp/business%20logic/cubits/timetable_cubit/cubit.dart';
 import 'package:web_schoolapp/business%20logic/cubits/web_cubit/cubit_admin.dart';
 import 'package:web_schoolapp/business%20logic/cubits/web_cubit/cubit_staff.dart';
+import 'package:web_schoolapp/presentation/components%20and%20constants/bloc_observer.dart';
 import 'package:web_schoolapp/presentation/components%20and%20constants/constants.dart';
 import 'package:web_schoolapp/presentation/screens/layouts/layout1.dart';
 import 'package:web_schoolapp/presentation/screens/layouts/staff_layout.dart';
 import 'package:web_schoolapp/presentation/screens/login_screen.dart';
 
-void main() {
-  runApp(const MyApp());
+import 'network/cache_helper.dart';
+
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  Bloc.observer = MyBlocObserver();
+ await CacheHelper.init();
+  Widget? widget;
+  token= CacheHelper.getData(key: 'token');
+  type=CacheHelper.getData(key: 'type');
+  print( token);
+  print(type);
+  //CacheHelper.removeData(key: 'token');
+  //CacheHelper.removeData(key: 'type');
+
+  if( token!=null){
+      if(type=='owner')
+      {
+        widget=DashBoard();
+      }
+      else if(type=='admin')
+      {
+        widget=DashBoardStaff();
+      }
+    }
+    else{
+      widget=LogIn();
+    }
+
+  runApp(
+      MyApp(startWidget: widget,));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final Widget? startWidget;
+  MyApp(
+      { this.startWidget}
+      );
 
   // This widget is the root of your application.
   @override
@@ -42,7 +74,7 @@ class MyApp extends StatelessWidget {
           primarySwatch: buildMaterialColor(AppColors.darkBlue)
         ),
         debugShowCheckedModeBanner: false,
-        home: DashBoard(),
+        home:startWidget,
       ),
     );
   }

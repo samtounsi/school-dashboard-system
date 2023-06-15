@@ -1,12 +1,10 @@
-// ignore_for_file: unused_import, must_be_immutable, prefer_const_constructors
 
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:web_schoolapp/presentation/components%20and%20constants/logComponent.dart';
-
-
+import 'package:fluttertoast/fluttertoast.dart';
 class UserNamePasswordScreen extends StatelessWidget {
   UserNamePasswordScreen({Key? key}) : super(key: key);
   TextEditingController userNameStudent = TextEditingController();
@@ -69,6 +67,12 @@ class UserNamePasswordScreen extends StatelessWidget {
                             suffixpressed: () {
                               Clipboard.setData(
                                   ClipboardData(text: userNameStudent.text));
+                              Fluttertoast.showToast(msg: 'copied',
+                                  toastLength: Toast.LENGTH_SHORT,
+                                  gravity: ToastGravity.CENTER,
+                                  timeInSecForIosWeb: 1,
+                                  fontSize: 16.0
+                              );
                             },
                             controller: userNameStudent,
                             type: TextInputType.text,
@@ -98,6 +102,12 @@ class UserNamePasswordScreen extends StatelessWidget {
                             suffixpressed: () {
                               Clipboard.setData(
                                   ClipboardData(text: passwordStudent.text));
+                              Fluttertoast.showToast(msg: 'copied',
+                                  toastLength: Toast.LENGTH_SHORT,
+                                  gravity: ToastGravity.CENTER,
+                                  timeInSecForIosWeb: 1,
+                                  fontSize: 16.0
+                              );
                             },
                             validate: (value) {
                               return null;
@@ -127,6 +137,13 @@ class UserNamePasswordScreen extends StatelessWidget {
                                 suffixpressed: () {
                                   Clipboard.setData(
                                       ClipboardData(text: userNameParent.text));
+                                  Fluttertoast.showToast(msg: 'copied',
+                                    toastLength: Toast.LENGTH_SHORT,
+                                    gravity: ToastGravity.CENTER,
+                                    timeInSecForIosWeb: 1,
+                                    fontSize: 16.0,
+
+                                  );
                                 },
                                 validate: (value) {
                                   return null;
@@ -154,6 +171,12 @@ class UserNamePasswordScreen extends StatelessWidget {
                                 suffixpressed: () {
                                   Clipboard.setData(
                                       ClipboardData(text: passwordParent.text));
+                                  Fluttertoast.showToast(msg: 'copied',
+                                      toastLength: Toast.LENGTH_SHORT,
+                                      gravity: ToastGravity.CENTER,
+                                      timeInSecForIosWeb: 1,
+                                      fontSize: 16.0
+                                  );
                                 },
                                 validate: (value) {
                                   return null;

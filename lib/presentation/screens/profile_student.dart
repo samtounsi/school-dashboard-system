@@ -16,6 +16,8 @@ import 'package:web_schoolapp/presentation/components%20and%20constants/constant
 import 'package:web_schoolapp/presentation/screens/layouts/layout1.dart';
 import 'package:web_schoolapp/presentation/screens/students_marks.dart';
 
+import 'attendanceDaysForStudent.dart';
+
 
 
 
@@ -569,7 +571,7 @@ class _StudentProfileState extends State<StudentProfile> {
                       defaultTextButton(
                         text: 'Show Attendance',
                         function: () {
-
+                          navigateTo(context, AttendanceDaysStudent());
                         },
                         isUpperCase: true,
                         radius: 50,

@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:web_schoolapp/presentation/components%20and%20constants/components.dart';
 import 'package:web_schoolapp/presentation/components%20and%20constants/constants.dart';
 
-import 'layouts/staff_profile.dart';
+import 'staff_profile.dart';
 
 List<String> staff=['Fatima Alkhlif','Sama Tunsie','Nour Ghanem','Abeer Barakat','Yumna Hashem','Fatima Alkhlif','Sama Tunsie','Nour Ghanem','Abeer Barakat','Yumna Hashem'];
 
