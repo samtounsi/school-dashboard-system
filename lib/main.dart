@@ -15,7 +15,9 @@ import 'package:web_schoolapp/presentation/components%20and%20constants/constant
 import 'package:web_schoolapp/presentation/screens/layouts/layout1.dart';
 import 'package:web_schoolapp/presentation/screens/layouts/staff_layout.dart';
 import 'package:web_schoolapp/presentation/screens/login_screen.dart';
+import 'package:web_schoolapp/presentation/screens/show_staff.dart';
 
+import 'business logic/cubits/staff_profile/cubit.dart';
 import 'network/cache_helper.dart';
 
 void main() async{
@@ -54,7 +56,6 @@ class MyApp extends StatelessWidget {
       { this.startWidget}
       );
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
@@ -68,6 +69,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create:(context) => TimetableCubit(),),
         BlocProvider(create:(context) => WebStaffCubit(),),
         BlocProvider(create:(context) => WebSchoolCubit(),),
+        BlocProvider(create: (context)=>StaffProfileCubit(),)
       ],
       child: MaterialApp(
         theme: ThemeData(

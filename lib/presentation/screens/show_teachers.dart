@@ -7,10 +7,16 @@ import 'package:web_schoolapp/presentation/components%20and%20constants/constant
 import 'package:web_schoolapp/presentation/screens/teacher_profile.dart';
 
 import '../../business logic/cubits/teacher_cubit/cubit.dart';
+import '../../data/models/teacher_show_model.dart';
 import '../components and constants/components.dart';
 
 TextEditingController nameController = TextEditingController();
-
+/*List<Teachers> teachers=[
+  Teachers(id: 0,firstName: 'Fatima',lastName: 'Alkhlif',),
+  Teachers(id: 1,firstName: 'Sama',lastName: 'Tunsie',),
+  Teachers(id: 2,firstName: 'Nour',lastName: 'Ghancem',),
+  Teachers(id: 3,firstName: 'Nour',lastName: 'Ghancem',),
+];*/
 class TeachersDisplay extends StatelessWidget {
   const TeachersDisplay({Key? key}) : super(key: key);
 
@@ -46,6 +52,7 @@ class TeachersDisplay extends StatelessWidget {
                               'All Teachers',
                               color: AppColors.darkBlue,
                               size: 40,
+                              weight: FontWeight.w600
                             ),
                           ),
                         ),
@@ -76,7 +83,7 @@ class TeachersDisplay extends StatelessWidget {
                       child: IconButton(
                           onPressed: () {
                             AppTeacherWebCubit.get(context)
-                                .runFilter(nameController.text);
+                                .runFilter(Teachers(fullName: nameController.text));
                           },
                           icon: Icon(
                             Icons.search,
@@ -98,7 +105,9 @@ class TeachersDisplay extends StatelessWidget {
                         AppTeacherWebCubit.get(context).foundUsers.length,
                             (index) => InkWell(
                           onTap: () {
-                            navigateTo(context, TeacherProfile());
+                            print(AppTeacherWebCubit.get(context).foundUsers[index].id);
+                           AppTeacherWebCubit.get(context).showTeacherProfile(id: '${AppTeacherWebCubit.get(context).foundUsers[index].id}').then((value) =>navigateTo(context, TeacherProfile(id:'${AppTeacherWebCubit.get(context).foundUsers[index].id}')));
+
                           },
                           child: Center(
                             child: Column(children: [
@@ -125,10 +134,10 @@ class TeachersDisplay extends StatelessWidget {
                                         height: 30,
                                       ),
                                       Text(
-                                        '${AppTeacherWebCubit.get(context).foundUsers[index]['name']}',
+                                        '${AppTeacherWebCubit.get(context).foundUsers[index].fullName}',
                                         style: TextStyle(
                                             fontSize: 20,
-                                            color: AppColors.aqua,
+                                            color: AppColors.darkBlue,
                                             fontWeight:
                                             FontWeight.bold),
                                       ),
@@ -147,7 +156,7 @@ class TeachersDisplay extends StatelessWidget {
                         style: TextStyle(
                             fontSize: 30,
                             fontWeight: FontWeight.w800,
-                            color: AppColors.aqua),
+                            color: AppColors.darkBlue),
                       )),
                 ),
               ],

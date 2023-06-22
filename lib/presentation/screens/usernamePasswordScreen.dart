@@ -5,20 +5,25 @@ import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:web_schoolapp/presentation/components%20and%20constants/logComponent.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+
+import '../../data/models/registerModel.dart';
 class UserNamePasswordScreen extends StatelessWidget {
-  UserNamePasswordScreen({Key? key}) : super(key: key);
-  TextEditingController userNameStudent = TextEditingController();
-  TextEditingController passwordStudent = TextEditingController();
+  RegisterModel? registerModel;
+  UserNamePasswordScreen({this.registerModel});
+  TextEditingController id = TextEditingController();
+  TextEditingController userName = TextEditingController();
+  TextEditingController password = TextEditingController();
   TextEditingController userNameParent = TextEditingController();
   TextEditingController passwordParent = TextEditingController();
   bool? navigate = false;
 
   @override
   Widget build(BuildContext context) {
-    userNameStudent.text = "NourG";
-    passwordStudent.text = "1234567890";
-    userNameParent.text = "NourParent";
-    passwordParent.text = "7115868";
+    id.text=" ${registerModel?.id}";
+    userName.text =" ${registerModel?.username}";
+    password.text = " ${registerModel?.password}";
+    userNameParent.text = " ${registerModel?.parentUsername}";
+    passwordParent.text = " ${registerModel?.parentPassword}";
     return Scaffold(
       backgroundColor: Colors.transparent,
       body: SafeArea(
@@ -55,6 +60,40 @@ class UserNamePasswordScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
+                          'Id',
+                          style: TextStyle(fontSize: 18),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        defaultformfeild(
+                            prefix: Icons.account_circle,
+                            suffix: Icons.copy,
+                            suffixpressed: () {
+                              Clipboard.setData(
+                                  ClipboardData(text: id.text));
+                              Fluttertoast.showToast(msg: 'copied',
+                                  toastLength: Toast.LENGTH_SHORT,
+                                  gravity: ToastGravity.CENTER,
+                                  timeInSecForIosWeb: 1,
+                                  fontSize: 16.0
+                              );
+                            },
+                            controller: id,
+                            type: TextInputType.text,
+                            validate: (value) {
+                              return null;
+                            }),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
                           'userName',
                           style: TextStyle(fontSize: 18),
                         ),
@@ -66,7 +105,7 @@ class UserNamePasswordScreen extends StatelessWidget {
                             suffix: Icons.copy,
                             suffixpressed: () {
                               Clipboard.setData(
-                                  ClipboardData(text: userNameStudent.text));
+                                  ClipboardData(text: userName.text));
                               Fluttertoast.showToast(msg: 'copied',
                                   toastLength: Toast.LENGTH_SHORT,
                                   gravity: ToastGravity.CENTER,
@@ -74,7 +113,7 @@ class UserNamePasswordScreen extends StatelessWidget {
                                   fontSize: 16.0
                               );
                             },
-                            controller: userNameStudent,
+                            controller: userName,
                             type: TextInputType.text,
                             validate: (value) {
                               return null;
@@ -96,12 +135,12 @@ class UserNamePasswordScreen extends StatelessWidget {
                         ),
                         defaultformfeild(
                             prefix: Icons.lock,
-                            controller: passwordStudent,
+                            controller: password,
                             type: TextInputType.text,
                             suffix: Icons.copy,
                             suffixpressed: () {
                               Clipboard.setData(
-                                  ClipboardData(text: passwordStudent.text));
+                                  ClipboardData(text: password.text));
                               Fluttertoast.showToast(msg: 'copied',
                                   toastLength: Toast.LENGTH_SHORT,
                                   gravity: ToastGravity.CENTER,

@@ -47,7 +47,7 @@ class AppLoginCubit extends Cubit<AppLoginStates>
 
     }
     else {
-      emit(AppLoginErrorState(response.stream.bytesToString.toString()));
+      emit(AppLoginErrorState(error:jsonDecode(await response.stream.bytesToString())['message'].toString()));
     }
 
 

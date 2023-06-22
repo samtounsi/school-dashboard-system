@@ -103,10 +103,9 @@ class _SearchStudentState extends State<SearchStudent> {
                             controller: nameController,
                             decoration: InputDecoration(
                               labelText: 'Search by Name',
-                              // prefixIcon: Icon(Icons.search),
                               filled: true,
                               fillColor: Colors.white70,
-                              labelStyle: TextStyle(color: Colors.black),
+                              labelStyle: TextStyle(color: Colors.black,),
                               enabledBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(50.0),
                                   borderSide: BorderSide(
@@ -118,9 +117,9 @@ class _SearchStudentState extends State<SearchStudent> {
                       Row(
                         children: [
                           Text(
-                            'state',
+                            'State',
                             style: TextStyle(
-                                fontWeight: FontWeight.w700, fontSize: 20),
+                                fontWeight: FontWeight.bold, fontSize: 22,color: AppColors.aqua),
                           ),
                           SizedBox(width: 6,),
                           Checkbox(

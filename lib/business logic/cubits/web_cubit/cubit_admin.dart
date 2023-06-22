@@ -1,9 +1,13 @@
 // ignore_for_file: non_constant_identifier_names, prefer_const_constructors
 
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:web_schoolapp/business%20logic/cubits/web_cubit/states_admin.dart';
+import 'package:web_schoolapp/data/models/registerModel.dart';
+import 'package:web_schoolapp/data/models/staffRegisterModel.dart';
 import 'package:web_schoolapp/presentation/screens/add_event.dart';
 import 'package:web_schoolapp/presentation/screens/add_staff.dart';
 import 'package:web_schoolapp/presentation/screens/add_student.dart';
@@ -16,6 +20,9 @@ import 'package:web_schoolapp/presentation/screens/show_staff.dart';
 import 'package:web_schoolapp/presentation/screens/show_teachers.dart';
 import 'package:web_schoolapp/presentation/screens/showtimetable.dart';
 import 'package:web_schoolapp/presentation/screens/time_table.dart';
+import 'package:http/http.dart'as http;
+
+import '../../../presentation/components and constants/constants.dart';
 
 class WebSchoolCubit extends Cubit<WebSchoolStates> {
   WebSchoolCubit() : super(WebSchoolInitState());
@@ -77,7 +84,56 @@ class WebSchoolCubit extends Cubit<WebSchoolStates> {
         icon: Icon(Icons.feedback), label: Text('Feedback')),
   ];
 
+  String staffGenderValue = 'male';
 
+  String changeStaffGender(value) {
+    this.staffGenderValue = value;
+    print(value);
+    emit(AppStaffWebChangeGenderState());
+    return value;
+  }
+
+
+
+  RegisterModel? staffRegisterModel;
+  postStaff
+  ({
+    required StaffModel data
+   })async
+  {
+  emit(WebSchoolAddStaffLoadingState());
+
+
+   var request = http.post(Uri.parse('https://new-school-management-system.onrender.com/admin_register')
+   ,headers: {
+         'Content-Type': 'application/json',
+         'Accept': '*/*',
+         'Authorization': 'Bearer $token'
+       },
+     body: jsonEncode(data.toJson(data))
+   );
+
+   var response = await request;
+
+    if (response.statusCode == 201) {
+      print(response.statusCode);
+      staffRegisterModel=RegisterModel.fromJson(jsonDecode(await response.body));
+     print(staffRegisterModel?.message);
+      //print(await response.stream.bytesToString());
+     emit(WebSchoolAddStaffSuccessState(staffRegisterModel!));
+    }
+    else
+    {
+      print(response.statusCode);
+      print(response.body);
+     // print(jsonDecode(await response.body)['message']);
+      emit(WebSchoolAddStaffErrorState(error:response.body ));
+    }
+
+
+
+
+  }
 
 
 }

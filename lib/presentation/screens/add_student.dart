@@ -74,28 +74,17 @@ class _AddStudentState extends State<AddStudent> {
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              SizedBox(height: 15,),
-                              text(
+                              SizedBox(
+                                height: 40,
+                              ),
+                              Text(
                                 'Add Student',
-                                size: 50,
-                                color: AppColors.aqua,
+                                style: TextStyle(fontSize: 50, color: AppColors.aqua),
                               ),
                               SizedBox(
-                                height: 15,
+                                height: 70,
                               ),
-                              Padding(
-                                padding:
-                                EdgeInsetsDirectional.symmetric(horizontal: 310),
-                                child: Container(
-                                  width: 200.0,
-                                  height: 200,
-                                  child: Column(
-                                    children: [
-                                      uploadAvatar(context),
-                                    ],
-                                  ),
-                                ),
-                              ),
+
                               Form(
                                 key: formKey,
                                 child: Column(
@@ -299,7 +288,6 @@ class _AddStudentState extends State<AddStudent> {
                                       height: 30,
                                     ),
                                     Container(
-                                        padding: EdgeInsets.only(left: 10),
                                         width: 850,
                                         decoration: BoxDecoration(
                                           borderRadius: BorderRadius.circular(7),
@@ -443,25 +431,36 @@ class _AddStudentState extends State<AddStudent> {
                                       height: 30,
                                     ),
                                     Row(
-                                      mainAxisAlignment: MainAxisAlignment.start,
                                       children: [
-                                        defaultformfeild(
-                                          Width: 860,
-                                          controller: rateController,
-                                          type: TextInputType.number,
-                                          label: 'Rate',
-                                          prefix: Icons.star_rate,
-                                          prefixColor: Color(0xFF3A968E),
-                                          validate: (value) {
-                                            if (value!.isEmpty) {
-                                              return 'This field is required';
-                                            }
-                                            if (value.length > 2) {
-                                              return 'Enter correct rate ';
-                                            }
-
-                                            return null;
-                                          },
+                                        Icon(
+                                          Icons.star_rate_outlined,
+                                          color: AppColors.darkAqua,
+                                          size: 40,
+                                        ),
+                                        SizedBox(
+                                          width: 15,
+                                        ),
+                                        Container(
+                                          width: 800,
+                                          child: TextFormField(
+                                            controller: rateController,
+                                            validator: (value) {
+                                              if (value!.isEmpty) {
+                                                return 'This field is required';
+                                              }
+                                              return null;
+                                            },
+                                            decoration: InputDecoration(
+                                              border: OutlineInputBorder(),
+                                              labelText: 'Studen\'s rate',
+                                              labelStyle: TextStyle(
+                                                color: AppColors.darkAqua,
+                                              ),
+                                              focusedBorder: OutlineInputBorder(
+                                                  borderSide: BorderSide(
+                                                      color: AppColors.darkAqua)),
+                                            ),
+                                          ),
                                         ),
                                       ],
                                     ),

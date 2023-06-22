@@ -1,8 +1,11 @@
 // ignore_for_file: prefer_const_constructors, non_constant_identifier_names
 
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:web_schoolapp/business%20logic/cubits/web_cubit/states_staff.dart';
+import 'package:web_schoolapp/presentation/components%20and%20constants/components.dart';
 import 'package:web_schoolapp/presentation/screens/add_event.dart';
 import 'package:web_schoolapp/presentation/screens/add_student.dart';
 import 'package:web_schoolapp/presentation/screens/add_teacher.dart';
@@ -12,7 +15,12 @@ import 'package:web_schoolapp/presentation/screens/home_screen.dart';
 import 'package:web_schoolapp/presentation/screens/searchFilter.dart';
 import 'package:web_schoolapp/presentation/screens/show_teachers.dart';
 import 'package:web_schoolapp/presentation/screens/showtimetable.dart';
+import 'package:web_schoolapp/presentation/screens/staff_profile.dart';
 import 'package:web_schoolapp/presentation/screens/time_table.dart';
+import 'package:http/http.dart'as http;
+
+import '../../../data/models/staff_profile_model.dart';
+import '../../../presentation/components and constants/constants.dart';
 
 
 class WebStaffCubit extends Cubit<WebStaffStates> {
@@ -73,6 +81,7 @@ class WebStaffCubit extends Cubit<WebStaffStates> {
   bool isPassword = true;
   IconData suffix = Icons.visibility_outlined;
 
+
   void changePasswordVisibility() {
     isPassword = !isPassword;
     suffix =
@@ -80,5 +89,7 @@ class WebStaffCubit extends Cubit<WebStaffStates> {
 
     emit(AppStaffWebChangePasswordVisibilityState());
   }
+
+
 
 }

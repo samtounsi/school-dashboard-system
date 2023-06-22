@@ -4,22 +4,20 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="16ed2272-f561-48d2-8ac4-a0c974b75fba" name="Changes" comment="edited web screens">
-      <change afterPath="$PROJECT_DIR$/lib/data/models/login_model.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/network/cache_helper.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/presentation/components and constants/bloc_observer.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/presentation/components and constants/secured_storage.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/presentation/screens/attendanceDaysForStudent.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/presentation/screens/staff_profile.dart" afterDir="false" />
+    <list default="true" id="16ed2272-f561-48d2-8ac4-a0c974b75fba" name="Changes" comment="more edits">
+      <change afterPath="$PROJECT_DIR$/lib/business logic/cubits/staff_profile/cubit.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/business logic/cubits/staff_profile/states.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/data/models/registerModel.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/data/models/staffRegisterModel.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/data/models/staffShowModel.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/data/models/staff_profile_model.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/data/models/teacherRegisterModel.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/data/models/teacher_profile_model.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/data/models/teacher_show_model.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.dart_tool/chrome-device/Default/DIPS" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/chrome-device/Default/DIPS" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.dart_tool/chrome-device/Default/Extension State/LOG" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/chrome-device/Default/Extension State/LOG" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.dart_tool/chrome-device/Default/Extension State/LOG.old" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/chrome-device/Default/Extension State/LOG.old" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.dart_tool/chrome-device/Default/Favicons" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/chrome-device/Default/Favicons" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.dart_tool/chrome-device/Default/GCM Store/Encryption/LOG" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/chrome-device/Default/GCM Store/Encryption/LOG" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.dart_tool/chrome-device/Default/GCM Store/Encryption/LOG.old" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/chrome-device/Default/GCM Store/Encryption/LOG.old" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.dart_tool/chrome-device/Default/History" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/chrome-device/Default/History" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.dart_tool/chrome-device/Default/Local Storage/leveldb/000003.log" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/chrome-device/Default/Local Storage/leveldb/000003.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.dart_tool/chrome-device/Default/Local Storage/leveldb/CURRENT" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/chrome-device/Default/Local Storage/leveldb/CURRENT" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.dart_tool/chrome-device/Default/Local Storage/leveldb/LOG" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/chrome-device/Default/Local Storage/leveldb/LOG" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.dart_tool/chrome-device/Default/Local Storage/leveldb/LOG.old" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/chrome-device/Default/Local Storage/leveldb/LOG.old" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.dart_tool/chrome-device/Default/Network Action Predictor" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/chrome-device/Default/Network Action Predictor" afterDir="false" />
@@ -28,65 +26,51 @@
       <change beforePath="$PROJECT_DIR$/.dart_tool/chrome-device/Default/Network/TransportSecurity" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/chrome-device/Default/Network/TransportSecurity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.dart_tool/chrome-device/Default/Preferences" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/chrome-device/Default/Preferences" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.dart_tool/chrome-device/Default/Service Worker/Database/000003.log" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/chrome-device/Default/Service Worker/Database/000003.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.dart_tool/chrome-device/Default/Service Worker/Database/CURRENT" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/chrome-device/Default/Service Worker/Database/CURRENT" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.dart_tool/chrome-device/Default/Service Worker/Database/LOG" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/chrome-device/Default/Service Worker/Database/LOG" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.dart_tool/chrome-device/Default/Service Worker/Database/LOG.old" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/chrome-device/Default/Service Worker/Database/LOG.old" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.dart_tool/chrome-device/Default/Service Worker/ScriptCache/index-dir/the-real-index" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/chrome-device/Default/Service Worker/ScriptCache/index-dir/the-real-index" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.dart_tool/chrome-device/Default/Session Storage/000003.log" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/chrome-device/Default/Session Storage/000003.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.dart_tool/chrome-device/Default/Session Storage/CURRENT" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/chrome-device/Default/Session Storage/CURRENT" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.dart_tool/chrome-device/Default/Session Storage/LOG" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/chrome-device/Default/Session Storage/LOG" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.dart_tool/chrome-device/Default/Session Storage/LOG.old" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/chrome-device/Default/Session Storage/LOG.old" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.dart_tool/chrome-device/Default/Site Characteristics Database/CURRENT" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/chrome-device/Default/Site Characteristics Database/CURRENT" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.dart_tool/chrome-device/Default/Site Characteristics Database/LOG" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/chrome-device/Default/Site Characteristics Database/LOG" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.dart_tool/chrome-device/Default/Site Characteristics Database/MANIFEST-000001" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/chrome-device/Default/Site Characteristics Database/MANIFEST-000001" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.dart_tool/chrome-device/Default/Sync Data/LevelDB/LOG" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/chrome-device/Default/Sync Data/LevelDB/LOG" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.dart_tool/chrome-device/Default/Visited Links" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/chrome-device/Default/Visited Links" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.dart_tool/chrome-device/Default/WebStorage/QuotaManager" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/chrome-device/Default/WebStorage/QuotaManager" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.dart_tool/chrome-device/Default/shared_proto_db/metadata/LOG" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/chrome-device/Default/shared_proto_db/metadata/LOG" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.dart_tool/dartpad/web_plugin_registrant.dart" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/dartpad/web_plugin_registrant.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.dart_tool/package_config.json" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/package_config.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.dart_tool/package_config_subset" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/package_config_subset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.flutter-plugins" beforeDir="false" afterPath="$PROJECT_DIR$/.flutter-plugins" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.flutter-plugins-dependencies" beforeDir="false" afterPath="$PROJECT_DIR$/.flutter-plugins-dependencies" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dashboard.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dashboard.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/android/app/src/main/java/io/flutter/plugins/GeneratedPluginRegistrant.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/src/main/java/io/flutter/plugins/GeneratedPluginRegistrant.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/4c047974a210d020bc36639e340fe5a6.cache.dill.track.dill" beforeDir="false" afterPath="$PROJECT_DIR$/build/4c047974a210d020bc36639e340fe5a6.cache.dill.track.dill" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/flutter_assets/AssetManifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/build/flutter_assets/AssetManifest.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/flutter_assets/AssetManifest.smcbin" beforeDir="false" afterPath="$PROJECT_DIR$/build/flutter_assets/AssetManifest.smcbin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/flutter_assets/NOTICES" beforeDir="false" afterPath="$PROJECT_DIR$/build/flutter_assets/NOTICES" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/flutter_assets/shaders/ink_sparkle.frag" beforeDir="false" afterPath="$PROJECT_DIR$/build/flutter_assets/shaders/ink_sparkle.frag" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Flutter/Generated.xcconfig" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Flutter/Generated.xcconfig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Flutter/flutter_export_environment.sh" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Flutter/flutter_export_environment.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Runner/GeneratedPluginRegistrant.h" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Runner/GeneratedPluginRegistrant.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ios/Runner/GeneratedPluginRegistrant.m" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Runner/GeneratedPluginRegistrant.m" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/business logic/cubits/login_cubit/cubit.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/business logic/cubits/login_cubit/cubit.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/business logic/cubits/login_cubit/states.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/business logic/cubits/login_cubit/states.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/business logic/cubits/student_cubit/cubit.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/business logic/cubits/student_cubit/cubit.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/business logic/cubits/student_cubit/states.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/business logic/cubits/student_cubit/states.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/business logic/cubits/teacher_cubit/cubit.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/business logic/cubits/teacher_cubit/cubit.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/business logic/cubits/teacher_cubit/states.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/business logic/cubits/teacher_cubit/states.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/business logic/cubits/web_cubit/cubit_admin.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/business logic/cubits/web_cubit/cubit_admin.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/business logic/cubits/web_cubit/cubit_staff.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/business logic/cubits/web_cubit/cubit_staff.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/business logic/cubits/web_cubit/states_admin.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/business logic/cubits/web_cubit/states_admin.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/business logic/cubits/web_cubit/states_staff.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/business logic/cubits/web_cubit/states_staff.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/main.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/presentation/components and constants/constants.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/components and constants/constants.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/presentation/screens/layouts/staff_profile.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/presentation/screens/add_attendance_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/screens/add_attendance_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/presentation/screens/add_staff.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/screens/add_staff.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/presentation/screens/add_student.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/screens/add_student.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/presentation/screens/add_teacher.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/screens/add_teacher.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/presentation/screens/attendanceDaysForStudent.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/screens/attendanceDaysForStudent.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/presentation/screens/login_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/screens/login_screen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/presentation/screens/profile_student.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/screens/profile_student.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/presentation/screens/searchFilter.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/screens/searchFilter.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/presentation/screens/show_staff.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/screens/show_staff.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/presentation/screens/show_teachers.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/screens/show_teachers.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/presentation/screens/staff_profile.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/screens/staff_profile.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/presentation/screens/teacher_profile.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/screens/teacher_profile.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/presentation/screens/usernamePasswordScreen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/screens/usernamePasswordScreen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/linux/flutter/generated_plugin_registrant.cc" beforeDir="false" afterPath="$PROJECT_DIR$/linux/flutter/generated_plugin_registrant.cc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/linux/flutter/generated_plugins.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/linux/flutter/generated_plugins.cmake" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/macos/Flutter/GeneratedPluginRegistrant.swift" beforeDir="false" afterPath="$PROJECT_DIR$/macos/Flutter/GeneratedPluginRegistrant.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/macos/Flutter/ephemeral/Flutter-Generated.xcconfig" beforeDir="false" afterPath="$PROJECT_DIR$/macos/Flutter/ephemeral/Flutter-Generated.xcconfig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/macos/Flutter/ephemeral/flutter_export_environment.sh" beforeDir="false" afterPath="$PROJECT_DIR$/macos/Flutter/ephemeral/flutter_export_environment.sh" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/widget_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/test/widget_test.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/windows/flutter/generated_plugin_registrant.cc" beforeDir="false" afterPath="$PROJECT_DIR$/windows/flutter/generated_plugin_registrant.cc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/windows/flutter/generated_plugins.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/windows/flutter/generated_plugins.cmake" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -101,6 +85,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="edited_web_screens" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
@@ -121,6 +110,7 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
     &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;com.google.services.firebase.aqiPopupShown&quot;: &quot;true&quot;,
     &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
     &quot;io.flutter.reload.alreadyRun&quot;: &quot;true&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/Users/LENOVO/Documents/bitbucket/dashboard/lib/presentation/screens&quot;,
@@ -160,7 +150,14 @@
       <option name="project" value="LOCAL" />
       <updated>1686556374992</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="more edits">
+      <created>1686843457068</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1686843457068</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -176,6 +173,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="edited web screens" />
-    <option name="LAST_COMMIT_MESSAGE" value="edited web screens" />
+    <MESSAGE value="more edits" />
+    <option name="LAST_COMMIT_MESSAGE" value="more edits" />
   </component>
 </project>

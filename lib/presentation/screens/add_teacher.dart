@@ -1,7 +1,10 @@
 // ignore_for_file: unused_import, depend_on_referenced_packages, prefer_const_constructors, sized_box_for_whitespace, avoid_print, prefer_const_literals_to_create_immutables, sort_child_properties_last
 
+
 import 'dart:io';
 
+import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
@@ -9,13 +12,19 @@ import 'package:image_picker/image_picker.dart';
 import 'package:image_picker_web/image_picker_web.dart';
 import 'package:intl/intl.dart';
 import 'package:bloc/bloc.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:image/image.dart' as Image;
 
 import 'dart:typed_data';
-
+import 'dart:convert';
+import 'package:http_parser/http_parser.dart';
+import 'dart:html'as html;
 import 'package:web_schoolapp/business%20logic/cubits/teacher_cubit/cubit.dart';
 import 'package:web_schoolapp/business%20logic/cubits/teacher_cubit/states.dart';
+import 'package:web_schoolapp/data/models/teacherRegisterModel.dart';
 import 'package:web_schoolapp/presentation/components%20and%20constants/constants.dart';
 import 'package:web_schoolapp/presentation/components%20and%20constants/dropdown.dart';
+import 'package:web_schoolapp/presentation/screens/add_staff.dart';
 import 'package:web_schoolapp/presentation/screens/usernamePasswordScreen.dart';
 
 import '../components and constants/alert_dialog.dart';
@@ -40,6 +49,7 @@ var formKey = GlobalKey<FormState>();
 Uint8List? imageFile;
 bool imageAvailable = false;
 
+
 String classValue = '7th grade';
 String sectionValue = 'section 1';
 String genderValue = 'male';
@@ -54,9 +64,60 @@ class _AddTeacherState extends State<AddTeacher> {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<AppTeacherWebCubit, AppTeacherWebStates>(
-      listener: (context, state) {},
+      listener: (context, state)
+      {
+        if(state is AppTeacherRegisterSuccessState)
+        {
+          navigateTo(context, UserNamePasswordScreen(registerModel: state.teacherRegisterModel,));
+
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Padding(
+              padding: EdgeInsetsDirectional.symmetric(horizontal: 500,vertical: 16),
+
+              child: Container(
+                  height: 50,
+                  constraints: const BoxConstraints(maxWidth: 400),
+                  decoration: BoxDecoration(color: AppColors.lightOrange,borderRadius: BorderRadius.all(Radius.circular(20))),
+                  child: Center(
+                    child: Text(state.teacherRegisterModel.message.toString(),
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(color: AppColors.darkBlue,fontSize: 20,fontWeight: FontWeight.bold),),
+                  )),
+            ),
+              behavior: SnackBarBehavior.floating,
+              backgroundColor: Colors.transparent,
+              elevation: 0,
+            ),
+          );
+        }
+        else if(state is AppTeacherRegisterErrorState)
+        {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Padding(
+              padding: EdgeInsetsDirectional.symmetric(horizontal: 500,vertical: 16),
+
+              child: Container(
+                  height: 50,
+                  constraints: const BoxConstraints(maxWidth: 400),
+                  decoration: BoxDecoration(color: Colors.redAccent,borderRadius: BorderRadius.all(Radius.circular(20))),
+                  child: Center(
+                    child: Text(state.error.toString(),
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(color: Colors.white,fontSize: 20,fontWeight: FontWeight.bold),),
+                  )),
+            ),
+              behavior: SnackBarBehavior.floating,
+              backgroundColor: Colors.transparent,
+              elevation: 0,
+            ),
+          );
+        }
+      },
       builder: (context, state) {
         return Scaffold(
+          key: scaffoldKey,
           body: ListView(
             scrollDirection: Axis.horizontal,
             children: [
@@ -81,23 +142,7 @@ class _AddTeacherState extends State<AddTeacher> {
                                 style: TextStyle(fontSize: 50, color: AppColors.darkBlue),
                               ),
                               SizedBox(
-                                height: 40,
-                              ),
-                              Padding(
-                                padding: EdgeInsetsDirectional.symmetric(
-                                    horizontal: 310),
-                                child: Container(
-                                  width: 200.0,
-                                  height: 200,
-                                  child: Column(
-                                    children: [
-                                      uploadAvatar(context),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                              SizedBox(
-                                height: 30,
+                                height: 80,
                               ),
                               Form(
                                 key: formKey,
@@ -283,7 +328,6 @@ class _AddTeacherState extends State<AddTeacher> {
                                       height: 30,
                                     ),
                                     Container(
-                                        padding: EdgeInsets.only(left: 10),
                                         width: 850,
                                         decoration: BoxDecoration(
                                           borderRadius: BorderRadius.circular(7),
@@ -313,13 +357,12 @@ class _AddTeacherState extends State<AddTeacher> {
                                             showDatePicker(
                                                 context: context,
                                                 initialDate: DateTime.now(),
-                                                firstDate: DateTime(2000),
+                                                firstDate: DateTime(1900),
                                                 lastDate: DateTime(2050))
                                                 .then((value) {
                                               print(DateFormat.yMMMd()
                                                   .format(value!));
-                                              dateOfBirth.text =
-                                                  DateFormat.yMMMd().format(value);
+                                                  DateFormat('dd-MM-yyyy').format(value);
                                             });
                                           },
                                         )),
@@ -328,149 +371,73 @@ class _AddTeacherState extends State<AddTeacher> {
                                     ),
                                     Row(
                                       children: [
+                                        Row(
+                                          children: [
+                                            Icon(
+                                              Icons.location_on,
+                                              color: AppColors.darkBlue,
+                                              size: 40,
+                                            ),
+                                            SizedBox(
+                                              width: 15,
+                                            ),
+                                            Container(
+                                              width: 500,
+                                              child: TextFormField(
+                                                controller: addressController,
+                                                validator: (value) {
+                                                  if (value!.isEmpty) {
+                                                    return 'This field is required';
+                                                  }
+                                                  return null;
+                                                },
+                                                decoration: InputDecoration(
+                                                  focusedBorder: OutlineInputBorder(
+                                                      borderSide: BorderSide(
+                                                          color: AppColors.darkBlue,
+                                                          width: 3)),
+                                                  border: OutlineInputBorder(),
+                                                  labelText: "Detailed address",
+                                                  labelStyle: TextStyle(
+                                                    color: AppColors.darkBlue,
+                                                  ),
+                                                  focusColor: Colors.purple,
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        SizedBox(
+                                          width: 30,
+                                        ),
                                         Padding(
                                           padding: EdgeInsetsDirectional.only(top:15),
                                           child: Column(
                                             children: [
                                               defaultTextButton(
-                                                  text: 'Teacher\'s subjects',
+                                                  text: 'Select Teacher\'s subjects',
                                                   isUpperCase: false,
                                                   background: Colors.white,
                                                   borderWidth: 1,
                                                   textSize: 20,
+                                                  width: 270,
                                                   textColor: AppColors.darkBlue,
                                                   borderColor: Colors.grey,
                                                   function: ()
                                                   {
                                                     showMultiSelect();
-                                                  }, radius: 50),
+                                                  }, radius: 10),
                                               Divider(),
                                               Wrap(
                                                 children: selectedSubjects.map((e) =>Padding(
-                                                  padding: EdgeInsetsDirectional.only(end: 2.0),
+                                                  padding: EdgeInsetsDirectional.only(end: 10.0),
                                                   child: Chip(label: Text(e),),
                                                 )).toList(),
                                               )
                                             ],
                                           ),
                                         ),
-                                        Padding(
-                                          padding:
-                                          EdgeInsetsDirectional.only(start: 50),
-                                          child: Container(
-                                            padding: EdgeInsets.only(left: 10),
-                                            width: 250,
-                                            decoration: BoxDecoration(
-                                                color: Colors.white,
-                                                border:
-                                                Border.all(color: Colors.grey),
-                                                borderRadius:
-                                                BorderRadius.circular(7)),
-                                            child: DropdownButton(
-                                              value: classValue,
-                                              items: [
-                                                //add items in the dropdown
-                                                DropdownMenuItem(
-                                                  child: Text("7th grade"),
-                                                  value: "7th grade",
-                                                ),
-                                                DropdownMenuItem(
-                                                    child: Text("8th grade"),
-                                                    value: "8th grade"),
-                                                DropdownMenuItem(
-                                                  child: Text("9th grade"),
-                                                  value: "9th grade",
-                                                )
-                                              ],
-                                              onChanged: (value) {
-                                                AppTeacherWebCubit.get(context)
-                                                    .changeClass(value!);
-                                                classValue =
-                                                    AppTeacherWebCubit.get(context)
-                                                        .value;
-                                              },
-                                              icon: Padding(
-                                                //Icon at tail, arrow bottom is default icon
-                                                  padding: EdgeInsets.only(
-                                                      left: 20, right: 10),
-                                                  child: Icon(
-                                                    Icons.arrow_drop_down,
-                                                    color: AppColors.darkBlue,
-                                                  )),
-                                              style: TextStyle(
-                                                  fontSize: 20,
-                                                  color: AppColors.darkBlue),
-                                              dropdownColor: Colors.white,
-                                              //dropdown background color
-                                              underline: Container(),
-                                              //remove underline
-                                              isExpanded:
-                                              true, //make true to make width 100%
-                                            ),
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding:
-                                          EdgeInsetsDirectional.only(start: 50),
-                                          child: defaultformfeild(
-                                            controller: salaryController,
-                                            type: TextInputType.number,
-                                            label: 'Salary',
-                                            labelTextColor: AppColors.darkBlue,
-                                            prefix: Icons.attach_money_outlined,
-                                            prefixColor: AppColors.darkBlue,
-                                            validate: (value) {
-                                              if (value!.isEmpty) {
-                                                return 'This field is required';
-                                              }
-                                              if (!RegExp(
-                                                  r'(^(?:[+0]9)?[0-9]{10}$)')
-                                                  .hasMatch(value!)) {
-                                                return ' Enter correct salary';
-                                              }
 
-                                              return null;
-                                            },
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    SizedBox(
-                                      height: 30,
-                                    ),
-                                    Row(
-                                      children: [
-                                        Icon(
-                                          Icons.location_on,
-                                          color: AppColors.darkBlue,
-                                          size: 40,
-                                        ),
-                                        SizedBox(
-                                          width: 15,
-                                        ),
-                                        Container(
-                                          width: 800,
-                                          child: TextFormField(
-                                            validator: (value) {
-                                              if (value!.isEmpty) {
-                                                return 'This field is required';
-                                              }
-                                              return null;
-                                            },
-                                            decoration: InputDecoration(
-                                              border: OutlineInputBorder(),
-                                              labelText: "Detailed address",
-                                              labelStyle: TextStyle(
-                                                color: AppColors.darkBlue,
-                                              ),
-                                              focusedBorder: OutlineInputBorder(
-                                                  borderSide: BorderSide(
-                                                    color: AppColors.darkBlue,
-                                                    width: 3,
-                                                  )),
-                                            ),
-                                          ),
-                                        ),
                                       ],
                                     ),
                                     SizedBox(
@@ -528,20 +495,53 @@ class _AddTeacherState extends State<AddTeacher> {
                                     Padding(
                                       padding: EdgeInsetsDirectional.only(
                                           start: 230, end: 150),
-                                      child: defaultTextButton(
-                                        text: 'SAVE',
-                                        function: () {
-                                          navigateTo(
-                                              context, UserNamePasswordScreen());
-                                        },
-                                        isUpperCase: true,
-                                        radius: 50,
-                                        width: 380,
-                                        height: 50,
-                                        background:
-                                        AppColors.darkBlue,
-                                        textSize: 20,
-                                        fontWeight: FontWeight.bold,
+                                      child: ConditionalBuilder(
+                                        condition: state is ! AppTeacherRegisterLoadingState,
+                                        builder:(context) =>defaultTextButton(
+                                          text: 'SAVE',
+                                          function: ()async
+                                          {
+                                            if(formKey.currentState!.validate())
+                                            {
+                                              print(firstNameController.text);
+                                              print(lastNameController.text);
+                                              print(addressController.text);
+                                              print(phoneController.text);
+                                              print(nationalityController.text);
+                                              print(experienceYearsController.text);
+                                              print(AppTeacherWebCubit.get(context).genderValue);
+                                              print(dateOfBirth.text);
+                                              print(selectedSubjects);
+                                              RegisterModelTeacher model=RegisterModelTeacher(
+                                                  firstName: firstNameController.text,
+                                                  lastName: lastNameController.text,
+                                                  address: addressController.text,
+                                                  phoneNumber: phoneController.text,
+                                                  gender: AppTeacherWebCubit.get(context)
+                                                      .genderValue,
+                                                  birthday: '2002-04-20',
+                                                  yearsOfExperience:experienceYearsController.text,
+                                                  nationality: nationalityController.text,
+                                                  subjects: selectedSubjects,
+                                                university: universityController.text,
+                                                email: emailController.text
+                                              );
+
+                                             AppTeacherWebCubit.get(context).postTeacher(data:model);
+                                              print(model.toJson(model).toString());
+                                            }
+
+                                          },
+                                          isUpperCase: true,
+                                          radius: 50,
+                                          width: 380,
+                                          height: 50,
+                                          background:
+                                          AppColors.darkBlue,
+                                          textSize: 20,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                        fallback: (context)=>Center(child: CircularProgressIndicator()),
                                       ),
                                     ),
                                     SizedBox(
@@ -615,21 +615,36 @@ class _AddTeacherState extends State<AddTeacher> {
         child: CircleAvatar(
           radius: 70.0,
           backgroundColor: Colors.white,
-          backgroundImage: imageFile == null
-              ? AssetImage("images/profile.png",)
-              : MemoryImage(Uint8List.fromList(imageFile!))
-          as ImageProvider,
+          backgroundImage:
+            selectedImageInBytes==null? AssetImage("images/profile.png",):MemoryImage(Uint8List.fromList(selectedImageInBytes!))as ImageProvider
+         /* selectdFile.isEmpty ? AssetImage("images/profile.png",): MemoryImage(Uint8List.fromList(selectedImageInBytes!)) as ImageProvider*/
+         // imageFile == null
+           //   ? AssetImage("images/profile.png",)
+             // : MemoryImage(Uint8List.fromList(imageFile!))
+          //as ImageProvider,
 
           //    : FileImage(imageFile as File) as ImageProvider,Image.memory(imageFile!)
         ),
       ),
       GestureDetector(
         onTap: () async {
-          var image = await ImagePickerWeb.getImageAsBytes();
-          setState(() {
-            imageFile = image!;
-            imageAvailable = true;
-          });
+          startWebFilePicker();
+        /*  FilePickerResult? filePickerResult=await FilePicker.platform.pickFiles();
+          if(filePickerResult!=null)
+          {
+            setState(() {
+              selectdFile=filePickerResult.files.first.name;
+              selectedImageInBytes=filePickerResult.files.first.bytes;
+            });
+          }
+          print(selectdFile);*/
+         //var image = await ImagePickerWeb.getImageAsBytes();
+          //setState(() {
+            //imageFile = image!;
+            //imageAvailable = true;
+         // });
+
+
         },
         child: Padding(
           padding: const EdgeInsetsDirectional.only(
@@ -650,6 +665,39 @@ class _AddTeacherState extends State<AddTeacher> {
       ),
     ],
   );
+
+
+
+
+
+
+
+  XFile? file;
+  Uint8List? selectedImageInBytes;
+  List<int>? selectdFile;
+  startWebFilePicker()async
+  {
+    html.FileUploadInputElement uploadInput = html.FileUploadInputElement();
+    uploadInput.multiple = true;
+    uploadInput.draggable = true;
+    uploadInput.click();
+    uploadInput.onChange.listen((event) {
+      final files = uploadInput.files;
+      final file = files![0];
+      final reader = html.FileReader();
+
+      reader.onLoadEnd.listen((event) {
+        setState(() {
+          selectedImageInBytes =
+              Base64Decoder().convert(reader.result.toString().split(",").last);
+          selectdFile = selectedImageInBytes;
+        });
+      });
+      reader.readAsDataUrl(file);
+    });
+  }
+
+
 }
 
 

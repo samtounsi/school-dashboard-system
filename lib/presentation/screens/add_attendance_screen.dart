@@ -130,7 +130,7 @@ class _AttendanceScreenState extends State<AttendanceScreen> {
                     SizedBox(
                       height: 60,
                       width: double.infinity,
-                      child: ListView.builder(
+                      child: ListView.separated(
                         itemCount: s.length,
                         scrollDirection: Axis.horizontal,
                         itemBuilder: (context, index) {
@@ -141,18 +141,24 @@ class _AttendanceScreenState extends State<AttendanceScreen> {
                             child: Container(
                               margin: const EdgeInsets.all(5),
                               width: 120,
-                              height: 45,
+                              height: 60,
                               decoration: BoxDecoration(
                                   color: AppColors.aqua,
                                   borderRadius: BorderRadius.circular(25)),
                               child: Center(
                                 child: Text(
                                   s[index],
+                                  style: TextStyle(
+                                    //color: Colors.white,
+                                    fontSize: 20,
+                                    //fontWeight: FontWeight.bold
+                                  ),
                                 ),
                               ),
                             ),
                           );
                         },
+                        separatorBuilder: (context,index)=>SizedBox(width: 15,),
                       ),
                     ),
                     SizedBox(
