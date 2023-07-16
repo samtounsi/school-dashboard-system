@@ -21,24 +21,29 @@ class AppAllTeacherState extends AppTeacherWebStates {}
 
 class AppSearchFilterNameTeacherState extends AppTeacherWebStates {}
 
-class AppTeacherRegisterLoadingState extends AppTeacherWebStates{}
-class AppTeacherRegisterSuccessState extends AppTeacherWebStates{
+class AppTeacherRegisterLoadingState extends AppTeacherWebStates {}
+
+class AppTeacherRegisterSuccessState extends AppTeacherWebStates {
   final RegisterModel teacherRegisterModel;
+
   AppTeacherRegisterSuccessState(this.teacherRegisterModel);
 }
-class AppTeacherRegisterErrorState extends AppTeacherWebStates{
+
+class AppTeacherRegisterErrorState extends AppTeacherWebStates {
   final String error;
 
   AppTeacherRegisterErrorState({required this.error});
 }
 
+class AppTeacherProfileLoadingState extends AppTeacherWebStates {}
 
-class AppTeacherProfileLoadingState extends AppTeacherWebStates{}
-class AppTeacherProfileSuccessState extends AppTeacherWebStates{
+class AppTeacherProfileSuccessState extends AppTeacherWebStates {
   final TeacherProfileModel teacherProfileModel;
+
   AppTeacherProfileSuccessState(this.teacherProfileModel);
 }
-class AppTeacherProfileErrorState extends AppTeacherWebStates{
+
+class AppTeacherProfileErrorState extends AppTeacherWebStates {
   final String error;
 
   AppTeacherProfileErrorState(this.error);

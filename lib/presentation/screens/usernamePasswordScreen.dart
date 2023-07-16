@@ -22,7 +22,8 @@ class UserNamePasswordScreen extends StatelessWidget {
     id.text=" ${registerModel?.id}";
     userName.text =" ${registerModel?.username}";
     password.text = " ${registerModel?.password}";
-    userNameParent.text = " ${registerModel?.parentUsername}";
+    userNameParent.text = " "
+        "${registerModel?.parentUsername}";
     passwordParent.text = " ${registerModel?.parentPassword}";
     return Scaffold(
       backgroundColor: Colors.transparent,
@@ -46,7 +47,7 @@ class UserNamePasswordScreen extends StatelessWidget {
             Spacer(),
             Form(
               child: Padding(
-                padding: const EdgeInsets.only(right: 200, top: 50),
+                padding: const EdgeInsets.only(right: 110, top: 50),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
@@ -225,12 +226,12 @@ class UserNamePasswordScreen extends StatelessWidget {
                       ],
                     ),
                     Spacer(),
-                    Spacer(),
+                    // Spacer(),
                   ],
                 ),
               ),
             ),
-            Spacer(),
+            // Spacer(),
           ],
         ),
       ),

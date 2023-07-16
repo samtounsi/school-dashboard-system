@@ -14,8 +14,8 @@ import 'package:web_schoolapp/presentation/screens/add_student.dart';
 import 'package:web_schoolapp/presentation/screens/add_teacher.dart';
 import 'package:web_schoolapp/presentation/screens/feedBack.dart';
 import 'package:web_schoolapp/presentation/screens/home_screen.dart';
-import 'package:web_schoolapp/presentation/screens/searchFilter.dart';
-import 'package:web_schoolapp/presentation/screens/sectionSort.dart';
+import 'package:web_schoolapp/presentation/screens/search_student_screen.dart';
+import 'package:web_schoolapp/presentation/screens/section_sort.dart';
 import 'package:web_schoolapp/presentation/screens/show_staff.dart';
 import 'package:web_schoolapp/presentation/screens/show_teachers.dart';
 import 'package:web_schoolapp/presentation/screens/showtimetable.dart';
@@ -104,7 +104,7 @@ class WebSchoolCubit extends Cubit<WebSchoolStates> {
   emit(WebSchoolAddStaffLoadingState());
 
 
-   var request = http.post(Uri.parse('https://new-school-management-system.onrender.com/admin_register')
+   var request = http.post(Uri.parse('https://new-school-management-system.onrender.com/web/admin_register')
    ,headers: {
          'Content-Type': 'application/json',
          'Accept': '*/*',
