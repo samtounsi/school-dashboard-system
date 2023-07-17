@@ -17,5 +17,7 @@ class SuccessStudentPorfileState extends StudentProfileState{
   final StudentProfileModel student;
   SuccessStudentPorfileState(this.student);
 }
+class StudentProfileChangePasswordVisibilityState extends StudentProfileState{}
+class AppDateStateLoading extends StudentProfileState{}
 
 

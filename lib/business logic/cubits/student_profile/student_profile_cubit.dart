@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:bloc/bloc.dart';
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:web_schoolapp/business%20logic/cubits/student_cubit/states.dart';
@@ -15,6 +16,16 @@ class StudentProfileCubit extends Cubit<StudentProfileState> {
 
   static StudentProfileCubit get(context) => BlocProvider.of(context);
   StudentProfileModel? studentProfileModel;
+  bool isPassword = true;
+  IconData suffix = Icons.visibility_outlined;
+
+  void changePasswordVisibility() {
+    isPassword = !isPassword;
+    suffix =
+    isPassword ? Icons.visibility_outlined : Icons.visibility_off_outlined;
+
+    emit(StudentProfileChangePasswordVisibilityState());
+  }
 
   void getStudentProfile(int studentId) async {
     emit(LoadingStudentProfileState());
@@ -46,6 +57,9 @@ class StudentProfileCubit extends Cubit<StudentProfileState> {
     } catch (e) {
       emit(ErrorStudentProfileState(e.toString()));
     }
+  }
+  void post(){
+    emit(AppDateStateLoading());
   }
 
 }

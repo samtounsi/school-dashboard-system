@@ -4,7 +4,7 @@ class StudentModel {
   final int id;
   final String firstName;
   final String lastName;
-  final String photo;
+  final String? photo;
   final String? section;
 
   StudentModel({
@@ -12,7 +12,7 @@ class StudentModel {
     required this.firstName,
     required this.lastName,
     this.section,
-    required this.photo,
+     this.photo,
   });
 
   factory StudentModel.fromJson(Map<String, dynamic> json) {

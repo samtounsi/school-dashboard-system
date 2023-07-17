@@ -1,3 +1,6 @@
+import 'dart:js_interop';
+
+import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -12,6 +15,7 @@ import 'package:web_schoolapp/data/models/student_profile_model.dart';
 import 'package:web_schoolapp/presentation/components%20and%20constants/components.dart';
 import 'package:web_schoolapp/presentation/components%20and%20constants/constants.dart';
 import 'package:web_schoolapp/presentation/screens/add_student.dart';
+import 'package:web_schoolapp/presentation/screens/parent_profile.dart';
 
 import 'package:web_schoolapp/presentation/screens/students_marks.dart';
 
@@ -31,31 +35,22 @@ class StudentProfile extends StatefulWidget {
 
 class _StudentProfileState extends State<StudentProfile> {
   TextEditingController dateOfBirth = TextEditingController();
-
   TextEditingController firstNameController = TextEditingController();
-
   TextEditingController telephoneController = TextEditingController();
-
   TextEditingController motherNameController = TextEditingController();
-
   TextEditingController lastNameController = TextEditingController();
-
   TextEditingController phoneController = TextEditingController();
-
   TextEditingController addressController = TextEditingController();
-
   TextEditingController birthdayController = TextEditingController();
-
   TextEditingController parentNumberController = TextEditingController();
-
-  TextEditingController passwordController = TextEditingController();
-
   TextEditingController usernameController = TextEditingController();
   TextEditingController genderController = TextEditingController();
   TextEditingController gradeStudentController = TextEditingController();
   TextEditingController classStudentController = TextEditingController();
   TextEditingController gbaStudentController = TextEditingController();
   TextEditingController nationalityStudentController = TextEditingController();
+  TextEditingController bioStudentController = TextEditingController();
+  TextEditingController passwordStudentController=TextEditingController();
 
   var scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -92,6 +87,7 @@ class _StudentProfileState extends State<StudentProfile> {
     parentNumberController.text = "${student.parentPhoneNumber}";
     gbaStudentController.text = "${student.gba}";
     nationalityStudentController.text = "${student.nationality}";
+    bioStudentController.text=student.bio.toString().isEmpty?"no bio yet":"${student.bio}";
   }
 
   @override
@@ -461,6 +457,54 @@ class _StudentProfileState extends State<StudentProfile> {
                                       ),
                                     ],
                                   ),
+                                  Row(
+                                    children: [
+                                      defaultformfeild(
+                                        controller: bioStudentController,
+                                        type: TextInputType.name,
+                                        label: 'bio',
+                                        prefix: Icons.person,
+                                        prefixColor: AppColors.aqua,
+                                        validate: (value) {},
+                                      ),
+                                      Padding(
+                                        padding: EdgeInsetsDirectional.only(
+                                            start: 50),
+                                        child: defaultformfeild(
+                                          controller: passwordStudentController,
+                                          type: TextInputType.name,
+                                          label: 'password',
+                                          prefix: Icons.person,
+                                          prefixColor: AppColors.aqua,
+                                          validate: (value) {},
+
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding: EdgeInsetsDirectional.only(
+                                            start: 50),
+                                        child: defaultTextButton(
+                                            text: "Parent's Profile",
+                                            function: () {
+                                              navigateTo(
+                                                  context, ParentProfile());
+                                            },
+                                            isUpperCase: true,
+                                            radius: 50,
+                                            width: 250,
+                                            height: 50,
+                                            background: Colors.white,
+                                            textColor: AppColors.aqua,
+                                            textSize: 20,
+                                            fontWeight: FontWeight.bold,
+                                            borderColor: Colors.grey,
+                                            borderWidth: 1),
+                                      ),
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    height: 50,
+                                  )
                                 ],
                               ),
                             )
@@ -485,16 +529,25 @@ class _StudentProfileState extends State<StudentProfile> {
                           fontWeight: FontWeight.bold,
                         ),
                         SizedBox(width: 50),
-                        defaultTextButton(
-                          text: 'UPDATE',
-                          function: () {},
-                          isUpperCase: true,
-                          radius: 50,
-                          width: 380,
-                          height: 50,
-                          background: AppColors.aqua,
-                          textSize: 20,
-                          fontWeight: FontWeight.bold,
+                        ConditionalBuilder(
+                          condition: state is! AppDateStateLoading,
+                          builder: (BuildContext context) {
+                            return defaultTextButton(
+                              text: 'UPDATE',
+                              function: () {
+                                StudentProfileCubit.get(context).post();
+                              },
+                              isUpperCase: true,
+                              radius: 50,
+                              width: 380,
+                              height: 50,
+                              background: AppColors.aqua,
+                              textSize: 20,
+                              fontWeight: FontWeight.bold,
+                            );
+                          },
+                          fallback: (BuildContext context)=>CircularProgressIndicator(),
+
                         ),
                         SizedBox(
                           width: 50,
@@ -536,44 +589,45 @@ class _StudentProfileState extends State<StudentProfile> {
         alignment: AlignmentDirectional.bottomEnd,
         children: [
           CircleAvatar(
-            radius: 80.0,
-            backgroundColor: Colors.white,
-            child: CircleAvatar(
-              radius: 70.0,
+              radius: 80.0,
               backgroundColor: Colors.white,
-              backgroundImage: imageFile == null
-                  ? AssetImage(
-                      "images/profile.png",
-                    )
-                  : MemoryImage(Uint8List.fromList(imageFile!))
-                      as ImageProvider,
+              child: CircleAvatar(
+                  radius: 70.0,
+                  backgroundColor: Colors.white,
+                  backgroundImage:
+                      // imageFile == null?
 
-              //    : FileImage(imageFile as File) as ImageProvider,Image.memory(imageFile!)
-            ),
-          ),
-          GestureDetector(
-            onTap: () async {
-              var image = await ImagePickerWeb.getImageAsBytes();
-              setState(() {
-                imageFile = image!;
-                imageAvailable = true;
-              });
-            },
-            child: Padding(
-              padding: const EdgeInsetsDirectional.only(bottom: 3),
-              child: Container(
-                child: CircleAvatar(
-                  radius: 17,
-                  backgroundColor: AppColors.backgroundcolor,
-                  child: Icon(
-                    Icons.edit,
-                    color: AppColors.aqua,
-                    size: 20,
-                  ),
-                ),
-              ),
-            ),
-          ),
+                      AssetImage(
+                    "images/profile.png",
+                  )
+                  //         : MemoryImage(Uint8List.fromList(imageFile!))
+                  //             as ImageProvider,
+                  //
+                  //     //    : FileImage(imageFile as File) as ImageProvider,Image.memory(imageFile!)
+                  //   ),
+                  // ),
+                  // GestureDetector(
+                  //   onTap: () async {
+                  //     var image = await ImagePickerWeb.getImageAsBytes();
+                  //     setState(() {
+                  //       imageFile = image!;
+                  //       imageAvailable = true;
+                  //     });
+                  //   },
+                  //   child: Padding(
+                  //     padding: const EdgeInsetsDirectional.only(bottom: 3),
+                  //     child: Container(
+                  //       child: CircleAvatar(
+                  //         radius: 17,
+                  //         backgroundColor: AppColors.backgroundcolor,
+                  //         child: Icon(
+                  //           Icons.edit,
+                  //           color: AppColors.aqua,
+                  //           size: 20,
+                  //         ),
+                  //       ),
+                  //     ),
+                  ))
         ],
       );
 }

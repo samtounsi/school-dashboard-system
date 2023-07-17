@@ -15,10 +15,11 @@ import 'package:web_schoolapp/presentation/screens/layouts/staff_layout.dart';
 
 import '../../network/cache_helper.dart';
 
-var formKey=GlobalKey<FormState>();
+var formKey = GlobalKey<FormState>();
 TextEditingController usernameController = TextEditingController();
 TextEditingController passwordController = TextEditingController();
-var scaffoldKey=GlobalKey<ScaffoldState>();
+var scaffoldKey = GlobalKey<ScaffoldState>();
+
 class LogIn extends StatelessWidget {
   const LogIn({Key? key}) : super(key: key);
 
@@ -29,75 +30,82 @@ class LogIn extends StatelessWidget {
       backgroundColor: Colors.transparent,
       body: BlocConsumer<AppLoginCubit, AppLoginStates>(
         listener: (context, state) {
-          if(state is AppLoginSuccessState){
-            if(state.loginModel.message=='successful login')
-            {
-              CacheHelper.saveData(key: 'token',
-                  value: state.loginModel.token).then((value){
-                token=state.loginModel.token!;
-                type=state.loginModel.type!;
-                print( token);
+          if (state is AppLoginSuccessState) {
+            if (state.loginModel.message == 'successful login') {
+              CacheHelper.saveData(key: 'token', value: state.loginModel.token)
+                  .then((value) {
+                token = state.loginModel.token!;
+                type = state.loginModel.type!;
+                print(token);
                 print(type);
                 print(state.loginModel.message);
-                if(state.loginModel.type=='owner')
-                {
+                if (state.loginModel.type == 'owner') {
                   navigateAndFinish(context, DashBoard());
-                }
-                else if(state.loginModel.type=='admin')
-                {
+                } else if (state.loginModel.type == 'admin') {
                   navigateAndFinish(context, DashBoardStaff());
                 }
-              }
-              ).then((value)
-              {
-                CacheHelper.saveData(key:'type', value: state.loginModel.type!).then(
-                        (value)
-                    {
-                      type=state.loginModel.type!;
-                      print( token);
-                      print(type);
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(content: Padding(
-                          padding: EdgeInsetsDirectional.symmetric(horizontal: 500,vertical: 16),
-
-                          child: Container(
-                              height: 50,
-                              constraints: const BoxConstraints(maxWidth: 400),
-                              decoration: BoxDecoration(color: AppColors.lightOrange,borderRadius: BorderRadius.all(Radius.circular(20))),
-                              child: Center(
-                                child: Text(state.loginModel.message.toString(),
-                                  maxLines: 2,
-                                  overflow: TextOverflow.ellipsis,
-                                  style: TextStyle(color: AppColors.darkBlue,fontSize: 20,fontWeight: FontWeight.bold),),
-                              )),
-                        ),
-                        behavior: SnackBarBehavior.floating,
-                          backgroundColor: Colors.transparent,
-                          elevation: 0,
-                        ),
-                      );
-                    });
+              }).then((value) {
+                CacheHelper.saveData(key: 'type', value: state.loginModel.type!)
+                    .then((value) {
+                  type = state.loginModel.type!;
+                  print(token);
+                  print(type);
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Padding(
+                        padding: EdgeInsetsDirectional.symmetric(
+                            horizontal: 500, vertical: 16),
+                        child: Container(
+                            height: 50,
+                            constraints: const BoxConstraints(maxWidth: 400),
+                            decoration: BoxDecoration(
+                                color: AppColors.lightOrange,
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(20))),
+                            child: Center(
+                              child: Text(
+                                state.loginModel.message.toString(),
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis,
+                                style: TextStyle(
+                                    color: AppColors.darkBlue,
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            )),
+                      ),
+                      behavior: SnackBarBehavior.floating,
+                      backgroundColor: Colors.transparent,
+                      elevation: 0,
+                    ),
+                  );
+                });
               });
-
             }
-          }
-          else if(state is AppLoginErrorState)
-          {
+          } else if (state is AppLoginErrorState) {
             ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Padding(
-                padding: EdgeInsetsDirectional.symmetric(horizontal: 500,vertical: 16),
-
-                child: Container(
-                    height: 50,
-                    constraints: const BoxConstraints(maxWidth: 400),
-                    decoration: BoxDecoration(color: Colors.redAccent,borderRadius: BorderRadius.all(Radius.circular(20))),
-                    child: Center(
-                      child: Text(state.error.toString(),
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                        style: TextStyle(color: Colors.white,fontSize: 20,fontWeight: FontWeight.bold),),
-                    )),
-              ),
+              SnackBar(
+                content: Padding(
+                  padding: EdgeInsetsDirectional.symmetric(
+                      horizontal: 500, vertical: 16),
+                  child: Container(
+                      height: 50,
+                      constraints: const BoxConstraints(maxWidth: 400),
+                      decoration: BoxDecoration(
+                          color: Colors.redAccent,
+                          borderRadius: BorderRadius.all(Radius.circular(20))),
+                      child: Center(
+                        child: Text(
+                          state.error.toString(),
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold),
+                        ),
+                      )),
+                ),
                 behavior: SnackBarBehavior.floating,
                 backgroundColor: Colors.transparent,
                 elevation: 0,
@@ -199,15 +207,16 @@ class LogIn extends StatelessWidget {
                             ),
                           ),
                           ConditionalBuilder(
-                            condition: state is ! AppLoginLoadingState,
-                            builder:(context)=> defaultTextButton(
+                            condition: state is! AppLoginLoadingState,
+                            builder: (context) => defaultTextButton(
                               text: 'Login',
                               function: () {
-                                if(formKey.currentState!.validate()){
-                                AppLoginCubit.get(context).Login(
-                                    userName: usernameController.text,
-                                    password: passwordController.text);
-          }},
+                                if (formKey.currentState!.validate()) {
+                                  AppLoginCubit.get(context).Login(
+                                      userName: usernameController.text,
+                                      password: passwordController.text);
+                                }
+                              },
                               isUpperCase: true,
                               radius: 50,
                               width: 400,
@@ -216,7 +225,8 @@ class LogIn extends StatelessWidget {
                               textSize: 20,
                               fontWeight: FontWeight.bold,
                             ),
-                            fallback: (context)=>Center(child: CircularProgressIndicator()),
+                            fallback: (context) =>
+                                Center(child: CircularProgressIndicator()),
                           ),
                           SizedBox(
                             height: 50,

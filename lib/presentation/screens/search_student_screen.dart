@@ -263,7 +263,10 @@ class _SearchStudentState extends State<SearchStudent> {
                                     )),
                           ))
                         : Center(
-                            child: Text('Not Found'),
+                            child: Text('No Results Found',
+                            style: TextStyle(fontSize: 30,
+                            fontWeight: FontWeight.w700,
+                            color: AppColors.aqua),),
                           );
                   }
                   return Center(

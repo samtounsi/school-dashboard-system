@@ -12,11 +12,14 @@ import 'package:web_schoolapp/business%20logic/cubits/teacher_cubit/cubit.dart';
 import 'package:web_schoolapp/business%20logic/cubits/timetable_cubit/cubit.dart';
 import 'package:web_schoolapp/business%20logic/cubits/web_cubit/cubit_admin.dart';
 import 'package:web_schoolapp/business%20logic/cubits/web_cubit/cubit_staff.dart';
+import 'package:web_schoolapp/business%20logic/feedback_cubit/cubit.dart';
 import 'package:web_schoolapp/presentation/components%20and%20constants/bloc_observer.dart';
 import 'package:web_schoolapp/presentation/components%20and%20constants/constants.dart';
 import 'package:web_schoolapp/presentation/screens/layouts/layout1.dart';
 import 'package:web_schoolapp/presentation/screens/layouts/staff_layout.dart';
 import 'package:web_schoolapp/presentation/screens/login_screen.dart';
+import 'package:web_schoolapp/presentation/screens/parent_profile.dart';
+
 import 'package:web_schoolapp/presentation/screens/profile_student.dart';
 import 'package:web_schoolapp/presentation/screens/show_staff.dart';
 import 'package:web_schoolapp/presentation/screens/students_marks.dart';
@@ -97,6 +100,9 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => StudentSortCubit(),
+        ),
+        BlocProvider(
+          create: (context) => FeedbackCubit(),
         ),
       ],
       child: MaterialApp(
