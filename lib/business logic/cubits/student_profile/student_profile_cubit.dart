@@ -6,9 +6,13 @@ import 'package:http/http.dart' as http;
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:web_schoolapp/business%20logic/cubits/student_cubit/states.dart';
 import 'package:web_schoolapp/business%20logic/cubits/student_profile/student_profile_state.dart';
+import 'package:web_schoolapp/data/models/send_edit_student_profile_model.dart';
 import 'package:web_schoolapp/presentation/screens/profile_student.dart';
 
+import '../../../data/models/editprofile_student_success_model.dart';
+import '../../../data/models/send_parent_edit_model.dart';
 import '../../../data/models/student_profile_model.dart';
+import '../../../data/models/success_parent_edit_model.dart';
 import '../../../presentation/components and constants/constants.dart';
 
 class StudentProfileCubit extends Cubit<StudentProfileState> {
@@ -22,10 +26,12 @@ class StudentProfileCubit extends Cubit<StudentProfileState> {
   void changePasswordVisibility() {
     isPassword = !isPassword;
     suffix =
-    isPassword ? Icons.visibility_outlined : Icons.visibility_off_outlined;
+        isPassword ? Icons.visibility_outlined : Icons.visibility_off_outlined;
 
     emit(StudentProfileChangePasswordVisibilityState());
   }
+
+  StudentProfileModel? studentProfile;
 
   void getStudentProfile(int studentId) async {
     emit(LoadingStudentProfileState());
@@ -34,7 +40,6 @@ class StudentProfileCubit extends Cubit<StudentProfileState> {
       final result = await http.get(
         Uri.parse(
             "https://new-school-management-system.onrender.com/web/student_profile/$studentId"),
-
         headers: {
           'Content-Type': 'application/json',
           'Accept': '*/*',
@@ -47,10 +52,10 @@ class StudentProfileCubit extends Cubit<StudentProfileState> {
       print(json);
 
       if (result.statusCode == 201) {
-        final model = StudentProfileModel.fromJson(json);
+        // final model = StudentProfileModel.fromJson(json);
+        studentProfile = StudentProfileModel.fromJson(json);
 
-        emit(SuccessStudentPorfileState(model));
-
+        emit(SuccessStudentPorfileState(studentProfile!));
       } else {
         throw Exception(json['message'] ?? "an error");
       }
@@ -58,9 +63,90 @@ class StudentProfileCubit extends Cubit<StudentProfileState> {
       emit(ErrorStudentProfileState(e.toString()));
     }
   }
-  void post(){
-    emit(AppDateStateLoading());
+
+  StudentProfileEditModel? studentProfileE;
+
+  void updateStudentProfile(StudentProfileEditSendModel sendModel) async {
+    emit(LoadingUpdateStudentProfileState());
+    try {
+      final url="https://new-school-management-system.onrender.com/web/update_student_profile";
+      final headers = {
+        'Content-Type': 'application/json',
+        'Accept': '*/*',
+        'Authorization': 'Bearer $token'
+      };
+      final updatePS = {
+        'id': sendModel.id,
+        'username': sendModel.userNameEditS,
+        'password': sendModel.passwordEditS,
+        'first_name': sendModel.firstNameEditS,
+        'last_name': sendModel.lastNameEditS,
+        'father_name': sendModel.fatherNameEditS,
+        'mother_name': sendModel.motherNameEditS,
+        'mother_last_name': sendModel.motherLastNameEditS,
+        'grade': sendModel.gradeNameEditS,
+        'address': sendModel.addressEditS,
+        'phone_number': sendModel.phoneNumberEditS,
+        'parent_number': sendModel.parentPhoneNumberEditS,
+        'telephone_number': sendModel.telephoneNumberEditS,
+        'gender': sendModel.genderEditS,
+        'GPA': sendModel.gbaEditS,
+        'birthday': sendModel.birthdayEditS,
+        'nationality': sendModel.nationalityEditS,
+        'section': sendModel.classNameEditS,
+      };
+      final jsonBody = jsonEncode(updatePS);
+      final request =
+          await http.post(Uri.parse(url), headers: headers, body: jsonBody);
+      final Map<String, dynamic> json = jsonDecode(request.body);
+      print(request.statusCode);
+      print(json);
+      if (request.statusCode == 201) {
+        studentProfileE = StudentProfileEditModel.fromJson(json);
+        emit(SuccessUpdateStudentProfileState(studentProfileE!));
+      } else {
+        throw Exception(json['message'] ?? "an error");
+      }
+    } catch (e) {
+      emit(ErrorUpdateStudentProfileState(errorUpdate: e.toString()));
+      print(e.toString());
+    }
   }
 
-}
+  ParentProfileEditModel? parentProfileE;
 
+  void updateParentProfile(ParentProfileEditSendModel sendParentModel) async {
+    emit(LoadingUpdateParentProfileState());
+    try {
+      final url =
+          "https://new-school-management-system.onrender.com/web/update_parent_profile";
+      final headers = {
+        'Content-Type': 'application/json',
+        'Accept': '*/*',
+        'Authorization': 'Bearer $token'
+      };
+      final updatePS = {
+        'id': sendParentModel.idParentEdit,
+        'username': sendParentModel.userNameParentEditS,
+        'password': sendParentModel.passwordParentEditS,
+        'name': sendParentModel.nameParentEditS,
+      };
+      final jsonBody = jsonEncode(updatePS);
+      final request =
+          await http.post(Uri.parse(url), headers: headers, body: jsonBody);
+      final Map<String, dynamic> json = jsonDecode(request.body);
+      print(request.statusCode);
+      print(json);
+      if (request.statusCode == 200) {
+        parentProfileE = ParentProfileEditModel.fromJson(json);
+        emit(SuccessUpdateParentProfileState(parentProfileE!));
+      } else {
+        throw Exception(json['message'] ?? "an error");
+      }
+    } catch (e) {
+      emit(ErrorUpdateParentProfileState(errorParentUpdate: e.toString()));
+      print(e.toString());
+    }
+    // }
+  }
+}

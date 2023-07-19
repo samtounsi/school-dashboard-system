@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:web_schoolapp/business%20logic/cubits/Show%20Time%20Table/cubit.dart';
+import 'package:web_schoolapp/business%20logic/cubits/delete_attendance_cubit/cubit.dart';
 import 'package:web_schoolapp/business%20logic/cubits/event_cubit/cubit.dart';
 import 'package:web_schoolapp/business%20logic/cubits/home_cubit/cubit.dart';
 import 'package:web_schoolapp/business%20logic/cubits/login_cubit/cubit.dart';
@@ -103,6 +104,9 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => FeedbackCubit(),
+        ),
+        BlocProvider(
+          create: (context) => DeleteAttendanceCubit(),
         ),
       ],
       child: MaterialApp(

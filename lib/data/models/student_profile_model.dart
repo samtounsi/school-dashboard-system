@@ -1,51 +1,58 @@
 class StudentProfileModel {
-  final String userName;//
-  final String firstName;//
-  final String lastName;//
-  final String fatherName;//
-  final String motherName;//
-  final String motherLastName;//
-  final String telephoneNumber;//
+  final int id;
+  final String userName; //
+  final String firstName; //
+  final String lastName; //
+  final String fatherName; //
+  final String motherName; //
+  final String motherLastName; //
+  final String telephoneNumber; //
   final double gba;
-  final String address;//
-  final String gender;//
-  final String phoneNumber;//
+  final String address; //
+  final String gender; //
+  final String phoneNumber; //
   final String nationality;
-  final String birthday;//
-  final String gradeName;//
-  final String className;//
-  final String parentPhoneNumber;//
+  final String birthday; //
+  final String gradeName; //
+  final String className; //
+  final String parentPhoneNumber; //
   final String? photo;
-  final List<DateTime> absences;//
+  final List<DateTime> absences; //
   final String? bio;
+  final int parentId;
+  final String parentUsername;
+  final String parentName;
   final String? message;
 
-  StudentProfileModel({
-    required this.userName,
-    required this.firstName,
-    required this.lastName,
-    required this.fatherName,
-    required this.motherName,
-    required this.motherLastName,
-    required this.telephoneNumber,
-    required this.gba,
-    required this.address,
-    required this.gender,
-    required this.phoneNumber,
-    required this.nationality,
-    required this.birthday,
-    required this.gradeName,
-    required this.className,
-    required this.parentPhoneNumber,
-    this.photo,
-    required this.absences,
-    this.bio,
-
-    this.message
-  });
+  StudentProfileModel(
+      {required this.id,
+      required this.userName,
+      required this.firstName,
+      required this.lastName,
+      required this.fatherName,
+      required this.motherName,
+      required this.motherLastName,
+      required this.telephoneNumber,
+      required this.gba,
+      required this.address,
+      required this.gender,
+      required this.phoneNumber,
+      required this.nationality,
+      required this.birthday,
+      required this.gradeName,
+      required this.className,
+      required this.parentPhoneNumber,
+      this.photo,
+      required this.absences,
+      this.bio,
+      required this.parentId,
+      required this.parentUsername,
+      required this.parentName,
+      this.message});
 
   factory StudentProfileModel.fromJson(Map<String, dynamic> json) {
     return StudentProfileModel(
+      id: json['id'],
       userName: json['username'],
       firstName: json['first_name'],
       lastName: json['last_name'],
@@ -63,9 +70,13 @@ class StudentProfileModel {
       className: json['class_name'],
       parentPhoneNumber: json['parent_phone_number'],
       photo: json['photo'],
-      absences: (json['absences'] as List).map((e) =>DateTime.parse(e)).toList(),
+      absences:
+          (json['absences'] as List).map((e) => DateTime.parse(e)).toList(),
       // marks: (json['marks'] as List).map((e)=> e.toString()).toList(),
-      bio: json['bio']
+      bio: json['bio'],
+      parentId: json['parent_id'],
+      parentUsername: json['parent_username'],
+      parentName: json['parent_name'],
     );
   }
 }

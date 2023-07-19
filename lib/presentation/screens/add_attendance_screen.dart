@@ -94,7 +94,7 @@ class _AttendanceScreenState extends State<AttendanceScreen> {
                     StudentCubit.get(context).postListAndDates(attendance);
                   },
                   child: Icon(Icons.add),
-                  backgroundColor: AppColors.aqua,
+                  backgroundColor: AppColors.darkBlue,
                 );
               },
               fallback: (BuildContext context) => CircularProgressIndicator(),
@@ -216,6 +216,9 @@ class _AttendanceScreenState extends State<AttendanceScreen> {
                                 return ListTile(
                                   title: Text(
                                     '${state.students?[index].firstName} ${state.students?[index].lastName}',
+                                    style: TextStyle(fontSize: 22,
+                                    color: AppColors.darkBlue,
+                                    fontWeight: FontWeight.w700),
                                   ),
                                   trailing: IconButton(
                                       onPressed: () {

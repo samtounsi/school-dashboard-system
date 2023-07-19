@@ -208,8 +208,7 @@ class StudentCubit extends Cubit<DashBoardState> {
     }
   }
 
-  Future<void> postListAndDates(
-      AddAttendanceStudentModel addAttendanceStudentModel) async {
+  Future<void> postListAndDates(AddAttendanceStudentModel addAttendanceStudentModel) async {
     emit(AttendanceStudentLoadingState());
     final url =
         'https://new-school-management-system.onrender.com/web/add_absent_students';
