@@ -1,9 +1,11 @@
 // ignore_for_file: use_key_in_widget_constructors, prefer_const_constructors, sized_box_for_whitespace
 
+import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:web_schoolapp/business%20logic/cubits/student_cubit/cubit.dart';
 import 'package:web_schoolapp/business%20logic/cubits/student_cubit/states.dart';
+import 'package:web_schoolapp/data/models/active_success_student_model.dart';
 import 'package:web_schoolapp/data/models/search_student_parameters.dart';
 import 'package:web_schoolapp/data/models/student_model.dart';
 import 'package:web_schoolapp/presentation/components%20and%20constants/constants.dart';
@@ -41,26 +43,33 @@ class _SearchStudentState extends State<SearchStudent> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        backgroundColor: Colors.transparent,
-        body: Padding(
-          padding: const EdgeInsets.all(12.0),
-          child: Column(
-            children: [
-              Text(
-                'Students',
-                style: TextStyle(
-                    color: AppColors.aqua,
-                    fontSize: 45,
-                    fontWeight: FontWeight.bold),
-              ),
-              SizedBox(
-                height: 30,
-              ),
-              BlocConsumer<StudentCubit, DashBoardState>(
-                listener: (context, state) {},
-                builder: (context, state) {
-                  return Padding(
+    return BlocConsumer<StudentCubit,DashBoardState>(
+      listener: (context, state){
+        if(state is StudentSearchErrorState)
+          {
+            print(state.errorMessage.toString());
+          }
+
+      },
+      builder: (context, state) {
+        var sModel=StudentCubit.get(context).students;
+        return  Scaffold(
+            backgroundColor: Colors.transparent,
+            body: Padding(
+              padding: const EdgeInsets.all(12.0),
+              child: Column(
+                children: [
+                  Text(
+                    'Students',
+                    style: TextStyle(
+                        color: AppColors.aqua,
+                        fontSize: 45,
+                        fontWeight: FontWeight.bold),
+                  ),
+                  SizedBox(
+                    height: 30,
+                  ),
+                  Padding(
                     padding: const EdgeInsets.all(13.0),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -90,10 +99,10 @@ class _SearchStudentState extends State<SearchStudent> {
                               onChanged: (value) {
                                 StudentCubit.get(context).changeGrade(value!);
                                 gradeValue =
-                                    StudentCubit.get(context).dropDown1!;
+                                StudentCubit.get(context).dropDown1!;
                               },
                               icon: Padding(
-                                  //Icon at tail, arrow bottom is default icon
+                                //Icon at tail, arrow bottom is default icon
                                   padding: EdgeInsets.only(left: 20, right: 10),
                                   child: Icon(
                                     Icons.arrow_drop_down,
@@ -150,35 +159,30 @@ class _SearchStudentState extends State<SearchStudent> {
                             ),
                           ),
                         ),
-                        BlocConsumer<StudentCubit, DashBoardState>(
-                          listener: (context, state) {},
-                          builder: (context, state) {
-                            return Row(
-                              children: [
-                                Text(
-                                  'State',
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 22,
-                                      color: AppColors.aqua),
-                                ),
-                                SizedBox(width: 6),
-                                Checkbox(
-                                  focusColor: AppColors.darkBlue,
-                                  checkColor: AppColors.darkBlue,
-                                  activeColor: AppColors.aqua,
-                                  value: StudentCubit.get(context).isActive,
-                                  onChanged: (bool? value) {
-                                    StudentCubit.get(context)
-                                        .activeCheck(value!);
-                                  },
-                                ),
-                              ],
-                            );
-                          },
+                        Row(
+                          children: [
+                            Text(
+                              'State',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 22,
+                                  color: AppColors.aqua),
+                            ),
+                            SizedBox(width: 6),
+                            Checkbox(
+                              focusColor: AppColors.darkBlue,
+                              checkColor: AppColors.darkBlue,
+                              activeColor: AppColors.aqua,
+                              value: StudentCubit.get(context).isActive,
+                              onChanged: (bool? value) {
+                                StudentCubit.get(context)
+                                    .activeCheck(value!);
+                              },
+                            ),
+                          ],
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(right: 30),
+                          padding: const EdgeInsets.only(right: 25),
                           child: IconButton(
                               onPressed: _makeSearch,
                               icon: Icon(
@@ -189,102 +193,90 @@ class _SearchStudentState extends State<SearchStudent> {
                         )
                       ],
                     ),
-                  );
-                },
-              ),
-              SizedBox(
-                height: 50,
-              ),
-              BlocConsumer<StudentCubit, DashBoardState>(
-                listener: (context, state) {},
-                builder: (context, state) {
-                  if (state is StudentSearchErrorState) {
-                    return Center(
-                      child: Text(state.errorMessage),
-                    );
-                  }
-                  if (state is StudentSearchSuccessfulState) {
-                    return state.students.isNotEmpty
-                        ? Expanded(
+                  ),
+
+                  SizedBox(
+                    height: 50,
+                  ),
+                  ConditionalBuilder(
+                      condition: state is ! StudentSearchLoadingState,
+                      builder: (context) {
+                        return Expanded(
                             child:
-                                // studentView!.students!.isNotEmpty
-                                GridView.count(
-                            crossAxisCount: 4,
-                            mainAxisSpacing: 35,
-                            crossAxisSpacing: 35,
-                            children: List.generate(
-                                state.students.length,
-                                (index) => InkWell(
-                                      onTap: () {
-                                        navigateTo(
-                                            context,
-                                            StudentProfile(
-                                                studentId:
-                                                    state.students[index].id));
-                                      },
-                                      child: Center(
-                                        child: Column(children: [
-                                          Container(
-                                            decoration: BoxDecoration(
-                                              shape: BoxShape.circle,
-                                              color: AppColors.borderColor,
+                            // studentView!.students!.isNotEmpty
+                            GridView.count(
+                              crossAxisCount: 4,
+                              mainAxisSpacing: 29,
+                              crossAxisSpacing: 28,
+                              children: List.generate(
+                                  sModel!.length,
+                                      (index) => InkWell(
+                                    onTap: () {
+                                      navigateTo(
+                                          context,
+                                          StudentProfile(
+                                              studentId:
+                                              sModel[index].id));
+                                    },
+                                    child: Center(
+                                      child: Column(children: [
+                                        Container(
+                                          decoration: BoxDecoration(
+                                            shape: BoxShape.circle,
+                                            color: AppColors.borderColor,
+                                          ),
+                                          height: 250,
+                                          width: 300,
+                                          child: Center(
+                                            child: Column(
+                                              children: [
+                                                Spacer(),
+                                                CircleAvatar(
+                                                  radius: 60,
+                                                  foregroundColor:
+                                                  Colors.grey[300],
+                                                  backgroundImage: NetworkImage('https://media1.popsugar-assets.com/files/thumbor/hnVKqXE-xPM5bi3w8RQLqFCDw_E/475x60:1974x1559/fit-in/2048xorig/filters:format_auto-!!-:strip_icc-!!-/2019/09/09/023/n/1922398/9f849ffa5d76e13d154137.01128738_/i/Taylor-Swift.jpg'),
+                                                ),
+                                                SizedBox(
+                                                  height: 30,
+                                                ),
+                                                Text(
+                                                  "${sModel[index].firstName} ${sModel[index].lastName}",
+                                                  style: TextStyle(
+                                                      fontSize: 20,
+                                                      color: AppColors.aqua,
+                                                      fontWeight:
+                                                      FontWeight.bold),
+                                                ),
+                                                Spacer(),
+                                              ],
                                             ),
-                                            height: 250,
-                                            width: 300,
-                                            child: Center(
-                                              child: Column(
-                                                children: [
-                                                  Spacer(),
-                                                  CircleAvatar(
-                                                      radius: 60,
-                                                      foregroundColor:
-                                                          Colors.grey[300],
-                                                      backgroundImage: NetworkImage(
-                                                          '${state.students[index].photo}'),
-                                                  ),
-                                                  SizedBox(
-                                                    height: 30,
-                                                  ),
-                                                  Text(
-                                                    '${state.students?[index].firstName} ${state.students?[index].lastName}',
-                                                    style: TextStyle(
-                                                        fontSize: 20,
-                                                        color: AppColors.aqua,
-                                                        fontWeight:
-                                                            FontWeight.bold),
-                                                  ),
-                                                  Spacer(),
-                                                ],
-                                              ),
-                                            ),
-                                          )
-                                        ]),
-                                      ),
-                                    )),
-                          ))
-                        : Center(
-                            child: Text('No Results Found',
-                            style: TextStyle(fontSize: 30,
-                            fontWeight: FontWeight.w700,
-                            color: AppColors.aqua),),
-                          );
-                  }
-                  return Center(
-                    child: CircularProgressIndicator(),
-                  );
-                },
+                                          ),
+                                        )
+                                      ]),
+                                    ),
+                                  )),
+                            ));
+                      },
+                      fallback:(context) => Center(child: CircularProgressIndicator(),)
+
+
+                  ),
+
+                ],
               ),
-            ],
-          ),
-        ));
+            ));
+      },
+
+    );
   }
 
   SearchStudentParameters get searchParametes => SearchStudentParameters(
-        isActive: StudentCubit.get(context).isActive,
-        grade: gradeValue,
-        name: nameController.text,
-        section: sectionController.text,
-      );
+    isActive: StudentCubit.get(context).isActive,
+    grade: gradeValue,
+    name: nameController.text,
+    section: sectionController.text,
+  );
 
   void _makeSearch() =>
       StudentCubit.get(context).searchStudent(searchParametes);

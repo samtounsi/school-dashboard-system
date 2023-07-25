@@ -1,30 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:web_schoolapp/business%20logic/cubits/Show%20Time%20Table/cubit.dart';
-import 'package:web_schoolapp/business%20logic/cubits/delete_attendance_cubit/cubit.dart';
 import 'package:web_schoolapp/business%20logic/cubits/event_cubit/cubit.dart';
 import 'package:web_schoolapp/business%20logic/cubits/home_cubit/cubit.dart';
 import 'package:web_schoolapp/business%20logic/cubits/login_cubit/cubit.dart';
 import 'package:web_schoolapp/business%20logic/cubits/sort_student_cubit/cubit.dart';
-import 'package:web_schoolapp/business%20logic/cubits/sort_student_cubit/state.dart';
 import 'package:web_schoolapp/business%20logic/cubits/student_cubit/cubit.dart';
 import 'package:web_schoolapp/business%20logic/cubits/student_profile/student_profile_cubit.dart';
 import 'package:web_schoolapp/business%20logic/cubits/teacher_cubit/cubit.dart';
 import 'package:web_schoolapp/business%20logic/cubits/timetable_cubit/cubit.dart';
 import 'package:web_schoolapp/business%20logic/cubits/web_cubit/cubit_admin.dart';
 import 'package:web_schoolapp/business%20logic/cubits/web_cubit/cubit_staff.dart';
-import 'package:web_schoolapp/business%20logic/feedback_cubit/cubit.dart';
 import 'package:web_schoolapp/presentation/components%20and%20constants/bloc_observer.dart';
 import 'package:web_schoolapp/presentation/components%20and%20constants/constants.dart';
 import 'package:web_schoolapp/presentation/screens/layouts/layout1.dart';
 import 'package:web_schoolapp/presentation/screens/layouts/staff_layout.dart';
 import 'package:web_schoolapp/presentation/screens/login_screen.dart';
-import 'package:web_schoolapp/presentation/screens/parent_profile.dart';
-
-import 'package:web_schoolapp/presentation/screens/profile_student.dart';
-import 'package:web_schoolapp/presentation/screens/show_staff.dart';
-import 'package:web_schoolapp/presentation/screens/students_marks.dart';
-
+import 'business logic/cubits/feedback_cubit/cubit.dart';
 import 'business logic/cubits/staff_profile/cubit.dart';
 import 'network/cache_helper.dart';
 
@@ -105,14 +97,12 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (context) => FeedbackCubit(),
         ),
-        BlocProvider(
-          create: (context) => DeleteAttendanceCubit(),
-        ),
+
       ],
       child: MaterialApp(
         theme: ThemeData(primarySwatch: buildMaterialColor(AppColors.darkBlue)),
         debugShowCheckedModeBanner: false,
-        home: startWidget,
+        home:startWidget,
       ),
     );
   }

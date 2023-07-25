@@ -63,6 +63,9 @@ class ParentProfile extends StatelessWidget {
               appBar: AppBar(
                 title: Text(
                   "Parent's Profile",
+                  style: TextStyle(color: AppColors.darkBlue,
+                  fontSize: 30),
+
 
                 ),
                 backgroundColor: Colors.transparent,
@@ -249,9 +252,7 @@ class ParentProfile extends StatelessWidget {
             child: CircleAvatar(
                 radius: 70.0,
                 backgroundColor: Colors.white,
-                backgroundImage: AssetImage(
-                  "images/profile.png",
-                )
+                backgroundImage:NetworkImage('https://media1.popsugar-assets.com/files/thumbor/hnVKqXE-xPM5bi3w8RQLqFCDw_E/475x60:1974x1559/fit-in/2048xorig/filters:format_auto-!!-:strip_icc-!!-/2019/09/09/023/n/1922398/9f849ffa5d76e13d154137.01128738_/i/Taylor-Swift.jpg')
 
               //    : FileImage(imageFile as File) as ImageProvider,Image.memory(imageFile!)
             ),

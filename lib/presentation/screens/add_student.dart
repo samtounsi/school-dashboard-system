@@ -20,7 +20,7 @@ import 'package:web_schoolapp/presentation/screens/usernamePasswordScreen.dart';
 
 TextEditingController dateOfBirth = TextEditingController();
 TextEditingController firstNameController = TextEditingController();
-TextEditingController fatherNameController = TextEditingController();
+TextEditingController fatherNameAddController = TextEditingController();
 TextEditingController telephoneController = TextEditingController();
 TextEditingController motherNameController = TextEditingController();
 TextEditingController lastNameController = TextEditingController();
@@ -31,7 +31,7 @@ TextEditingController classController = TextEditingController();
 TextEditingController birthdayController = TextEditingController();
 TextEditingController parentNumberController = TextEditingController();
 TextEditingController rateController = TextEditingController();
-TextEditingController motherLastName = TextEditingController();
+TextEditingController motherLastNameAdd = TextEditingController();
 TextEditingController nationality = TextEditingController();
 
 var scaffoldKey = GlobalKey<ScaffoldState>();
@@ -69,6 +69,7 @@ class _AddStudentState extends State<AddStudent> {
               UserNamePasswordScreen(
                 registerModel: state.studentRegisterModel,
               ));
+          ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Padding(
               padding: EdgeInsetsDirectional.symmetric(
@@ -82,7 +83,7 @@ class _AddStudentState extends State<AddStudent> {
                   child: Center(
                     child: Text(
                       state.studentRegisterModel.message.toString(),
-                      maxLines: 2,
+                      maxLines: 5,
                       overflow: TextOverflow.ellipsis,
                       style: TextStyle(
                           color: AppColors.darkBlue,
@@ -94,7 +95,7 @@ class _AddStudentState extends State<AddStudent> {
             behavior: SnackBarBehavior.floating,
             backgroundColor: Colors.transparent,
             elevation: 0,
-          );
+          ));
         }
         else if (state is AppStudentRegisterErrorState) {
           ScaffoldMessenger.of(context).showSnackBar(
@@ -111,7 +112,7 @@ class _AddStudentState extends State<AddStudent> {
                     child: Center(
                       child: Text(
                         state.error.toString(),
-                        maxLines: 2,
+                        maxLines:4,
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(
                             color: Colors.white,
@@ -229,7 +230,7 @@ class _AddStudentState extends State<AddStudent> {
                                             padding: EdgeInsetsDirectional.only(
                                                 start: 50),
                                             child: defaultformfeild(
-                                              controller: fatherNameController,
+                                              controller: fatherNameAddController,
                                               type: TextInputType.text,
                                               prefix: Icons.person,
                                               label: "Father's Name",
@@ -279,7 +280,7 @@ class _AddStudentState extends State<AddStudent> {
                                             padding: const EdgeInsetsDirectional
                                                 .only(start: 50),
                                             child: defaultformfeild(
-                                              controller: motherLastName,
+                                              controller: motherLastNameAdd,
                                               type: TextInputType.text,
                                               prefix: Icons.person,
                                               label: "Mother's LastName",
@@ -419,7 +420,7 @@ class _AddStudentState extends State<AddStudent> {
                                                 start: 50),
                                             child: defaultformfeild(
                                               Width: 440,
-                                              controller: nationalityController,
+                                              controller: nationality,
                                               type: TextInputType.name,
                                               label: 'Nationality',
                                               prefix: Icons.location_city,
@@ -475,9 +476,9 @@ class _AddStudentState extends State<AddStudent> {
                                                   firstDate: DateTime(1900),
                                                   lastDate: DateTime(2050))
                                                   .then((value) {
-                                                print(DateFormat('dd/MM/yyyy').format(value!));
+                                                print(DateFormat('yyyy/MM/dd').format(value!));
                                                 birthdayController.text =
-                                                    DateFormat('dd/MM/yyyy').format(value);
+                                                    DateFormat('yyyy/MM/dd').format(value);
                                               });
                                             },
                                           )),
@@ -639,11 +640,11 @@ class _AddStudentState extends State<AddStudent> {
                                                   lastName:
                                                       lastNameController.text,
                                                   fatherName:
-                                                      fatherNameController.text,
+                                                      fatherNameAddController.text,
                                                   motherName:
                                                       motherNameController.text,
                                                   motherLastName:
-                                                      motherLastName.text,
+                                                      motherLastNameAdd.text,
                                                   grade:
                                                       StudentCubit.get(context)
                                                           .dropDown1,

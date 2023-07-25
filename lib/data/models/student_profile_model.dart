@@ -1,5 +1,6 @@
 class StudentProfileModel {
   final int id;
+  final String type;
   final String userName; //
   final String firstName; //
   final String lastName; //
@@ -25,7 +26,9 @@ class StudentProfileModel {
   final String? message;
 
   StudentProfileModel(
-      {required this.id,
+      {
+        required this.type,
+        required this.id,
       required this.userName,
       required this.firstName,
       required this.lastName,
@@ -52,6 +55,7 @@ class StudentProfileModel {
 
   factory StudentProfileModel.fromJson(Map<String, dynamic> json) {
     return StudentProfileModel(
+      type: json['type'],
       id: json['id'],
       userName: json['username'],
       firstName: json['first_name'],

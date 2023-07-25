@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:html';
 
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
@@ -6,9 +7,13 @@ import 'package:http/http.dart' as http;
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:web_schoolapp/business%20logic/cubits/student_cubit/states.dart';
 import 'package:web_schoolapp/business%20logic/cubits/student_profile/student_profile_state.dart';
+import 'package:web_schoolapp/data/models/active_success_student_model.dart';
 import 'package:web_schoolapp/data/models/send_edit_student_profile_model.dart';
+import 'package:web_schoolapp/data/models/success_delete_attendance_model.dart';
 import 'package:web_schoolapp/presentation/screens/profile_student.dart';
 
+import '../../../data/models/active_send_student_model.dart';
+import '../../../data/models/delete_attendance_model.dart';
 import '../../../data/models/editprofile_student_success_model.dart';
 import '../../../data/models/send_parent_edit_model.dart';
 import '../../../data/models/student_profile_model.dart';
@@ -69,7 +74,8 @@ class StudentProfileCubit extends Cubit<StudentProfileState> {
   void updateStudentProfile(StudentProfileEditSendModel sendModel) async {
     emit(LoadingUpdateStudentProfileState());
     try {
-      final url="https://new-school-management-system.onrender.com/web/update_student_profile";
+      final url =
+          "https://new-school-management-system.onrender.com/web/update_student_profile";
       final headers = {
         'Content-Type': 'application/json',
         'Accept': '*/*',
@@ -123,7 +129,7 @@ class StudentProfileCubit extends Cubit<StudentProfileState> {
       final headers = {
         'Content-Type': 'application/json',
         'Accept': '*/*',
-        'Authorization': 'Bearer $token'
+        'Authorization': 'Bearer $token',
       };
       final updatePS = {
         'id': sendParentModel.idParentEdit,
@@ -149,4 +155,82 @@ class StudentProfileCubit extends Cubit<StudentProfileState> {
     }
     // }
   }
+
+  SuccessDeleteAttendanceModel? s;
+
+  Future<void> postDeleteAttendance(
+      DeleteAttendanceModel deleteAttendanceModel) async {
+    emit(DeleteAttendanceLoadingState());
+    try {
+      final url =
+          'https://new-school-management-system.onrender.com/web/delete_absent_student';
+      final headers = {
+        'Content-Type': 'application/json',
+        'Accept': '*/*',
+        'Authorization': 'Bearer $token'
+      };
+      final data = {
+        'student_id': deleteAttendanceModel.studentId,
+        'date': deleteAttendanceModel.date
+      };
+      final jsonBody = jsonEncode(data);
+      final response =
+          await http.post(Uri.parse(url), headers: headers, body: jsonBody);
+      Map<String, dynamic> json = jsonDecode(response.body);
+      print(response.statusCode);
+      print(response.body);
+      if (response.statusCode == 201) {
+        s = SuccessDeleteAttendanceModel.fromJson(json);
+        emit(DeleteAttendanceSuccessState(s!));
+      } else {
+        throw Exception(json['message'] ?? "an error");
+      }
+    } catch (e) {
+      emit(DeleteAttendanceErrorState(errorDelete: e.toString()));
+      print(e.toString());
+    }
+  }
+
+  SuccessActiveStudentModel? successActive;
+
+  void changeStateStudent(ActiveStudentSendModel activeStudentSendModel) async {
+    emit(ChangeStateStudentLoadingState());
+    try {
+      final url =
+          'https://new-school-management-system.onrender.com/web/activate_user';
+      final headres = {
+        'Content-Type': 'application/json',
+        'Accept': '*/*',
+        'Authorization': 'Bearer $token',
+      };
+      final c = {
+        'type': activeStudentSendModel.typeA,
+        'id': activeStudentSendModel.idA,
+      };
+      final jsonBody = jsonEncode(c);
+      final response =
+          await http.post(Uri.parse(url), headers: headres, body: jsonBody);
+      Map<String, dynamic> json = jsonDecode(response.body);
+      if (response.statusCode == 201) {
+        successActive = SuccessActiveStudentModel.fromJson(json);
+        emit(ChangeStateStudentSuccessState(successActive!));
+      }
+      else{
+        throw Exception(json['message'] ?? "an error");
+      }
+    } catch (e) {
+      emit(ChangeStateStudentErrorState(errorState: e.toString()));
+    }
+  }
+  bool isStateActive = true;
+  IconData iconData = Icons.delete_forever_outlined;
+
+  void changeState() {
+    isStateActive = !isStateActive;
+    iconData =
+    isStateActive ? Icons.delete_forever_outlined : Icons.add_box;
+
+    emit(ChangeIconState());
+  }
+
 }

@@ -53,7 +53,7 @@ class ShowStaff extends StatelessWidget {
               child: ListView.separated(
                   scrollDirection: Axis.vertical,
                   itemBuilder: (context,index)=>buildStaffItem(staff,context,index),
-                  separatorBuilder: (context,index)=>SizedBox(height: 30,),
+                  separatorBuilder: (context,index)=>const SizedBox(height: 30,),
                   itemCount: staff.length),
             ),
           ],
@@ -69,7 +69,7 @@ class ShowStaff extends StatelessWidget {
       StaffProfileCubit.get(context).showStaffProfile(id: '${staff[index].id}').then((value) =>navigateTo(context, StaffProfile(id:'${staff[index].id}')));
       },
       child: Padding(
-        padding: EdgeInsets.only(left: 80.0,top: 20,right: 20,),
+        padding: const EdgeInsets.only(left: 80.0,top: 20,right: 20,),
         child: Row(
           children: [
             Container(
@@ -84,14 +84,14 @@ class ShowStaff extends StatelessWidget {
                 borderRadius: BorderRadius.circular(20),
               ),
               child: Padding(
-                padding: EdgeInsetsDirectional.only(top:30,bottom: 30,start: 50,end: 50 ),
+                padding: const EdgeInsetsDirectional.only(top:30,bottom: 30,start: 50,end: 50 ),
                 child: Row(
                   children: [
                     Row(
                       children: [
                         Text(
                           '${staff[index].firstName} ',
-                          style: TextStyle(
+                          style: const TextStyle(
                               fontSize: 30,
                               fontWeight: FontWeight.w600,
                               color: AppColors.lightOrange
@@ -99,7 +99,7 @@ class ShowStaff extends StatelessWidget {
                         ),
                         Text(
                           '${staff[index].lastName}',
-                          style: TextStyle(
+                          style: const TextStyle(
                               fontSize: 30,
                               fontWeight: FontWeight.w600,
                               color: AppColors.lightOrange
@@ -107,7 +107,7 @@ class ShowStaff extends StatelessWidget {
                         ),
                       ],
                     ),
-                    Spacer(),
+                    const Spacer(),
                     Container(
                       decoration: BoxDecoration(
                           color: AppColors.borderColor.withAlpha(60),
@@ -118,7 +118,7 @@ class ShowStaff extends StatelessWidget {
                       ),
                       child: IconButton(
                         padding: EdgeInsets.zero,
-                        icon: Icon(Icons.delete_forever_outlined,
+                        icon: const Icon(Icons.delete_forever_outlined,
                           color: AppColors.lightOrange,
                           size: 30,
                         ),

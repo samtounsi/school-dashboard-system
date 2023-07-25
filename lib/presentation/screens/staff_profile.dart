@@ -73,7 +73,7 @@ class StaffProfile extends StatelessWidget {
                       child: SafeArea(
                         child: Row(
                           children: [
-                            SizedBox(width: 100),
+                            const SizedBox(width: 100),
                             Column(
                               mainAxisSize: MainAxisSize.min,
                               children: [
@@ -91,15 +91,15 @@ class StaffProfile extends StatelessWidget {
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
                                   Text(
-                                   ' ${model.firstName.toString()+' '+model.lastName.toString() }',
-                                    style: TextStyle(
+                                   ' ${'${model.firstName} ${model.lastName}' }',
+                                    style: const TextStyle(
                                         fontSize: 50, color: AppColors.lightOrange),
                                   ),
-                                  SizedBox(height: 30,),
+                                  const SizedBox(height: 30,),
                                   Row(
                                     children: [
                                       Padding(
-                                        padding: EdgeInsetsDirectional.only(bottom: 50),
+                                        padding: const EdgeInsetsDirectional.only(bottom: 50),
                                         child: defaultformfeild(
                                           controller: firstNameController,
                                           type: TextInputType.name,
@@ -123,9 +123,9 @@ class StaffProfile extends StatelessWidget {
                                           },
                                         ),
                                       ),
-                                      SizedBox(width: 50,),
+                                      const SizedBox(width: 50,),
                                       Padding(
-                                        padding: EdgeInsetsDirectional.only(bottom: 50),
+                                        padding: const EdgeInsetsDirectional.only(bottom: 50),
                                         child: defaultformfeild(
                                           controller: lastNameController,
                                           Width: 250,
@@ -154,7 +154,7 @@ class StaffProfile extends StatelessWidget {
                                   Row(
                                     children: [
                                       Padding(
-                                        padding: EdgeInsetsDirectional.only(bottom: 50),
+                                        padding: const EdgeInsetsDirectional.only(bottom: 50),
                                         child: defaultformfeild(
                                           controller: genderController,
                                           type: TextInputType.text,
@@ -171,9 +171,9 @@ class StaffProfile extends StatelessWidget {
                                           },
                                         ),
                                       ),
-                                      SizedBox(width: 50,),
+                                      const SizedBox(width: 50,),
                                       Padding(
-                                        padding: EdgeInsetsDirectional.only(bottom: 50),
+                                        padding: const EdgeInsetsDirectional.only(bottom: 50),
                                         child: defaultformfeild(
                                           controller: phoneController,
                                           Width: 250,
@@ -204,7 +204,7 @@ class StaffProfile extends StatelessWidget {
                                       ),
                                       child: TextField(
                                         controller: birthdayController,
-                                        decoration: InputDecoration(
+                                        decoration: const InputDecoration(
                                             border: OutlineInputBorder(),
                                             focusedBorder: OutlineInputBorder(
                                                 borderSide: BorderSide(
@@ -236,15 +236,15 @@ class StaffProfile extends StatelessWidget {
                                           });
                                         },
                                       )),
-                                  SizedBox(height: 50,),
+                                  const SizedBox(height: 50,),
                                   Row(
                                     children: [
-                                      Icon(
+                                      const Icon(
                                         Icons.location_on,
                                         color: AppColors.lightOrange,
                                         size: 40,
                                       ),
-                                      SizedBox(
+                                      const SizedBox(
                                         width: 15,
                                       ),
                                       Container(
@@ -257,7 +257,7 @@ class StaffProfile extends StatelessWidget {
                                             }
                                             return null;
                                           },
-                                          decoration: InputDecoration(
+                                          decoration: const InputDecoration(
                                             border: OutlineInputBorder(),
                                             labelText: "Detailed address",
                                             labelStyle: TextStyle(
@@ -273,14 +273,14 @@ class StaffProfile extends StatelessWidget {
                                       ),
                                     ],
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     height: 50,
                                   ),
                                   Row(
                                     children: [
-                                      SizedBox(width: 30,),
+                                      const SizedBox(width: 30,),
                                       Padding(
-                                        padding: EdgeInsetsDirectional.only(bottom: 50),
+                                        padding: const EdgeInsetsDirectional.only(bottom: 50),
                                         child: defaultformfeild(
                                           controller: usernameController,
                                           type: TextInputType.name,
@@ -304,9 +304,9 @@ class StaffProfile extends StatelessWidget {
                                           },
                                         ),
                                       ),
-                                      SizedBox(width: 50,),
+                                      const SizedBox(width: 50,),
                                       Padding(
-                                        padding: EdgeInsetsDirectional.only(bottom: 50),
+                                        padding: const EdgeInsetsDirectional.only(bottom: 50),
                                         child: defaultformfeild(
                                           Width: 250,
                                           controller: passwordController,
@@ -351,7 +351,7 @@ class StaffProfile extends StatelessWidget {
                                       ),
                                     ],
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     height: 50,
                                   ),
                                 ],
@@ -367,7 +367,7 @@ class StaffProfile extends StatelessWidget {
               ),
             );
           },
-          fallback: (context)=>Center(child: CircularProgressIndicator()),
+          fallback: (context)=>const Center(child: CircularProgressIndicator()),
         );
       },
     );

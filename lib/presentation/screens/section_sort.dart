@@ -63,126 +63,132 @@ class SectionSort extends StatelessWidget {
       },
       builder: (context, state) {
         return Scaffold(
-          body: Row(
+          body: ListView(
+            scrollDirection: Axis.horizontal,
+            shrinkWrap: true,
             children: [
-              Spacer(),
-              Padding(
-                padding: const EdgeInsets.only(left: 60),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    SvgPicture.asset(
-                      'images/selectSectionDarkBlue.svg',
-                      height: 600,
-                      width: 600,
-                    )
-                  ],
-                ),
-              ),
-              Spacer(),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.start,
+              Row(
                 children: [
                   Spacer(),
-                  Text(
-                    'Distribute Students into Sections',
-                    style: TextStyle(
-                      fontSize: 35,
+                  Padding(
+                    padding: const EdgeInsets.only(left: 60),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        SvgPicture.asset(
+                          'images/selectSectionDarkBlue.svg',
+                          height: 600,
+                          width: 600,
+                        )
+                      ],
                     ),
                   ),
-                  SizedBox(
-                    height: 80,
-                  ),
-                  Row(
+                  Spacer(),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      defaultformfeild(
-                          Width: 200,
-                          controller: seventhGradeController,
-                          type: TextInputType.text,
-                          validate: (value) {}),
-                      SizedBox(
-                        width: 40,
+                      Spacer(),
+                      Text(
+                        'Distribute Students into Sections',
+                        style: TextStyle(
+                          fontSize: 35,
+                        ),
                       ),
-                      defaultWriteFormField(
-                          Width: 300,
-                          label: 'Number of Section',
-                          labelTextColor: AppColors.darkBlue,
-                          controller: seventhSectionNumberController,
-                          type: TextInputType.text,
-                          validate: (value) {})
-                    ],
-                  ),
-                  SizedBox(height: 40),
-                  Row(
-                    children: [
-                      defaultformfeild(
-                          Width: 200,
-                          controller: eighthGradeController,
-                          type: TextInputType.text,
-                          validate: (value) {}),
                       SizedBox(
-                        width: 40,
+                        height: 80,
                       ),
-                      defaultWriteFormField(
-                          Width: 300,
-                          label: 'Number of Section',
-                          labelTextColor: AppColors.darkBlue,
-                          controller: eighthSectionNumberController,
-                          type: TextInputType.text,
-                          validate: (value) {})
-                    ],
-                  ),
-                  SizedBox(height: 40),
-                  Row(
-                    children: [
-                      defaultformfeild(
-                          Width: 200,
-                          controller: ninthGradeController,
-                          type: TextInputType.text,
-                          validate: (value) {}),
+                      Row(
+                        children: [
+                          defaultformfeild(
+                              Width: 200,
+                              controller: seventhGradeController,
+                              type: TextInputType.text,
+                              validate: (value) {}),
+                          SizedBox(
+                            width: 40,
+                          ),
+                          defaultWriteFormField(
+                              Width: 300,
+                              label: 'Number of Section',
+                              labelTextColor: AppColors.darkBlue,
+                              controller: seventhSectionNumberController,
+                              type: TextInputType.text,
+                              validate: (value) {})
+                        ],
+                      ),
+                      SizedBox(height: 40),
+                      Row(
+                        children: [
+                          defaultformfeild(
+                              Width: 200,
+                              controller: eighthGradeController,
+                              type: TextInputType.text,
+                              validate: (value) {}),
+                          SizedBox(
+                            width: 40,
+                          ),
+                          defaultWriteFormField(
+                              Width: 300,
+                              label: 'Number of Section',
+                              labelTextColor: AppColors.darkBlue,
+                              controller: eighthSectionNumberController,
+                              type: TextInputType.text,
+                              validate: (value) {})
+                        ],
+                      ),
+                      SizedBox(height: 40),
+                      Row(
+                        children: [
+                          defaultformfeild(
+                              Width: 200,
+                              controller: ninthGradeController,
+                              type: TextInputType.text,
+                              validate: (value) {}),
+                          SizedBox(
+                            width: 40,
+                          ),
+                          defaultWriteFormField(
+                              Width: 300,
+                              label: 'Number of Section',
+                              labelTextColor: AppColors.darkBlue,
+                              controller: ninthSectionNumberController,
+                              type: TextInputType.text,
+                              validate: (value) {})
+                        ],
+                      ),
                       SizedBox(
-                        width: 40,
+                        height: 60,
                       ),
-                      defaultWriteFormField(
-                          Width: 300,
-                          label: 'Number of Section',
-                          labelTextColor: AppColors.darkBlue,
-                          controller: ninthSectionNumberController,
-                          type: TextInputType.text,
-                          validate: (value) {})
-                    ],
-                  ),
-                  SizedBox(
-                    height: 60,
-                  ),
-                  ConditionalBuilder(
-                    condition: state is! LoadingSortStudentState,
-                    builder: (BuildContext context) {
-                      return  defaultTextButton(
-                          text: 'Sections Sort',
-                          function: () {
-                            StudentSortModel sort = StudentSortModel(
-                                numberSectionSeventh:
-                                seventhSectionNumberController.text,
-                                numberSectionEighth:
-                                eighthSectionNumberController.text,
-                                numberSectionNinth:
-                                ninthSectionNumberController.text);
-                            StudentSortCubit.get(context).sortStudentPost(sort);
-                          },
-                          radius: 35,
-                          background: AppColors.darkBlue,
-                          textSize: 22);
-                    },
-                    fallback: (BuildContext context)=>Center(
-                      child: CircularProgressIndicator(),
-                    ),
+                      ConditionalBuilder(
+                        condition: state is! LoadingSortStudentState,
+                        builder: (BuildContext context) {
+                          return  defaultTextButton(
+                              text: 'Sections Sort',
+                              function: () {
+                                StudentSortModel sort = StudentSortModel(
+                                    numberSectionSeventh:
+                                    seventhSectionNumberController.text,
+                                    numberSectionEighth:
+                                    eighthSectionNumberController.text,
+                                    numberSectionNinth:
+                                    ninthSectionNumberController.text);
+                                StudentSortCubit.get(context).sortStudentPost(sort);
+                              },
+                              radius: 35,
+                              background: AppColors.darkBlue,
+                              textSize: 22);
+                        },
+                        fallback: (BuildContext context)=>Center(
+                          child: CircularProgressIndicator(),
+                        ),
 
+                      ),
+                      Spacer(),
+                    ],
                   ),
                   Spacer(),
                 ],
               ),
-              Spacer(),
             ],
           ),
         );

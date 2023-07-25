@@ -7,9 +7,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:image_picker_web/image_picker_web.dart';
 import 'package:intl/intl.dart';
+import 'package:table_calendar/table_calendar.dart';
 
 import 'package:web_schoolapp/business%20logic/cubits/student_profile/student_profile_cubit.dart';
 import 'package:web_schoolapp/business%20logic/cubits/student_profile/student_profile_state.dart';
+import 'package:web_schoolapp/data/models/active_send_student_model.dart';
 import 'package:web_schoolapp/data/models/send_edit_student_profile_model.dart';
 import 'package:web_schoolapp/data/models/student_profile_model.dart';
 
@@ -24,12 +26,11 @@ import 'package:web_schoolapp/presentation/screens/students_marks.dart';
 import 'attendanceDaysForStudent.dart';
 
 class StudentProfile extends StatefulWidget {
-  StudentProfile({
-    super.key,
-    required this.studentId,
-  });
+  StudentProfile(
+      {super.key, required this.studentId});
 
   final int studentId;
+
 
   @override
   State<StudentProfile> createState() => _StudentProfileState();
@@ -53,6 +54,8 @@ class _StudentProfileState extends State<StudentProfile> {
   TextEditingController nationalityStudentController = TextEditingController();
   TextEditingController bioStudentController = TextEditingController();
   TextEditingController passwordStudentController = TextEditingController();
+  TextEditingController fatherNameController = TextEditingController();
+  TextEditingController motherLastName = TextEditingController();
 
   var scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -158,19 +161,20 @@ class _StudentProfileState extends State<StudentProfile> {
               state.studentProfileEditModel.bioEdit.toString().isEmpty
                   ? "no bio yet"
                   : state.studentProfileEditModel.bioEdit.toString();
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
+          passwordStudentController.text = "";
+
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
               content: Padding(
-                padding: EdgeInsetsDirectional.symmetric(
+                padding: const EdgeInsetsDirectional.symmetric(
                     horizontal: 500, vertical: 16),
                 child: Container(
                     height: 50,
                     constraints: const BoxConstraints(maxWidth: 400),
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                         color: AppColors.lightOrange,
                         borderRadius: BorderRadius.all(Radius.circular(20))),
-                    child: Center(
-                      child:  Text(
+                    child: const Center(
+                      child: Text(
                         "updated successfully",
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
@@ -186,24 +190,56 @@ class _StudentProfileState extends State<StudentProfile> {
               elevation: 0,
             ),
           );
-
         }
+        if(state is ChangeStateStudentSuccessState)
+          {
+            var modelActivate=StudentProfileCubit.get(context).successActive;
+            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+              content: Padding(
+                padding: const EdgeInsetsDirectional.symmetric(
+                    horizontal: 500, vertical: 16),
+                child: Container(
+                    height: 50,
+                    constraints: const BoxConstraints(maxWidth: 400),
+                    decoration: const BoxDecoration(
+                        color: AppColors.aqua,
+                        borderRadius: BorderRadius.all(Radius.circular(20))),
+                    child: Center(
+                      child: Text(
+                        modelActivate!.msg,
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                        style: const TextStyle(
+                            color: AppColors.darkBlue,
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold),
+                      ),
+                    )),
+              ),
+              behavior: SnackBarBehavior.floating,
+              backgroundColor: Colors.transparent,
+              elevation: 0,
+            ),
+            );
+
+          }
       },
       builder: (context, state) {
+        var modelP=StudentProfileCubit.get(context).studentProfile;
         return Scaffold(
             appBar: AppBar(
               backgroundColor: AppColors.aqua,
               toolbarHeight: 70,
               elevation: 0.0,
               leading: Padding(
-                padding: EdgeInsetsDirectional.only(
+                padding: const EdgeInsetsDirectional.only(
                   start: 15,
                   top: 15,
                 ),
                 child: Column(
                   children: [
                     IconButton(
-                      icon: Icon(
+                      icon: const Icon(
                         Icons.arrow_back,
                         color: Colors.white,
                       ),
@@ -214,13 +250,13 @@ class _StudentProfileState extends State<StudentProfile> {
                   ],
                 ),
               ),
-              title: Text(
+              title: const Text(
                 'Student\'s profile',
                 style: TextStyle(color: Colors.white, fontSize: 30),
               ),
               actions: [
                 Padding(
-                  padding: EdgeInsetsDirectional.only(
+                  padding: const EdgeInsetsDirectional.only(
                     end: 15,
                     top: 15,
                   ),
@@ -229,11 +265,17 @@ class _StudentProfileState extends State<StudentProfile> {
                       CircleAvatar(
                         backgroundColor: Colors.white,
                         child: IconButton(
-                          icon: Icon(
-                            Icons.delete_forever_outlined,
-                            color: AppColors.aqua,
-                          ),
-                          onPressed: () {},
+                          icon:Icon(StudentProfileCubit.get(context).iconData,
+                          color: AppColors.aqua),
+                          onPressed: () {
+                            ActiveStudentSendModel active =
+                                ActiveStudentSendModel(
+                                    idA: widget.studentId.toString(),
+                                    typeA:modelP!.type );
+                            StudentProfileCubit.get(context).changeStateStudent(active);
+                            StudentProfileCubit.get(context).changeState();
+
+                          },
                         ),
                       ),
                     ],
@@ -267,7 +309,7 @@ class _StudentProfileState extends State<StudentProfile> {
                                 ],
                               ),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               width: 20,
                             ),
                             Column(
@@ -275,7 +317,7 @@ class _StudentProfileState extends State<StudentProfile> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Padding(
-                                  padding: EdgeInsetsDirectional.symmetric(
+                                  padding: const EdgeInsetsDirectional.symmetric(
                                       horizontal: 310),
                                   child: Container(
                                     width: 200.0,
@@ -287,7 +329,7 @@ class _StudentProfileState extends State<StudentProfile> {
                                     ),
                                   ),
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   height: 30,
                                 ),
                                 Form(
@@ -308,7 +350,7 @@ class _StudentProfileState extends State<StudentProfile> {
                                             validate: (value) {},
                                           ),
                                           Padding(
-                                            padding: EdgeInsetsDirectional.only(
+                                            padding: const EdgeInsetsDirectional.only(
                                                 start: 50),
                                             child: defaultformfeild(
                                               controller: firstNameController,
@@ -320,7 +362,7 @@ class _StudentProfileState extends State<StudentProfile> {
                                             ),
                                           ),
                                           Padding(
-                                            padding: EdgeInsetsDirectional.only(
+                                            padding: const EdgeInsetsDirectional.only(
                                                 start: 50),
                                             child: defaultformfeild(
                                               controller: lastNameController,
@@ -332,7 +374,7 @@ class _StudentProfileState extends State<StudentProfile> {
                                           ),
                                         ],
                                       ),
-                                      SizedBox(
+                                      const SizedBox(
                                         height: 30,
                                       ),
                                       Row(
@@ -345,7 +387,7 @@ class _StudentProfileState extends State<StudentProfile> {
                                             validate: (value) {},
                                           ),
                                           Padding(
-                                            padding: EdgeInsetsDirectional.only(
+                                            padding: const EdgeInsetsDirectional.only(
                                                 start: 50),
                                             child: defaultformfeild(
                                               controller: motherNameController,
@@ -356,7 +398,7 @@ class _StudentProfileState extends State<StudentProfile> {
                                             ),
                                           ),
                                           Padding(
-                                            padding: EdgeInsetsDirectional.only(
+                                            padding: const EdgeInsetsDirectional.only(
                                                 start: 50),
                                             child: defaultformfeild(
                                               controller: motherLastName,
@@ -369,7 +411,7 @@ class _StudentProfileState extends State<StudentProfile> {
                                           ),
                                         ],
                                       ),
-                                      SizedBox(
+                                      const SizedBox(
                                         height: 30,
                                       ),
                                       Row(
@@ -380,7 +422,7 @@ class _StudentProfileState extends State<StudentProfile> {
                                               label: 'gender',
                                               validate: (value) {}),
                                           Padding(
-                                            padding: EdgeInsetsDirectional.only(
+                                            padding: const EdgeInsetsDirectional.only(
                                                 start: 50),
                                             child: defaultformfeild(
                                               controller:
@@ -393,7 +435,7 @@ class _StudentProfileState extends State<StudentProfile> {
                                             ),
                                           ),
                                           Padding(
-                                            padding: EdgeInsetsDirectional.only(
+                                            padding: const EdgeInsetsDirectional.only(
                                                 start: 50),
                                             child: defaultformfeild(
                                               controller:
@@ -407,11 +449,11 @@ class _StudentProfileState extends State<StudentProfile> {
                                           ),
                                         ],
                                       ),
-                                      SizedBox(
+                                      const SizedBox(
                                         height: 30,
                                       ),
                                       Container(
-                                          padding: EdgeInsets.only(left: 10),
+                                          padding: const EdgeInsets.only(left: 10),
                                           width: 850,
                                           decoration: BoxDecoration(
                                             borderRadius:
@@ -419,7 +461,7 @@ class _StudentProfileState extends State<StudentProfile> {
                                           ),
                                           child: TextField(
                                             controller: dateOfBirth,
-                                            decoration: InputDecoration(
+                                            decoration: const InputDecoration(
                                                 border: OutlineInputBorder(),
                                                 icon: Icon(
                                                   Icons.calendar_today,
@@ -450,7 +492,7 @@ class _StudentProfileState extends State<StudentProfile> {
                                               });
                                             },
                                           )),
-                                      SizedBox(
+                                      const SizedBox(
                                         height: 30,
                                       ),
                                       Row(
@@ -462,7 +504,7 @@ class _StudentProfileState extends State<StudentProfile> {
                                               label: 'phone number',
                                               validate: (value) {}),
                                           Padding(
-                                            padding: EdgeInsetsDirectional.only(
+                                            padding: const EdgeInsetsDirectional.only(
                                                 start: 50),
                                             child: defaultformfeild(
                                               controller: telephoneController,
@@ -474,7 +516,7 @@ class _StudentProfileState extends State<StudentProfile> {
                                             ),
                                           ),
                                           Padding(
-                                            padding: EdgeInsetsDirectional.only(
+                                            padding: const EdgeInsetsDirectional.only(
                                                 start: 50),
                                             child: defaultformfeild(
                                               controller:
@@ -488,17 +530,17 @@ class _StudentProfileState extends State<StudentProfile> {
                                           ),
                                         ],
                                       ),
-                                      SizedBox(
+                                      const SizedBox(
                                         height: 30,
                                       ),
                                       Row(
                                         children: [
-                                          Icon(
+                                          const Icon(
                                             Icons.location_on,
                                             color: Color(0xFF3A968E),
                                             size: 40,
                                           ),
-                                          SizedBox(
+                                          const SizedBox(
                                             width: 15,
                                           ),
                                           Container(
@@ -506,7 +548,7 @@ class _StudentProfileState extends State<StudentProfile> {
                                             child: TextFormField(
                                               controller: addressController,
                                               validator: (value) {},
-                                              decoration: InputDecoration(
+                                              decoration: const InputDecoration(
                                                 border: OutlineInputBorder(),
                                                 labelText: "Detailed address",
                                                 labelStyle: TextStyle(
@@ -518,13 +560,13 @@ class _StudentProfileState extends State<StudentProfile> {
                                           ),
                                         ],
                                       ),
-                                      SizedBox(
+                                      const SizedBox(
                                         height: 50,
                                       ),
                                       Row(
                                         children: [
                                           Padding(
-                                            padding: EdgeInsetsDirectional.only(
+                                            padding: const EdgeInsetsDirectional.only(
                                                 bottom: 50),
                                             child: defaultformfeild(
                                               controller: gbaStudentController,
@@ -536,11 +578,11 @@ class _StudentProfileState extends State<StudentProfile> {
                                               validate: (value) {},
                                             ),
                                           ),
-                                          SizedBox(
+                                          const SizedBox(
                                             width: 50,
                                           ),
                                           Padding(
-                                            padding: EdgeInsetsDirectional.only(
+                                            padding: const EdgeInsetsDirectional.only(
                                                 bottom: 50),
                                             child: defaultformfeild(
                                               Width: 400,
@@ -551,7 +593,7 @@ class _StudentProfileState extends State<StudentProfile> {
                                               label: 'nationality',
                                             ),
                                           ),
-                                          SizedBox(
+                                          const SizedBox(
                                             height: 50,
                                           ),
                                         ],
@@ -567,7 +609,7 @@ class _StudentProfileState extends State<StudentProfile> {
                                             validate: (value) {},
                                           ),
                                           Padding(
-                                            padding: EdgeInsetsDirectional.only(
+                                            padding: const EdgeInsetsDirectional.only(
                                                 start: 50),
                                             child: defaultformfeild(
                                               controller:
@@ -592,13 +634,13 @@ class _StudentProfileState extends State<StudentProfile> {
                                             ),
                                           ),
                                           Padding(
-                                            padding: EdgeInsetsDirectional.only(
+                                            padding: const EdgeInsetsDirectional.only(
                                                 start: 50),
                                             child: defaultTextButton(
                                                 text: "Parent's Profile",
                                                 function: () {
                                                   if (state
-                                                      is SuccessStudentPorfileState)
+                                                      is SuccessStudentPorfileState) {
                                                     navigateTo(
                                                         context,
                                                         ParentProfile(
@@ -611,6 +653,7 @@ class _StudentProfileState extends State<StudentProfile> {
                                                               .student
                                                               .parentUsername,
                                                         ));
+                                                  }
                                                 },
                                                 isUpperCase: true,
                                                 radius: 50,
@@ -625,7 +668,7 @@ class _StudentProfileState extends State<StudentProfile> {
                                           ),
                                         ],
                                       ),
-                                      SizedBox(
+                                      const SizedBox(
                                         height: 50,
                                       )
                                     ],
@@ -635,16 +678,18 @@ class _StudentProfileState extends State<StudentProfile> {
                             ),
                           ],
                         ),
-                        if(state is LoadingUpdateStudentProfileState)
-                          LinearProgressIndicator(),
-                        SizedBox(height: 30,),
+                        if (state is LoadingUpdateStudentProfileState)
+                          const LinearProgressIndicator(),
+                        const SizedBox(
+                          height: 30,
+                        ),
                         Row(
                           children: [
-                            Spacer(),
+                            const Spacer(),
                             defaultTextButton(
                               text: 'Show Marks',
                               function: () {
-                                navigateTo(context, ShowStudentsMarks());
+                                navigateTo(context, const ShowStudentsMarks());
                               },
                               isUpperCase: true,
                               radius: 50,
@@ -654,7 +699,7 @@ class _StudentProfileState extends State<StudentProfile> {
                               textSize: 20,
                               fontWeight: FontWeight.bold,
                             ),
-                            SizedBox(width: 50),
+                            const SizedBox(width: 50),
                             defaultTextButton(
                               text: 'UPDATE',
                               function: () {
@@ -699,17 +744,20 @@ class _StudentProfileState extends State<StudentProfile> {
                               textSize: 20,
                               fontWeight: FontWeight.bold,
                             ),
-                            SizedBox(
+                            const SizedBox(
                               width: 50,
                             ),
                             defaultTextButton(
                               text: 'Show Attendance',
                               function: () {
-                                if (state is SuccessStudentPorfileState)
+                                if (state is SuccessStudentPorfileState) {
                                   navigateTo(
                                       context,
                                       AttendanceDaysStudent(
-                                          absenceDays: state.student.absences));
+                                        absenceDays: state.student.absences,
+                                        idStudentAttendance: state.student.id,
+                                      ));
+                                }
                               },
                               isUpperCase: true,
                               radius: 50,
@@ -719,17 +767,17 @@ class _StudentProfileState extends State<StudentProfile> {
                               textSize: 20,
                               fontWeight: FontWeight.bold,
                             ),
-                            Spacer(),
+                            const Spacer(),
                           ],
                         ),
-                        SizedBox(height: 50),
+                        const SizedBox(height: 50),
                       ],
                     ),
                   ),
                 );
               },
               fallback: (context) {
-                return Center(
+                return const Center(
                   child: CircularProgressIndicator(),
                 );
               },
@@ -738,7 +786,7 @@ class _StudentProfileState extends State<StudentProfile> {
     );
   }
 
-  Widget uploadAvatar(context) => Stack(
+  Widget uploadAvatar(context) => const Stack(
         alignment: AlignmentDirectional.bottomEnd,
         children: [
           CircleAvatar(

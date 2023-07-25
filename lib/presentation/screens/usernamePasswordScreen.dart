@@ -29,7 +29,6 @@ class UserNamePasswordScreen extends StatelessWidget {
       backgroundColor: Colors.transparent,
       body: SafeArea(
         child: Row(
-          //mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Padding(
               padding: const EdgeInsets.only(left: 60),

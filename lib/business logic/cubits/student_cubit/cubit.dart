@@ -129,39 +129,50 @@ class StudentCubit extends Cubit<DashBoardState> {
 
   postAddStudent({required RegisterModelStudent data}) async {
     emit(AppStudentRegisterLoading());
-    var request = http.post(
-      Uri.parse(
-          'https://new-school-management-system.onrender.com/web/student_register'),
-      headers: {
+    final url =
+        "https://new-school-management-system.onrender.com/web/student_register";
+    try {
+      final headers = {
         'Content-Type': 'application/json',
         'Accept': '*/*',
         'Authorization': 'Bearer $token'
-      },
-      body: (data.toJson(data)),
-    );
-    var response = await request;
-    if (response.statusCode == 201) {
-      print(response.statusCode);
-      studentRegisterModel =
-          RegisterModel.fromJson(jsonDecode(await response.body));
-      print(studentRegisterModel?.message);
-      print(await response.body);
-      emit(AppStudentRegisterSuccessState(studentRegisterModel!));
-    } else if (response.statusCode == 200) {
-      print(response.statusCode);
-      studentRegisterModel =
-          RegisterModel.fromJson(jsonDecode(await response.body));
-      print(studentRegisterModel?.message);
-      print(await response.body);
-      emit(AppStudentRegisterSuccessState(studentRegisterModel!));
-    } else {
+      };
+      final register = {
+        'first_name': data.firstName,
+        'last_name': data.lastName,
+        'father_name': data.fatherName,
+        'mother_name': data.motherName,
+        'mother_last_name': data.motherLastName,
+        'grade': data.grade,
+        'address': data.address,
+        'phone_number': data.phoneNumber,
+        'parent_number': data.parentNumber,
+        'telephone_number': data.telephoneNumber,
+        'gender': data.gender,
+        'GPA': data.gba,
+        'birthday': data.birthday,
+        'nationality': data.nationality
+      };
+      final response = await http.post(Uri.parse(url),
+          headers: headers, body: jsonEncode(register));
+
+      final Map<String, dynamic> json = jsonDecode(response.body);
       print(response.body);
       print(response.statusCode);
-
-      emit(AppStudentRegisterErrorState(
-          error: jsonDecode(await response.body)['message']));
+      if (response.statusCode == 200)
+      {
+        studentRegisterModel=RegisterModel.fromJson(json);
+        emit(AppStudentRegisterSuccessState(studentRegisterModel!));
+      }
+      else{
+        throw Exception(json['message']);
+      }
+    } catch (e) {
+      emit(AppStudentRegisterErrorState(error:e.toString()));
     }
   }
+
+  List<StudentModel>? students;
 
   void searchStudent(SearchStudentParameters parameters) async {
     emit(StudentSearchLoadingState());
@@ -195,11 +206,12 @@ class StudentCubit extends Cubit<DashBoardState> {
       print(myResponse.statusCode);
 
       if (myResponse.statusCode == 200) {
-        List<StudentModel> students = (json['students'][0] as List)
+        // List<StudentModel> students
+        students = (json['students'][0] as List)
             .map((e) => StudentModel.fromJson(e))
             .toList();
 
-        emit(StudentSearchSuccessfulState(students));
+        emit(StudentSearchSuccessfulState(students!));
       } else {
         throw Exception(json['message']);
       }
@@ -208,7 +220,8 @@ class StudentCubit extends Cubit<DashBoardState> {
     }
   }
 
-  Future<void> postListAndDates(AddAttendanceStudentModel addAttendanceStudentModel) async {
+  Future<void> postListAndDates(
+      AddAttendanceStudentModel addAttendanceStudentModel) async {
     emit(AttendanceStudentLoadingState());
     final url =
         'https://new-school-management-system.onrender.com/web/add_absent_students';

@@ -1,4 +1,6 @@
+import 'package:web_schoolapp/data/models/active_success_student_model.dart';
 import 'package:web_schoolapp/data/models/editprofile_student_success_model.dart';
+import 'package:web_schoolapp/data/models/success_delete_attendance_model.dart';
 import 'package:web_schoolapp/data/models/success_parent_edit_model.dart';
 import 'package:web_schoolapp/presentation/screens/profile_student.dart';
 
@@ -26,6 +28,7 @@ class StudentProfileChangePasswordVisibilityState extends StudentProfileState {}
 
 class AppDateStateLoading extends StudentProfileState {}
 
+//update profile student
 class SuccessUpdateStudentProfileState extends StudentProfileState {
   StudentProfileEditModel studentProfileEditModel;
 
@@ -39,6 +42,7 @@ class ErrorUpdateStudentProfileState extends StudentProfileState {
 }
 
 class LoadingUpdateStudentProfileState extends StudentProfileState {}
+//update profile parent
 
 class SuccessUpdateParentProfileState extends StudentProfileState {
   ParentProfileEditModel parentProfileEditModel;
@@ -53,3 +57,34 @@ class ErrorUpdateParentProfileState extends StudentProfileState {
 }
 
 class LoadingUpdateParentProfileState extends StudentProfileState {}
+//delete date from list attendance
+
+class DeleteAttendanceSuccessState extends StudentProfileState {
+  SuccessDeleteAttendanceModel successDeleteAttendanceModel;
+
+  DeleteAttendanceSuccessState(this.successDeleteAttendanceModel);
+}
+
+class DeleteAttendanceErrorState extends StudentProfileState {
+  String errorDelete;
+
+  DeleteAttendanceErrorState({required this.errorDelete});
+}
+
+class DeleteAttendanceLoadingState extends StudentProfileState {}
+//change state in profile student
+
+class ChangeStateStudentLoadingState extends StudentProfileState {}
+
+class ChangeStateStudentSuccessState extends StudentProfileState {
+  SuccessActiveStudentModel successActiveStudentModel;
+
+  ChangeStateStudentSuccessState(this.successActiveStudentModel);
+}
+
+class ChangeStateStudentErrorState extends StudentProfileState {
+  String errorState;
+
+  ChangeStateStudentErrorState({required this.errorState});
+}
+class ChangeIconState extends StudentProfileState{}
