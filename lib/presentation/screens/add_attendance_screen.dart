@@ -44,10 +44,49 @@ class _AttendanceScreenState extends State<AttendanceScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<StudentCubit,DashBoardState>(
-      listener: (context, state) {},
+      listener: (context, state) {
+        if(state is AttendanceStudentSuccessfulState)
+          {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Padding(
+                  padding: EdgeInsetsDirectional.symmetric(
+                      horizontal: 500, vertical: 16),
+                  child: Container(
+                      height: 50,
+                      constraints: const BoxConstraints(maxWidth: 400),
+                      decoration: BoxDecoration(
+                          color: AppColors.aqua,
+                          borderRadius: BorderRadius.all(Radius.circular(20))),
+                      child: Center(
+                        child: Text(
+                        'added absent students success',
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                              color: AppColors.darkBlue,
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold),
+                        ),
+                      )),
+                ),
+                behavior: SnackBarBehavior.floating,
+                backgroundColor: Colors.transparent,
+                elevation: 0,
+              ),
+            );
+          }
+      },
       builder: (context, state) {
         var attendanceModel=StudentCubit.get(context).students;
-        return  Form(
+       if(state is StudentSearchErrorState)
+         {
+           return Center(child: Text(state.errorMessage,style: TextStyle(
+             fontSize: 30,
+             color: AppColors.darkBlue
+           ),));
+         }
+         return  Form(
           key: formKey,
           child: Scaffold(
             backgroundColor: Colors.white,
@@ -243,8 +282,8 @@ class _AttendanceScreenState extends State<AttendanceScreen> {
                                       '${attendanceModel[index].firstName} ${attendanceModel[index].lastName}',
                                       style: TextStyle(fontSize: 22,
                                           color: AppColors.darkBlue,
-                                          fontWeight: FontWeight.w500),
-                                    ),
+                                          // fontWeight: FontWeight.w500),
+                                      )  ),
                                     trailing: IconButton(
                                         onPressed: () {
                                           StudentCubit.get(context).toggleCheck(

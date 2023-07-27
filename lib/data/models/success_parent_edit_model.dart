@@ -1,3 +1,4 @@
+//model for response api update profile Edit 
 class ParentProfileEditModel {
   final String userNameParentEdit;
   final String nameParentEdit;
@@ -6,11 +7,9 @@ class ParentProfileEditModel {
     required this.userNameParentEdit,
     required this.nameParentEdit,
   });
-  factory ParentProfileEditModel.fromJson(Map<String,dynamic>json)
-  {
+
+  factory ParentProfileEditModel.fromJson(Map<String, dynamic> json) {
     return ParentProfileEditModel(
-      userNameParentEdit: json['username'],
-      nameParentEdit: json['name']
-    );
+        userNameParentEdit: json['username'], nameParentEdit: json['name']);
   }
 }

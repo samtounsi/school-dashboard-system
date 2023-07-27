@@ -35,11 +35,13 @@ class ParentProfile extends StatelessWidget {
   ParentProfile({required this.idParent,
     required this.userNameParent,
     required this.nameParent,
+    required this.urlPhoto,
     Key? key})
       : super(key: key);
   int idParent;
   String userNameParent;
   String nameParent;
+  String urlPhoto;
 
   @override
   Widget build(BuildContext context) {
@@ -114,7 +116,22 @@ class ParentProfile extends StatelessWidget {
                                       height: 200,
                                       child: Column(
                                         children: [
-                                          uploadAvatar(context),
+                                        Stack(
+                                        alignment: AlignmentDirectional.bottomEnd,
+                                        children: [
+                                          CircleAvatar(
+                                            radius: 80.0,
+                                            backgroundColor: Colors.white,
+                                            child: CircleAvatar(
+                                                radius: 70.0,
+                                                backgroundColor: Colors.white,
+                                                backgroundImage:NetworkImage(urlPhoto)
+
+                                              //    : FileImage(imageFile as File) as ImageProvider,Image.memory(imageFile!)
+                                            ),
+                                          ),
+                                        ],
+                                      )
                                         ],
                                       ),
                                     ),
@@ -242,21 +259,4 @@ class ParentProfile extends StatelessWidget {
     );
   }
 
-  Widget uploadAvatar(context) =>
-      const Stack(
-        alignment: AlignmentDirectional.bottomEnd,
-        children: [
-          CircleAvatar(
-            radius: 80.0,
-            backgroundColor: Colors.white,
-            child: CircleAvatar(
-                radius: 70.0,
-                backgroundColor: Colors.white,
-                backgroundImage:NetworkImage('https://media1.popsugar-assets.com/files/thumbor/hnVKqXE-xPM5bi3w8RQLqFCDw_E/475x60:1974x1559/fit-in/2048xorig/filters:format_auto-!!-:strip_icc-!!-/2019/09/09/023/n/1922398/9f849ffa5d76e13d154137.01128738_/i/Taylor-Swift.jpg')
-
-              //    : FileImage(imageFile as File) as ImageProvider,Image.memory(imageFile!)
-            ),
-          ),
-        ],
-      );
 }

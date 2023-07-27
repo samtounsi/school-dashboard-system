@@ -87,4 +87,5 @@ class ChangeStateStudentErrorState extends StudentProfileState {
 
   ChangeStateStudentErrorState({required this.errorState});
 }
+//
 class ChangeIconState extends StudentProfileState{}

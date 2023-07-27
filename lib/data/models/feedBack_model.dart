@@ -1,3 +1,4 @@
+//model for api get feedback
 class FeedBackModel{
   final String author;
   final String feedback;

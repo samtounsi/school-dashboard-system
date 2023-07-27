@@ -1,3 +1,4 @@
+//model for response api delete date from list absences
 class SuccessDeleteAttendanceModel {
   final List<DateTime> absences;
   final String message;

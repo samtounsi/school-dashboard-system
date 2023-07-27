@@ -1,3 +1,4 @@
+//model for send attendance (absences students)
 class AddAttendanceStudentModel {
   final List<String> attendance;
   final String date;
@@ -6,5 +7,4 @@ class AddAttendanceStudentModel {
     required this.date,
     required this.attendance,
   });
-
 }

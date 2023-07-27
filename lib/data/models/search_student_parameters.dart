@@ -1,3 +1,4 @@
+//model for request api search filter student
 class SearchStudentParameters {
   final String? grade;
   final String? section;

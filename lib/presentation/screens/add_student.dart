@@ -69,8 +69,7 @@ class _AddStudentState extends State<AddStudent> {
               UserNamePasswordScreen(
                 registerModel: state.studentRegisterModel,
               ));
-          ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
             content: Padding(
               padding: EdgeInsetsDirectional.symmetric(
                   horizontal: 500, vertical: 16),
@@ -96,8 +95,7 @@ class _AddStudentState extends State<AddStudent> {
             backgroundColor: Colors.transparent,
             elevation: 0,
           ));
-        }
-        else if (state is AppStudentRegisterErrorState) {
+        } else if (state is AppStudentRegisterErrorState) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
               content: Padding(
@@ -112,7 +110,7 @@ class _AddStudentState extends State<AddStudent> {
                     child: Center(
                       child: Text(
                         state.error.toString(),
-                        maxLines:4,
+                        maxLines: 4,
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(
                             color: Colors.white,
@@ -230,7 +228,8 @@ class _AddStudentState extends State<AddStudent> {
                                             padding: EdgeInsetsDirectional.only(
                                                 start: 50),
                                             child: defaultformfeild(
-                                              controller: fatherNameAddController,
+                                              controller:
+                                                  fatherNameAddController,
                                               type: TextInputType.text,
                                               prefix: Icons.person,
                                               label: "Father's Name",
@@ -471,14 +470,17 @@ class _AddStudentState extends State<AddStudent> {
                                             //set it true, so that user will not able to edit text
                                             onTap: () {
                                               showDatePicker(
-                                                  context: context,
-                                                  initialDate: DateTime.now(),
-                                                  firstDate: DateTime(1900),
-                                                  lastDate: DateTime(2050))
+                                                      context: context,
+                                                      initialDate:
+                                                          DateTime.now(),
+                                                      firstDate: DateTime(1900),
+                                                      lastDate: DateTime(2050))
                                                   .then((value) {
-                                                print(DateFormat('yyyy/MM/dd').format(value!));
+                                                print(DateFormat('yyyy/MM/dd')
+                                                    .format(value!));
                                                 birthdayController.text =
-                                                    DateFormat('yyyy/MM/dd').format(value);
+                                                    DateFormat('yyyy/MM/dd')
+                                                        .format(value);
                                               });
                                             },
                                           )),
@@ -640,7 +642,8 @@ class _AddStudentState extends State<AddStudent> {
                                                   lastName:
                                                       lastNameController.text,
                                                   fatherName:
-                                                      fatherNameAddController.text,
+                                                      fatherNameAddController
+                                                          .text,
                                                   motherName:
                                                       motherNameController.text,
                                                   motherLastName:
@@ -651,10 +654,9 @@ class _AddStudentState extends State<AddStudent> {
                                                   gender:
                                                       StudentCubit.get(context)
                                                           .gender,
-                                                  nationality:
-                                                      nationalityController
-                                                          .text,
-                                                  birthday: birthdayController.text,
+                                                  nationality: nationality.text,
+                                                  birthday:
+                                                      birthdayController.text,
                                                   phoneNumber:
                                                       phoneController.text,
                                                   parentNumber:

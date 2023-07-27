@@ -1,3 +1,4 @@
+//model for success api toggle
 class SuccessActiveStudentModel {
   final String msg;
 

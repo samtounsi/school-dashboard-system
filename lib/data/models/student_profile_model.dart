@@ -1,3 +1,4 @@
+//model for api get student profile
 class StudentProfileModel {
   final int id;
   final String type;
@@ -17,7 +18,8 @@ class StudentProfileModel {
   final String gradeName; //
   final String className; //
   final String parentPhoneNumber; //
-  final String? photo;
+  final String photo;
+  final String photoUrlParent;
   final List<DateTime> absences; //
   final String? bio;
   final int parentId;
@@ -26,9 +28,8 @@ class StudentProfileModel {
   final String? message;
 
   StudentProfileModel(
-      {
-        required this.type,
-        required this.id,
+      {required this.type,
+      required this.id,
       required this.userName,
       required this.firstName,
       required this.lastName,
@@ -45,7 +46,8 @@ class StudentProfileModel {
       required this.gradeName,
       required this.className,
       required this.parentPhoneNumber,
-      this.photo,
+      required this.photo,
+      required this.photoUrlParent,
       required this.absences,
       this.bio,
       required this.parentId,
@@ -74,6 +76,7 @@ class StudentProfileModel {
       className: json['class_name'],
       parentPhoneNumber: json['parent_phone_number'],
       photo: json['photo'],
+      photoUrlParent: json['photoUrl_parent'],
       absences:
           (json['absences'] as List).map((e) => DateTime.parse(e)).toList(),
       // marks: (json['marks'] as List).map((e)=> e.toString()).toList(),

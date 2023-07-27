@@ -1,3 +1,4 @@
+//model for response api update student profile
 class StudentProfileEditModel {
   final String userNameEdit;
   final String firstNameEdit;
@@ -16,6 +17,12 @@ class StudentProfileEditModel {
   final String classNameEdit;
   final String parentPhoneNumberEdit;
   final String? bioEdit;
+  final String photoEdit;
+  final String photoParentEdit;
+  final List<DateTime> absencesEdit;
+  final String userNameParentSEdit;
+  final String nameParentSEdit;
+  final int idPar;
   final String message;
 
   StudentProfileEditModel(
@@ -36,6 +43,12 @@ class StudentProfileEditModel {
       required this.classNameEdit,
       required this.parentPhoneNumberEdit,
       this.bioEdit,
+      required this.absencesEdit,
+      required this.nameParentSEdit,
+      required this.photoEdit,
+      required this.photoParentEdit,
+      required this.userNameParentSEdit,
+      required this.idPar,
       required this.message});
 
   factory StudentProfileEditModel.fromJson(Map<String, dynamic> json) {
@@ -57,6 +70,13 @@ class StudentProfileEditModel {
         classNameEdit: json['class_name'],
         parentPhoneNumberEdit: json['parent_phone_number'],
         bioEdit: json['bio'],
+        absencesEdit:
+            (json['absences'] as List).map((e) => DateTime.parse(e)).toList(),
+        nameParentSEdit: json['parent_name'],
+        photoEdit: json['photo'],
+        photoParentEdit: json['photoUrl_parent'],
+        idPar: json['parent_id'],
+        userNameParentSEdit: json['parent_username'],
         message: json['message']);
   }
 }
