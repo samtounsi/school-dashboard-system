@@ -33,5 +33,6 @@ MaterialColor buildMaterialColor(Color color) {
   return MaterialColor(color.value, swatch);
 }
 
- String? token;
+String? token;
 String? type;
+

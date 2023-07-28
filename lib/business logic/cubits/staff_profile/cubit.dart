@@ -6,6 +6,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:web_schoolapp/business%20logic/cubits/staff_profile/states.dart';
 
+import '../../../data/models/activate_user_model.dart';
+import '../../../data/models/staffRegisterModel.dart';
+import '../../../data/models/staff_edit_profile_model.dart';
 import '../../../data/models/staff_profile_model.dart';
 import 'package:http/http.dart'as http;
 
@@ -64,5 +67,46 @@ class StaffProfileCubit extends Cubit<StaffProfileStates>
 
     emit(AppStaffWebProfileChangePasswordVisibilityState());
   }
+
+
+  Future updateStaffProfile({required UpdateStaffModel data})async
+  {
+    emit(AppStaffWebStaffUpdateProfileLoadingState());
+    try {
+      const url ="https://new-school-management-system.onrender.com/web/update_admin_profile";
+      final headers = {
+        'Content-Type': 'application/json',
+        'Accept': '*/*',
+        'Authorization': 'Bearer $token'
+      };
+      final updatePS = {
+        'id':data.id,
+        'first_name':data.firstName,
+        'last_name':data.lastName,
+        'address': data.address,
+        'phone_number' : data.phoneNumber,
+        'gender': data.gender,
+        'birthday':data.birthday,
+        'username': data.username,
+        'password': data.password
+      };
+      final jsonBody = jsonEncode(updatePS);
+      final request =
+      await http.post(Uri.parse(url), headers: headers, body: jsonBody);
+      final Map<String, dynamic> json = jsonDecode(request.body);
+      print(request.statusCode);
+      print(json);
+      if (request.statusCode == 201) {
+        staffProfileModel = StaffProfileModel.fromJson(json);
+        emit(AppStaffWebStaffUpdateProfileSuccessState(staffProfileModel!));
+      } else {
+        throw Exception(json['message'] ?? "an error");
+      }
+    } catch (e) {
+      emit(AppStaffWebStaffUpdateProfileErrorState(error: e.toString()));
+      print(e.toString());
+    }
+  }
+
 
 }

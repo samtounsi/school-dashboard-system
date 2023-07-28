@@ -15,6 +15,9 @@ import 'package:web_schoolapp/presentation/screens/usernamePasswordScreen.dart';
 import '../../business logic/cubits/staff_profile/cubit.dart';
 import 'package:intl/intl.dart';
 
+import '../../data/models/staffRegisterModel.dart';
+import '../../data/models/staff_edit_profile_model.dart';
+
 TextEditingController firstNameController = TextEditingController();
 TextEditingController lastNameController = TextEditingController();
 TextEditingController phoneController = TextEditingController();
@@ -46,8 +49,12 @@ class StaffProfile extends StatelessWidget {
             addressController.text=state.staffProfileModel.address.toString();
             genderController.text=state.staffProfileModel.gender.toString();
             phoneController.text=state.staffProfileModel.phoneNumber.toString();
-            birthdayController.text=state.staffProfileModel.birthday.toString();
+            DateTime date=DateTime.parse(state.staffProfileModel.birthday!);
+            String formattedDate =
+                "${date.year}/${date.month.toString().padLeft(2, '0')}/${date.day.toString().padLeft(2, '0')}";
+            birthdayController.text = formattedDate;
           }
+
       },
       builder: (context,state)
       {
@@ -58,7 +65,10 @@ class StaffProfile extends StatelessWidget {
         addressController.text=model.address.toString();
         genderController.text=model.gender.toString();
         phoneController.text=model.phoneNumber.toString();
-        birthdayController.text=model.birthday.toString();
+        DateTime date=DateTime.parse(model.birthday!);
+        String formattedDate =
+            "${date.year}/${date.month.toString().padLeft(2, '0')}/${date.day.toString().padLeft(2, '0')}";
+        birthdayController.text = formattedDate;
         return ConditionalBuilder(
           condition: StaffProfileCubit.get(context).staffProfileModel!=null ,
           builder:(context)
@@ -226,13 +236,16 @@ class StaffProfile extends StatelessWidget {
                                         onTap: () {
                                           showDatePicker(
                                               context: context,
-                                              initialDate: DateTime.now(),
+                                              initialDate:
+                                              DateTime.now(),
                                               firstDate: DateTime(1900),
                                               lastDate: DateTime(2050))
                                               .then((value) {
-                                            print(DateFormat('dd/MM/yyyy').format(value!));
+                                            print(DateFormat.yMMMd()
+                                                .format(value!));
                                             birthdayController.text =
-                                                DateFormat('dd/MM/yyyy').format(value);
+                                                DateFormat.yMMMd()
+                                                    .format(value);
                                           });
                                         },
                                       )),
@@ -336,18 +349,34 @@ class StaffProfile extends StatelessWidget {
                                   ),
                                   Column(
                                     children: [
-                                      defaultTextButton(
-                                        text: 'Update',
-                                        function: () {
-                                          navigateTo(context, UserNamePasswordScreen());
-                                        },
-                                        isUpperCase: true,
-                                        radius: 50,
-                                        width: 400,
-                                        height: 50,
-                                        background: AppColors.lightOrange,
-                                        textSize: 20,
-                                        fontWeight: FontWeight.bold,
+                                      ConditionalBuilder(
+                                        condition: state is ! AppStaffWebStaffUpdateProfileLoadingState,
+                                        builder:(context)=> defaultTextButton(
+                                          text: 'Update',
+                                          function: () {
+                                            UpdateStaffModel model=UpdateStaffModel(
+                                              id: id,
+                                              firstName: firstNameController.text,
+                                              lastName: lastNameController.text,
+                                              address: addressController.text,
+                                              phoneNumber: phoneController.text,
+                                              gender: genderController.text,
+                                              birthday: birthdayController.text,
+                                              username: usernameController.text,
+                                              password: passwordController.text
+                                            );
+                                            StaffProfileCubit.get(context).updateStaffProfile(data: model);
+                                            print(model.toJson(model).toString());
+                                          },
+                                          isUpperCase: true,
+                                          radius: 50,
+                                          width: 400,
+                                          height: 50,
+                                          background: AppColors.lightOrange,
+                                          textSize: 20,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                        fallback: (context)=>Center(child: CircularProgressIndicator()),
                                       ),
                                     ],
                                   ),

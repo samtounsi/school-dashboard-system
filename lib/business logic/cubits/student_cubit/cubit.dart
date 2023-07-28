@@ -1,6 +1,11 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:web_schoolapp/business%20logic/cubits/student_cubit/states.dart';
+import 'package:http/http.dart'as http;
+import '../../../data/models/certificate_model.dart';
+import '../../../presentation/components and constants/constants.dart';
 
 class StudentCubit extends Cubit<DashBoardState> {
   StudentCubit() : super(InitialState());
@@ -191,6 +196,34 @@ class StudentCubit extends Cubit<DashBoardState> {
 
     emit(ActiveState());
 
+  }
+
+  CertificateModel? certificateModel;
+  getCertificate({int? id})async
+  {
+    emit(AppStaffWebGetCertificateLoadingState());
+    var headers = {
+      'Accept': '*/*',
+      'Authorization': 'Bearer $token'
+    };
+    var request = http.Request('GET', Uri.parse('https://new-school-management-system.onrender.com/web/get_student_marks/$id'));
+
+    request.headers.addAll(headers);
+
+    http.StreamedResponse response = await request.send();
+
+    if (response.statusCode == 201) {
+      print(response.statusCode);
+      certificateModel=CertificateModel.fromJson(jsonDecode(await response.stream.bytesToString()));
+      print(certificateModel?.toJson().toString());
+      emit( AppStaffWebGetCertificateSuccessState(certificateModel!));
+    }
+    else {
+      print(response.reasonPhrase);
+      print(response.statusCode);
+      String error=jsonDecode(await response.stream.bytesToString())['message'].toString();
+      emit(AppStaffWebGetCertificateErrorState(error:error));
+    }
   }
 
 // bool? isChecked = false;

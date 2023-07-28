@@ -2,6 +2,7 @@
 
 import 'dart:io';
 
+import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -10,6 +11,7 @@ import 'package:image_picker_web/image_picker_web.dart';
 import 'package:intl/intl.dart';
 import 'package:web_schoolapp/business%20logic/cubits/student_cubit/cubit.dart';
 import 'package:web_schoolapp/business%20logic/cubits/student_cubit/states.dart';
+import 'package:web_schoolapp/data/models/certificate_model.dart';
 
 import 'package:web_schoolapp/presentation/components%20and%20constants/components.dart';
 import 'package:web_schoolapp/presentation/components%20and%20constants/constants.dart';
@@ -76,13 +78,20 @@ class _StudentProfileState extends State<StudentProfile> {
     '8th grade',
     '9th grade',
   ];
-
+CertificateModel? certificateModel;
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<StudentCubit,DashBoardState>(
-      listener: (context,state){},
+      listener: (context,state)
+      {
+        if(state is AppStaffWebGetCertificateSuccessState)
+        {
+          certificateModel=state.certificateModel;
+        }
+      },
       builder: (context,state)
       {
+        certificateModel=StudentCubit.get(context).certificateModel;
         return Scaffold(
           appBar: AppBar(
             backgroundColor: AppColors.aqua,
@@ -538,18 +547,25 @@ class _StudentProfileState extends State<StudentProfile> {
                   Row(
                     children: [
                       Spacer(),
-                      defaultTextButton(
-                        text: 'Show Marks',
-                        function: () {
-                          navigateTo(context, ShowStudentsMarks());
-                        },
-                        isUpperCase: true,
-                        radius: 50,
-                        width: 380,
-                        height: 50,
-                        background: AppColors.lightOrange,
-                        textSize: 20,
-                        fontWeight: FontWeight.bold,
+                      ConditionalBuilder(
+                        condition:state is ! AppStaffWebGetCertificateLoadingState,
+                        builder: (context)=>defaultTextButton(
+                          text: 'Show Marks',
+                          function: () {
+                            StudentCubit.get(context).getCertificate(id: 2)
+                                .then((value) =>navigateTo(context, ShowStudentsMarks(model: StudentCubit.get(context).certificateModel!)));
+                            print(certificateModel?.toJson().toString());
+
+                          },
+                          isUpperCase: true,
+                          radius: 50,
+                          width: 380,
+                          height: 50,
+                          background: AppColors.lightOrange,
+                          textSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        fallback: (context)=>Center(child: CircularProgressIndicator()),
                       ),
                       SizedBox(
                         width: 50,

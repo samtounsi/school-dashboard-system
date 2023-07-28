@@ -1,4 +1,6 @@
 class TeacherProfileModel {
+  String? type;
+  int? id;
   String? username;
   String? firstName;
   String? lastName;
@@ -9,14 +11,17 @@ class TeacherProfileModel {
   int? yearsOfExperience;
   String? birthday;
   List<String>? subjects;
-  List<String>? classes;
-  Null? photo;
+  List<Classes>? classes;
+  String? photo;
+  String? bio;
   String? email;
   String? university;
   String? message;
 
   TeacherProfileModel(
-      {this.username,
+      {this.type,
+        this.id,
+        this.username,
         this.firstName,
         this.lastName,
         this.address,
@@ -28,11 +33,14 @@ class TeacherProfileModel {
         this.subjects,
         this.classes,
         this.photo,
+        this.bio,
         this.email,
         this.university,
         this.message});
 
   TeacherProfileModel.fromJson(Map<String, dynamic> json) {
+    type = json['type'];
+    id = json['id'];
     username = json['username'];
     firstName = json['first_name'];
     lastName = json['last_name'];
@@ -43,8 +51,14 @@ class TeacherProfileModel {
     yearsOfExperience = json['years_of_experience'];
     birthday = json['birthday'];
     subjects = json['subjects'].cast<String>();
-    classes = json['classes'].cast<String>();
+    if (json['classes'] != null) {
+      classes = <Classes>[];
+      json['classes'].forEach((v) {
+        classes!.add(new Classes.fromJson(v));
+      });
+    }
     photo = json['photo'];
+    bio = json['bio'];
     email = json['email'];
     university = json['university'];
     message = json['message'];
@@ -52,6 +66,8 @@ class TeacherProfileModel {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['type'] = this.type;
+    data['id'] = this.id;
     data['username'] = this.username;
     data['first_name'] = this.firstName;
     data['last_name'] = this.lastName;
@@ -62,11 +78,33 @@ class TeacherProfileModel {
     data['years_of_experience'] = this.yearsOfExperience;
     data['birthday'] = this.birthday;
     data['subjects'] = this.subjects;
-    data['classes'] = this.classes;
+    if (this.classes != null) {
+      data['classes'] = this.classes!.map((v) => v.toJson()).toList();
+    }
     data['photo'] = this.photo;
+    data['bio'] = this.bio;
     data['email'] = this.email;
     data['university'] = this.university;
     data['message'] = this.message;
+    return data;
+  }
+}
+
+class Classes {
+  String? grade;
+  String? section;
+
+  Classes({this.grade, this.section});
+
+  Classes.fromJson(Map<String, dynamic> json) {
+    grade = json['grade'];
+    section = json['section'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['grade'] = this.grade;
+    data['section'] = this.section;
     return data;
   }
 }

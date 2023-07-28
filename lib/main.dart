@@ -62,12 +62,17 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider(create:(context) => AppLoginCubit(),),
         BlocProvider(create:(context) => WebHomeCubit(),),
-        BlocProvider(create:(context) => EventWebCubit(),),
-        BlocProvider(create:(context) => ShowTimetableCubit(),),
+        BlocProvider(create:(context) => EventWebCubit()..showEvents(),),
+        BlocProvider(create:(context) => ShowTimetableCubit()..showTimetable(grade: 'seventh',section: 1),),
         BlocProvider(create:(context) => StudentCubit(),),
-        BlocProvider(create:(context) => AppTeacherWebCubit(),),
-        BlocProvider(create:(context) => TimetableCubit(),),
-        BlocProvider(create:(context) => WebStaffCubit(),),
+        BlocProvider(create:(context) => AppTeacherWebCubit()..showTeachers(),),
+        BlocProvider(create:(context) => TimetableCubit()..showSections()..showSubjectTeacher()..showEnglishSubjectTeacher()
+          ..showFrenchSubjectTeacher()..showMathSubjectTeacher()..showPhysicsSubjectTeacher()..showChemistrySubjectTeacher()
+          ..showArtSubjectTeacher()..showMusicSubjectTeacher()..showSportsSubjectTeacher()..showSocialSubjectTeacher()
+          ..showCultureSubjectTeacher()..showReligionSubjectTeacher()..showPhilosophySubjectTeacher()..showScienceSubjectTeacher()
+          ..showTechnologySubjectTeacher()
+          ,),
+        BlocProvider(create:(context) => WebStaffCubit()..showStaff(),),
         BlocProvider(create:(context) => WebSchoolCubit(),),
         BlocProvider(create: (context)=>StaffProfileCubit(),)
       ],

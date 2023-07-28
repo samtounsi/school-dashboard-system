@@ -362,7 +362,8 @@ class _AddTeacherState extends State<AddTeacher> {
                                                 .then((value) {
                                               print(DateFormat.yMMMd()
                                                   .format(value!));
-                                                  DateFormat('dd-MM-yyyy').format(value);
+                                              DateFormat('yyyy/MM/dd').format(value);
+                                              dateOfBirth.text=DateFormat('yyyy/MM/dd').format(value);
                                             });
                                           },
                                         )),
@@ -512,6 +513,7 @@ class _AddTeacherState extends State<AddTeacher> {
                                               print(AppTeacherWebCubit.get(context).genderValue);
                                               print(dateOfBirth.text);
                                               print(selectedSubjects);
+
                                               RegisterModelTeacher model=RegisterModelTeacher(
                                                   firstName: firstNameController.text,
                                                   lastName: lastNameController.text,
@@ -519,14 +521,13 @@ class _AddTeacherState extends State<AddTeacher> {
                                                   phoneNumber: phoneController.text,
                                                   gender: AppTeacherWebCubit.get(context)
                                                       .genderValue,
-                                                  birthday: '2002-04-20',
+                                                  birthday: dateOfBirth.text,
                                                   yearsOfExperience:experienceYearsController.text,
                                                   nationality: nationalityController.text,
                                                   subjects: selectedSubjects,
                                                 university: universityController.text,
                                                 email: emailController.text
                                               );
-
                                              AppTeacherWebCubit.get(context).postTeacher(data:model);
                                               print(model.toJson(model).toString());
                                             }

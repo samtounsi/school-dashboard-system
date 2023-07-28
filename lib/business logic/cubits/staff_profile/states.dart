@@ -1,7 +1,9 @@
 
 import 'package:flutter/material.dart';
 
+import '../../../data/models/activate_user_model.dart';
 import '../../../data/models/staff_profile_model.dart';
+import '../../../data/models/teacher_profile_model.dart';
 
 abstract class StaffProfileStates{}
 class StaffProfileInitialState extends StaffProfileStates{}
@@ -21,3 +23,17 @@ class AppStaffWebStaffProfileErrorState extends StaffProfileStates {
 
   AppStaffWebStaffProfileErrorState({this.error});
 }
+
+class AppStaffWebStaffUpdateProfileLoadingState extends StaffProfileStates {}
+class AppStaffWebStaffUpdateProfileSuccessState extends StaffProfileStates {
+  StaffProfileModel staffProfileModel;
+
+  AppStaffWebStaffUpdateProfileSuccessState(this.staffProfileModel);
+
+}
+class AppStaffWebStaffUpdateProfileErrorState extends StaffProfileStates {
+  final error;
+
+  AppStaffWebStaffUpdateProfileErrorState({this.error});
+}
+

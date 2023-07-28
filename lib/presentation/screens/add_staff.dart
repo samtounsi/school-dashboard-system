@@ -16,6 +16,7 @@ import 'package:web_schoolapp/presentation/components%20and%20constants/componen
 import 'dart:typed_data';
 
 import 'package:web_schoolapp/presentation/components%20and%20constants/constants.dart';
+import 'package:web_schoolapp/presentation/screens/add_student.dart';
 import 'package:web_schoolapp/presentation/screens/usernamePasswordScreen.dart';
 
 import '../../data/models/staffRegisterModel.dart';
@@ -281,9 +282,9 @@ class AddStaff extends StatelessWidget {
                                             firstDate: DateTime(1900),
                                             lastDate: DateTime(2050))
                                             .then((value) {
-                                          print(DateFormat('dd/MM/yyyy').format(value!));
+                                          print(DateFormat('yyyy/MM/dd').format(value!));
                                           birthdayController.text =
-                                              DateFormat('dd/MM/yyyy').format(value);
+                                              DateFormat('yyyy/MM/dd').format(value);
                                         });
                                       },
                                     )),
@@ -349,7 +350,7 @@ class AddStaff extends StatelessWidget {
                                             phone_number: phoneController.text,
                                             gender: WebSchoolCubit.get(context)
                                                 .staffGenderValue,
-                                            birthday: '2002-04-20',
+                                            birthday: birthdayController.text,
                                       );
                                           WebSchoolCubit.get(context).postStaff(data : model);
                                           print(model.toJson(model).toString());

@@ -30,7 +30,7 @@ class AppLoginCubit extends Cubit<AppLoginStates>
     required password
   })async{
     emit(AppLoginLoadingState());
-    var request = http.MultipartRequest('POST', Uri.parse('https://new-school-management-system.onrender.com/login'));
+    var request = http.MultipartRequest('POST', Uri.parse('https://new-school-management-system.onrender.com/web/login'));
     request.fields.addAll({
       'username': userName,
       'password': password

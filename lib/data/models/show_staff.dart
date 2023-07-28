@@ -1,10 +1,10 @@
-class StaffShowModel {
+class ShowStaffModel {
   List<Staff>? staff;
   String? message;
 
-  StaffShowModel({this.staff, this.message});
+  ShowStaffModel({this.staff, this.message});
 
-  StaffShowModel.fromJson(Map<String, dynamic> json) {
+  ShowStaffModel.fromJson(Map<String, dynamic> json) {
     if (json['staff'] != null) {
       staff = <Staff>[];
       json['staff'].forEach((v) {
@@ -26,25 +26,19 @@ class StaffShowModel {
 
 class Staff {
   int? id;
-  String? firstName;
-  String? lastName;
-  String? photo;
+  String? fullName;
 
-  Staff({this.id, this.firstName, this.lastName, this.photo});
+  Staff({this.id, this.fullName});
 
   Staff.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    firstName = json['first_name'];
-    lastName = json['last_name'];
-    photo = json['photo'];
+    fullName = json['full_name'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['id'] = this.id;
-    data['first_name'] = this.firstName;
-    data['last_name'] = this.lastName;
-    data['photo'] = this.photo;
+    data['full_name'] = this.fullName;
     return data;
   }
 }

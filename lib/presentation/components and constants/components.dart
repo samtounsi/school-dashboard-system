@@ -161,6 +161,7 @@ Widget text(
       color: color,
       fontSize: size,
       fontWeight: weight,
+     // overflow: TextOverflow.ellipsis,
     ),
   );
 }
