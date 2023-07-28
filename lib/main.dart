@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:web_schoolapp/business%20logic/cubits/Show%20Time%20Table/cubit.dart';
 import 'package:web_schoolapp/business%20logic/cubits/event_cubit/cubit.dart';
-import 'package:web_schoolapp/business%20logic/cubits/home_cubit/cubit.dart';
+import 'package:web_schoolapp/business%20logic/cubits/home_cubit_owner/cubit.dart';
+import 'package:web_schoolapp/business%20logic/cubits/home_cubit_staff/cubit.dart';
 import 'package:web_schoolapp/business%20logic/cubits/login_cubit/cubit.dart';
 import 'package:web_schoolapp/business%20logic/cubits/student_cubit/cubit.dart';
 import 'package:web_schoolapp/business%20logic/cubits/teacher_cubit/cubit.dart';
@@ -62,8 +63,9 @@ class MyApp extends StatelessWidget {
           create: (context) => AppLoginCubit(),
         ),
         BlocProvider(
-          create: (context) => WebHomeCubit(),
+          create: (context) => WebHomeCubit()..getHomeWebData(year: DateTime.now().year + 1, token: token.toString()),
         ),
+        BlocProvider(create: (context) => WebHomeStaffCubit()..getHomeWebData(year: DateTime.now().year + 1, token: token.toString())),
         BlocProvider(
           create: (context) => EventWebCubit()..showEvents(),
         ),

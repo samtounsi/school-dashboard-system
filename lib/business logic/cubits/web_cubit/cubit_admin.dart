@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:web_schoolapp/business%20logic/cubits/web_cubit/states_admin.dart';
+import 'package:web_schoolapp/data/models/logout_model.dart';
 import 'package:web_schoolapp/data/models/registerModel.dart';
 import 'package:web_schoolapp/data/models/staffRegisterModel.dart';
 import 'package:web_schoolapp/presentation/screens/add_event.dart';
@@ -15,12 +16,12 @@ import 'package:web_schoolapp/presentation/screens/add_teacher.dart';
 import 'package:web_schoolapp/presentation/screens/choose_grade_add_table.dart';
 import 'package:web_schoolapp/presentation/screens/choose_grade_show_table.dart';
 import 'package:web_schoolapp/presentation/screens/feedBack.dart';
-import 'package:web_schoolapp/presentation/screens/home_screen.dart';
+import 'package:web_schoolapp/presentation/screens/home_screen_owner.dart';
 import 'package:web_schoolapp/presentation/screens/show_staff.dart';
 import 'package:web_schoolapp/presentation/screens/show_teachers.dart';
 import 'package:web_schoolapp/presentation/screens/showtimetable.dart';
 import 'package:web_schoolapp/presentation/screens/time_table.dart';
-import 'package:http/http.dart'as http;
+import 'package:http/http.dart' as http;
 
 import '../../../data/models/activate_user_model.dart';
 import '../../../data/models/show_staff.dart';
@@ -33,6 +34,7 @@ class WebSchoolCubit extends Cubit<WebSchoolStates> {
 
   static WebSchoolCubit get(context) => BlocProvider.of(context);
 
+  //rail functions
   bool isExpanded = false;
   IconData arrow = Icons.arrow_back_ios;
   void ShowHideRail() {
@@ -42,7 +44,7 @@ class WebSchoolCubit extends Cubit<WebSchoolStates> {
   }
 
   List<Widget> screens = [
-    HomeScreen(),
+    HomeScreenOwner(),
     SearchStudent(),
     AddStudent(),
     TeachersDisplay(),
@@ -58,7 +60,7 @@ class WebSchoolCubit extends Cubit<WebSchoolStates> {
 
   int currentInd = 0;
   void ChangeScreen(int index) {
-    emit(WebSchoolRailAppearState());
+    emit(WebSchoolChangeScreenState());
     currentInd = index;
   }
 
@@ -88,6 +90,31 @@ class WebSchoolCubit extends Cubit<WebSchoolStates> {
         icon: Icon(Icons.feedback), label: Text('Feedback')),
   ];
 
+
+  //logout
+  LogoutModel? logoutmodel;
+  void Logout({String? token}) async {
+    emit(AppLogoutLoadingState());
+    var request = http.MultipartRequest(
+        'POST',
+        Uri.parse(
+            'https://new-school-management-system.onrender.com/web/logout'));
+    request.headers['Authorization'] = 'Bearer $token';
+    http.StreamedResponse response = await request.send();
+
+    if (response.statusCode == 200) {
+      logoutmodel = LogoutModel.fromJson(
+          jsonDecode(await response.stream.bytesToString()));
+      emit(AppLogoutSuccessState(logoutmodel!));
+      print(logoutmodel!.message);
+    } else {
+      emit(AppLogoutErrorState(
+          jsonDecode(await response.stream.bytesToString())['message']
+              .toString()));
+      print('error');
+    }
+  }
+  //staff managment functions
   String staffGenderValue = 'male';
 
   String changeStaffGender(value) {
@@ -97,44 +124,34 @@ class WebSchoolCubit extends Cubit<WebSchoolStates> {
     return value;
   }
 
-
-
   RegisterModel? staffRegisterModel;
-  postStaff
-  ({
-    required StaffModel data
-   })async
-  {
-  emit(WebSchoolAddStaffLoadingState());
+  postStaff({required StaffModel data}) async {
+    emit(WebSchoolAddStaffLoadingState());
 
+    var request = http.post(
+        Uri.parse(
+            'https://new-school-management-system.onrender.com/web/admin_register'),
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': '*/*',
+          'Authorization': 'Bearer $token'
+        },
+        body: jsonEncode(data.toJson(data)));
 
-   var request = http.post(Uri.parse('https://new-school-management-system.onrender.com/web/admin_register')
-   ,headers: {
-         'Content-Type': 'application/json',
-         'Accept': '*/*',
-         'Authorization': 'Bearer $token'
-       },
-     body: jsonEncode(data.toJson(data))
-   );
-
-   var response = await request;
+    var response = await request;
 
     if (response.statusCode == 201) {
       print(response.statusCode);
-      staffRegisterModel=RegisterModel.fromJson(jsonDecode(await response.body));
-     print(staffRegisterModel?.message);
+      staffRegisterModel =
+          RegisterModel.fromJson(jsonDecode(await response.body));
+      print(staffRegisterModel?.message);
       //print(await response.stream.bytesToString());
-     emit(WebSchoolAddStaffSuccessState(staffRegisterModel!));
-    }
-    else
-    {
+      emit(WebSchoolAddStaffSuccessState(staffRegisterModel!));
+    } else {
       print(response.statusCode);
       print(response.body);
-     // print(jsonDecode(await response.body)['message']);
-      emit(WebSchoolAddStaffErrorState(error:response.body ));
+      // print(jsonDecode(await response.body)['message']);
+      emit(WebSchoolAddStaffErrorState(error: response.body));
     }
   }
-
-
-
 }

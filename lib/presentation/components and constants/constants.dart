@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:web_schoolapp/data/models/home_model.dart';
 
 class AppColors {
   static const darkBlue = Color(0xFF295087);

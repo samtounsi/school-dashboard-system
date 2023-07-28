@@ -5,18 +5,14 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:web_schoolapp/business%20logic/cubits/web_cubit/states_staff.dart';
-import 'package:web_schoolapp/data/models/certificate_model.dart';
-import 'package:web_schoolapp/presentation/components%20and%20constants/components.dart';
+import 'package:web_schoolapp/data/models/logout_model.dart';
 import 'package:web_schoolapp/presentation/screens/add_event.dart';
 import 'package:web_schoolapp/presentation/screens/add_student.dart';
 import 'package:web_schoolapp/presentation/screens/add_teacher.dart';
 import 'package:web_schoolapp/presentation/screens/feedBack.dart';
-import 'package:web_schoolapp/presentation/screens/home_screen.dart';
+import 'package:web_schoolapp/presentation/screens/home_screen_staff.dart';
 import 'package:web_schoolapp/presentation/screens/show_teachers.dart';
-import 'package:web_schoolapp/presentation/screens/showtimetable.dart';
-import 'package:web_schoolapp/presentation/screens/staff_profile.dart';
-import 'package:web_schoolapp/presentation/screens/time_table.dart';
-import 'package:http/http.dart'as http;
+import 'package:http/http.dart' as http;
 
 import '../../../data/models/activate_user_model.dart';
 import '../../../data/models/show_staff.dart';
@@ -27,11 +23,35 @@ import '../../../presentation/screens/choose_grade_show_table.dart';
 import '../../../presentation/screens/search_student_screen.dart';
 import '../../../presentation/screens/show_staff.dart';
 
-
 class WebStaffCubit extends Cubit<WebStaffStates> {
   WebStaffCubit() : super(WebStaffInitState());
 
   static WebStaffCubit get(context) => BlocProvider.of(context);
+
+
+  //logout
+  LogoutModel? logoutmodel;
+  void Logout({String? token}) async {
+    emit(StaffLogoutLoadingState());
+    var request = http.MultipartRequest(
+        'POST',
+        Uri.parse(
+            'https://new-school-management-system.onrender.com/web/logout'));
+    request.headers['Authorization'] = 'Bearer $token';
+    http.StreamedResponse response = await request.send();
+
+    if (response.statusCode == 200) {
+      logoutmodel = LogoutModel.fromJson(
+          jsonDecode(await response.stream.bytesToString()));
+      emit(StaffLogoutSuccessState(logoutmodel!));
+      print(logoutmodel!.message);
+    } else {
+      emit(StaffLogoutErrorState(
+          jsonDecode(await response.stream.bytesToString())['message']
+              .toString()));
+      print('error');
+    }
+  }
 
   bool isExpanded = false;
   IconData arrow = Icons.arrow_back_ios;
@@ -42,14 +62,14 @@ class WebStaffCubit extends Cubit<WebStaffStates> {
   }
 
   List<Widget> screens = [
-    HomeScreen(),
+    HomeScreenStaff(),
     SearchStudent(),
     AddStudent(),
     TeachersDisplay(),
     AddTeacher(),
     AttendanceScreen(),
-  ChooseGradeShowTableScreen(),
-  ChooseGradeAddTableScreen(),
+    ChooseGradeShowTableScreen(),
+    ChooseGradeAddTableScreen(),
     AddEvent(),
     FeedBack(),
   ];
@@ -86,37 +106,32 @@ class WebStaffCubit extends Cubit<WebStaffStates> {
   bool isPassword = true;
   IconData suffix = Icons.visibility_outlined;
 
-
   void changePasswordVisibility() {
     isPassword = !isPassword;
     suffix =
-    isPassword ? Icons.visibility_outlined : Icons.visibility_off_outlined;
+        isPassword ? Icons.visibility_outlined : Icons.visibility_off_outlined;
 
     emit(AppStaffWebChangePasswordVisibilityState());
   }
 
-  String activeValue='true';
+  String activeValue = 'true';
   String changeActive(value) {
     this.activeValue = value;
-   // print(activeValue);
-   // print(value);
+    // print(activeValue);
+    // print(value);
     emit(AppStaffWebChangeActiveState());
     return value;
   }
 
-
   ShowStaffModel? showStaffModel;
-  Future<ShowStaffModel?> showStaff({activeValue})async
-  {
+  Future<ShowStaffModel?> showStaff({activeValue}) async {
     emit(AppStaffWebStaffShowLoadingState());
-    var headers = {
-      'Accept': '*/*',
-      'Authorization': 'Bearer $token'
-    };
-    var request = http.MultipartRequest('POST', Uri.parse('https://new-school-management-system.onrender.com/web/view_staff'));
-    request.fields.addAll({
-      'is_active': active
-    });
+    var headers = {'Accept': '*/*', 'Authorization': 'Bearer $token'};
+    var request = http.MultipartRequest(
+        'POST',
+        Uri.parse(
+            'https://new-school-management-system.onrender.com/web/view_staff'));
+    request.fields.addAll({'is_active': active});
 
     request.headers.addAll(headers);
 
@@ -124,12 +139,12 @@ class WebStaffCubit extends Cubit<WebStaffStates> {
 
     if (response.statusCode == 200) {
       print(response.statusCode);
-    showStaffModel=ShowStaffModel.fromJson(jsonDecode(await response.stream.bytesToString()));
-    // print(await response.stream.bytesToString());
-     print(showStaffModel?.message);
+      showStaffModel = ShowStaffModel.fromJson(
+          jsonDecode(await response.stream.bytesToString()));
+      // print(await response.stream.bytesToString());
+      print(showStaffModel?.message);
       emit(AppStaffWebStaffShowSuccessState(showStaffModel!));
-    }
-    else {
+    } else {
       print(response.reasonPhrase);
       print(response.statusCode);
       print(jsonDecode(await response.stream.bytesToString())['message']);
@@ -137,33 +152,27 @@ class WebStaffCubit extends Cubit<WebStaffStates> {
     }
     return showStaffModel;
   }
+
   ActivateUserModel? activateUserModel;
-  activeUser({required String type, required int id})async
-  {
-    var headers = {
-      'Authorization': 'Bearer $token'
-    };
-    var request = http.MultipartRequest('POST', Uri.parse('https://new-school-management-system.onrender.com/web/activate_user'));
-    request.fields.addAll({
-      'type': type,
-      'id': id.toString()
-    });
+  activeUser({required String type, required int id}) async {
+    var headers = {'Authorization': 'Bearer $token'};
+    var request = http.MultipartRequest(
+        'POST',
+        Uri.parse(
+            'https://new-school-management-system.onrender.com/web/activate_user'));
+    request.fields.addAll({'type': type, 'id': id.toString()});
 
     request.headers.addAll(headers);
 
     http.StreamedResponse response = await request.send();
 
     if (response.statusCode == 201) {
-      activateUserModel=ActivateUserModel.fromJson(jsonDecode(await response.stream.bytesToString()));
+      activateUserModel = ActivateUserModel.fromJson(
+          jsonDecode(await response.stream.bytesToString()));
       print(activateUserModel?.toJson().toString());
+    } else {
+      String error =
+          jsonDecode(await response.stream.bytesToString())['message'];
     }
-    else {
-      String error=jsonDecode(await response.stream.bytesToString())['message'];
-
-    }
-
   }
-
-
-
 }

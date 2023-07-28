@@ -1,3 +1,4 @@
+import 'package:web_schoolapp/data/models/logout_model.dart';
 import 'package:web_schoolapp/data/models/show_sections.dart';
 
 import '../../../data/models/activate_user_model.dart';
@@ -36,6 +37,19 @@ class AppStaffWebStaffActiveErrorState extends WebStaffStates {
   final error;
 
   AppStaffWebStaffActiveErrorState({this.error});
+}
+
+//logout states
+class StaffLogoutLoadingState extends WebStaffStates {}
+
+class StaffLogoutSuccessState extends WebStaffStates {
+  final LogoutModel logoutModel;
+  StaffLogoutSuccessState(this.logoutModel);
+}
+
+class StaffLogoutErrorState extends WebStaffStates {
+  final String error;
+  StaffLogoutErrorState(this.error);
 }
 
 

@@ -9,11 +9,16 @@ Widget calendar({
   bool Function(DateTime)? holidayPredicate,
   DateTime? startRange,
   DateTime? endRange,
+  required DateTime focusedDay,
+  bool Function(DateTime)? selectedDayPredicate,
+  void Function(DateTime, DateTime)? onDaySelected,
+  List<dynamic> Function(DateTime)? eventLoader
 }) {
   return TableCalendar(
     shouldFillViewport: true,
     calendarBuilders: CalendarBuilders(),
-    focusedDay: DateTime.now(),
+    eventLoader: eventLoader,
+    focusedDay: focusedDay,
     firstDay: DateTime(1990),
     lastDay: DateTime(2050),
     currentDay: DateTime.now(),
@@ -21,6 +26,8 @@ Widget calendar({
     rangeStartDay: startRange,
     rangeEndDay: endRange,
     holidayPredicate: holidayPredicate,
+    onDaySelected: onDaySelected,
+    selectedDayPredicate: selectedDayPredicate,
     headerStyle: HeaderStyle(
         formatButtonVisible: false,
         titleCentered: true,
@@ -38,9 +45,10 @@ Widget calendar({
       ),
     ),
     calendarStyle: CalendarStyle(
+      isTodayHighlighted: true,
       selectedDecoration: BoxDecoration(
         shape: BoxShape.circle,
-        color: Color.fromARGB(255, 41, 101, 184),
+        color: Color.fromARGB(255, 125, 186, 216),
       ),
       selectedTextStyle: TextStyle(
         color: Colors.white,
@@ -48,10 +56,14 @@ Widget calendar({
       ),
       todayDecoration: BoxDecoration(
         shape: BoxShape.circle,
-        color: Color.fromARGB(255, 41, 101, 184),
+        color: Colors.transparent,
+        border: Border.all(
+          color: Color.fromARGB(255, 41, 101, 184),
+          
+        )
       ),
       todayTextStyle: TextStyle(
-        color: Colors.white,
+        color: Color.fromARGB(255, 41, 101, 184),
         fontSize: size,
       ),
       holidayDecoration: BoxDecoration(
@@ -88,6 +100,10 @@ Widget calendar({
       ),
       defaultTextStyle: TextStyle(
         fontSize: size,
+      ),
+      markerDecoration: BoxDecoration(
+        shape: BoxShape.rectangle,
+        color: AppColors.darkBlue,
       ),
     ),
   );
