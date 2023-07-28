@@ -12,13 +12,10 @@ import 'package:web_schoolapp/presentation/screens/add_event.dart';
 import 'package:web_schoolapp/presentation/screens/add_staff.dart';
 import 'package:web_schoolapp/presentation/screens/add_student.dart';
 import 'package:web_schoolapp/presentation/screens/add_teacher.dart';
-import 'package:web_schoolapp/presentation/screens/choose_grade.dart';
 import 'package:web_schoolapp/presentation/screens/choose_grade_add_table.dart';
 import 'package:web_schoolapp/presentation/screens/choose_grade_show_table.dart';
 import 'package:web_schoolapp/presentation/screens/feedBack.dart';
 import 'package:web_schoolapp/presentation/screens/home_screen.dart';
-import 'package:web_schoolapp/presentation/screens/searchFilter.dart';
-import 'package:web_schoolapp/presentation/screens/sectionSort.dart';
 import 'package:web_schoolapp/presentation/screens/show_staff.dart';
 import 'package:web_schoolapp/presentation/screens/show_teachers.dart';
 import 'package:web_schoolapp/presentation/screens/showtimetable.dart';
@@ -28,6 +25,8 @@ import 'package:http/http.dart'as http;
 import '../../../data/models/activate_user_model.dart';
 import '../../../data/models/show_staff.dart';
 import '../../../presentation/components and constants/constants.dart';
+import '../../../presentation/screens/search_student_screen.dart';
+import '../../../presentation/screens/section_sort.dart';
 
 class WebSchoolCubit extends Cubit<WebSchoolStates> {
   WebSchoolCubit() : super(WebSchoolInitState());
