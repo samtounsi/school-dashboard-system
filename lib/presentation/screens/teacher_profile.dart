@@ -258,6 +258,7 @@ class _TeacherProfileState extends State<TeacherProfile> {
                 ],
               ),
               body: SingleChildScrollView(
+                scrollDirection: Axis.vertical,
                 child: Padding(
                   padding: const EdgeInsets.all(30.0),
                   child: SafeArea(
@@ -458,16 +459,14 @@ class _TeacherProfileState extends State<TeacherProfile> {
                                             onTap: () {
                                               showDatePicker(
                                                   context: context,
-                                                  initialDate:
-                                                  DateTime.now(),
+                                                  initialDate: DateTime.now(),
                                                   firstDate: DateTime(1900),
                                                   lastDate: DateTime(2050))
                                                   .then((value) {
                                                 print(DateFormat.yMMMd()
                                                     .format(value!));
-                                                dateOfBirth.text =
-                                                    DateFormat.yMMMd()
-                                                        .format(value);
+                                                DateFormat('yyyy/MM/dd').format(value);
+                                                dateOfBirth.text=DateFormat('yyyy/MM/dd').format(value);
                                               });
                                             },
                                           )),
@@ -532,11 +531,18 @@ class _TeacherProfileState extends State<TeacherProfile> {
                                                   showMultiSelect();
                                                 }, radius: 50),
                                             Divider(),
-                                            Wrap(
-                                              children: selectedSubjects.map((e) =>Padding(
-                                                padding: EdgeInsetsDirectional.only(end: 2.0),
-                                                child: Chip(label: Text(e),),
-                                              )).toList(),
+                                            Container(
+                                              height: 100,
+                                              width: 400,
+                                              child: SingleChildScrollView(
+                                                scrollDirection: Axis.horizontal,
+                                                child: Wrap(
+                                                  children: selectedSubjects.map((e) => Padding(
+                                                    padding: EdgeInsetsDirectional.only(end: 2.0),
+                                                    child: Chip(label: Text(e),),
+                                                  )).toList(),
+                                                ),
+                                              ),
                                             )
                                           ],
                                         ),

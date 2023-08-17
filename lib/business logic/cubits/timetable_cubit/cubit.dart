@@ -66,7 +66,7 @@ class TimetableCubit extends Cubit<TimetableStates>
 
 
   AddTimetableResponse? timetableResponse;
-  postTimetable( {required AddTimeTable data})async
+  Future postTimetable( {required AddTimeTable data})async
   {
     emit(AppAddTimetableLoadingState());
 
@@ -108,6 +108,7 @@ class TimetableCubit extends Cubit<TimetableStates>
   String changeEnglishTeacher(value) {
     this.englishValue = value;
     print(value);
+    print(englishValue);
     emit(TimetableChangeEnglishTeacherState());
     return value;
   }

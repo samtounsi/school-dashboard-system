@@ -38,14 +38,14 @@ class CertificateModel {
 
 class FirstSemester {
   String? subject;
-  Marks? marks;
-  int? totalMark;
+  Mark? marks;
+  late final totalMark;
 
   FirstSemester({this.subject, this.marks, this.totalMark});
 
   FirstSemester.fromJson(Map<String, dynamic> json) {
     subject = json['subject'];
-    marks = json['marks'] != null ? new Marks.fromJson(json['marks']) : null;
+    marks = json['marks'] != null ? new Mark.fromJson(json['marks']) : null;
     totalMark = json['total_mark'];
   }
 
@@ -62,7 +62,7 @@ class FirstSemester {
 class SecondSemester {
   String? subject;
   Marks? marks;
-  int? totalMark;
+  late final totalMark;
 
   SecondSemester({this.subject, this.marks, this.totalMark});
 
@@ -84,9 +84,9 @@ class SecondSemester {
 }
 
 class Mark {
-  int? midMarkFirstSemester;
-  int? finalMarkFirstSemester;
-  int? quizPrizeFirstSemester;
+  late final midMarkFirstSemester;
+  late final finalMarkFirstSemester;
+  late final quizPrizeFirstSemester;
 
   Mark(
       {this.midMarkFirstSemester,
@@ -109,9 +109,9 @@ class Mark {
 }
 
 class Marks {
-  double? midMarkSecondSemester;
-  double? finalMarkSecondSemester;
-  int? quizPrizeSecondSemester;
+  late final midMarkSecondSemester;
+  late final finalMarkSecondSemester;
+  late final quizPrizeSecondSemester;
 
   Marks(
       {this.midMarkSecondSemester,

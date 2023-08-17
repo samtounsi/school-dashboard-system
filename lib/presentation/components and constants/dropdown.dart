@@ -7,10 +7,11 @@ Widget buildDropdown(
 {
   required String label,
   required List list,
+  Text? hintText,
  // required List<DropdownMenuItem<Object>>? list,
   required ValueChanged<Object?>? onChanged,
   required int maxLength,
-  required Object value,
+   Object? value,
   Color labelColor=AppColors.darkBlue
 }
     ){
@@ -40,7 +41,7 @@ Widget buildDropdown(
               borderRadius: BorderRadius.circular(7)),
           child: DropdownButton(
             value: value,
-
+            hint: hintText,
             items: list.map((option) {
     return DropdownMenuItem(
     child: Text("$option"),

@@ -15,6 +15,7 @@ import 'package:web_schoolapp/presentation/screens/add_student.dart';
 import 'package:web_schoolapp/presentation/screens/add_teacher.dart';
 import 'package:web_schoolapp/presentation/screens/choose_grade_add_table.dart';
 import 'package:web_schoolapp/presentation/screens/choose_grade_show_table.dart';
+import 'package:web_schoolapp/presentation/screens/exam_schedule.dart';
 import 'package:web_schoolapp/presentation/screens/feedBack.dart';
 import 'package:web_schoolapp/presentation/screens/home_screen_owner.dart';
 import 'package:web_schoolapp/presentation/screens/show_staff.dart';
@@ -56,6 +57,7 @@ class WebSchoolCubit extends Cubit<WebSchoolStates> {
     ChooseGradeAddTableScreen(),
     AddEvent(),
     FeedBack(),
+    ExamSchedule()
   ];
 
   int currentInd = 0;
@@ -88,6 +90,8 @@ class WebSchoolCubit extends Cubit<WebSchoolStates> {
         icon: Icon(Icons.notifications), label: Text('Events')),
     NavigationRailDestination(
         icon: Icon(Icons.feedback), label: Text('Feedback')),
+    NavigationRailDestination(
+        icon: Icon(Icons.feedback), label: Text('Exam Schedule')),
   ];
 
 

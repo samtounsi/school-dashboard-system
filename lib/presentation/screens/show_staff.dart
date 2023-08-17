@@ -93,13 +93,16 @@ class ShowStaff extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.only(top: 30.0,bottom: 30,right: 30),
                 child: Row(
-
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Expanded(
                       child: SingleChildScrollView(
                         scrollDirection: Axis.vertical,
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.start,
+                          mainAxisSize: MainAxisSize.min,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Container(
@@ -122,13 +125,20 @@ class ShowStaff extends StatelessWidget {
                               ),
                             ),
                             SizedBox(height: 20,),
-                            ListView.separated(
-                                shrinkWrap: true,
-                               physics: NeverScrollableScrollPhysics(),
-                                //scrollDirection: Axis.vertical,
-                                itemBuilder: (context,index)=>buildStaffItem(list!,context,index),
-                                separatorBuilder: (context,index)=>SizedBox(height: 30,),
-                                itemCount: model!.staff!.length),
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              mainAxisSize: MainAxisSize.min,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                ListView.separated(
+                                    shrinkWrap: true,
+                                   physics: NeverScrollableScrollPhysics(),
+                                    //scrollDirection: Axis.vertical,
+                                    itemBuilder: (context,index)=>buildStaffItem(list!,context,index),
+                                    separatorBuilder: (context,index)=>SizedBox(height: 30,),
+                                    itemCount: model!.staff!.length),
+                              ],
+                            ),
                           ],
                         ),
                       ),

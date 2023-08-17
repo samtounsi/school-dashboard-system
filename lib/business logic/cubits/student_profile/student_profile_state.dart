@@ -5,6 +5,7 @@ import 'package:web_schoolapp/data/models/success_parent_edit_model.dart';
 import 'package:web_schoolapp/presentation/screens/profile_student.dart';
 
 import '../../../data/models/certificate_model.dart';
+import '../../../data/models/get_years_model.dart';
 import '../../../data/models/student_profile_model.dart';
 
 abstract class StudentProfileState {}
@@ -90,6 +91,20 @@ class ChangeStateStudentErrorState extends StudentProfileState {
 }
 //
 class ChangeIconState extends StudentProfileState{}
+class GetYearsLoadingState extends StudentProfileState {}
+class GetYearsSuccessState extends StudentProfileState
+{
+  final GetYearsModel getYearsModel;
+
+  GetYearsSuccessState(this.getYearsModel);
+}
+class GetYearsErrorState extends StudentProfileState
+{
+  final String error;
+
+  GetYearsErrorState(this.error);
+}
+class ChangeYearState extends  StudentProfileState{}
 class AppStaffWebGetCertificateLoadingState extends StudentProfileState  {}
 class AppStaffWebGetCertificateSuccessState extends StudentProfileState {
 

@@ -11,6 +11,7 @@ import 'package:table_calendar/table_calendar.dart';
 
 import 'package:web_schoolapp/business%20logic/cubits/student_profile/student_profile_cubit.dart';
 import 'package:web_schoolapp/business%20logic/cubits/student_profile/student_profile_state.dart';
+import '../../business logic/cubits/student_cubit/cubit.dart';
 import '../../data/models/active_send_student_model.dart';
 import '../../data/models/certificate_model.dart';
 import '../../data/models/send_edit_student_profile_model.dart';
@@ -82,29 +83,6 @@ class _StudentProfileState extends State<StudentProfile> {
   String? userNameCP;
   String? nameCP;
 
-  // void _setData(StudentProfileModel student) {
-  //   usernameController.text = "${student.userName}";
-  //   firstNameController.text = "${student.firstName}";
-  //   lastNameController.text = "${student.lastName}";
-  //   fatherNameController.text = "${student.fatherName}";
-  //   motherNameController.text = "${student.motherName}";
-  //   motherLastName.text = "${student.motherLastName}";
-  //   addressController.text = "${student.address}";
-  //   DateTime date = DateTime.parse(student.birthday);
-  //   String formattedDate =
-  //       "${date.year}/${date.month.toString().padLeft(2, '0')}/${date.day.toString().padLeft(2, '0')}";
-  //   dateOfBirth.text = formattedDate;
-  //   genderController.text = "${student.gender}";
-  //   gradeStudentController.text = "${student.gradeName}";
-  //   classStudentController.text = "${student.className}";
-  //   phoneController.text = "${student.phoneNumber}";
-  //   telephoneController.text = "${student.telephoneNumber}";
-  //   parentNumberController.text = "${student.parentPhoneNumber}";
-  //   gbaStudentController.text = "${student.gba}";
-  //   nationalityStudentController.text = "${student.nationality}";
-  //   bioStudentController.text =
-  //       student.bio.toString().isNull ? "no bio yet" : "${student.bio}";
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -727,8 +705,9 @@ class _StudentProfileState extends State<StudentProfile> {
                                 return defaultTextButton(
                                   text: 'Show Marks',
                                   function: () {
-                                    StudentProfileCubit.get(context).getCertificate(id: 2)
-                                        .then((value) =>navigateTo(context, ShowStudentsMarks(model: StudentProfileCubit.get(context).certificateModel!)));
+                                    StudentProfileCubit.get(context).getYears(
+                                        studentId: modelP.id)
+                                        .then((value) =>navigateTo(context, ShowStudentsMarks(id:  modelP.id,)));
                                     print(certificateModel?.toJson().toString());
                                   },
                                   isUpperCase: true,

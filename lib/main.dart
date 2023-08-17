@@ -17,6 +17,7 @@ import 'package:web_schoolapp/presentation/screens/layouts/staff_layout.dart';
 import 'package:web_schoolapp/presentation/screens/login_screen.dart';
 import 'package:web_schoolapp/presentation/screens/show_staff.dart';
 
+import 'business logic/cubits/exam_schedule_cubit/cubit.dart';
 import 'business logic/cubits/feedback_cubit/cubit.dart';
 import 'business logic/cubits/sort_student_cubit/cubit.dart';
 import 'business logic/cubits/staff_profile/cubit.dart';
@@ -32,7 +33,7 @@ void main() async {
   type = CacheHelper.getData(key: 'type');
   print(token);
   print(type);
-  // CacheHelper.removeData(key: 'token');
+  //CacheHelper.removeData(key: 'token');
   //CacheHelper.removeData(key: 'type');
 
   if (token != null) {
@@ -98,6 +99,7 @@ class MyApp extends StatelessWidget {
             ..showScienceSubjectTeacher()
             ..showTechnologySubjectTeacher(),
         ),
+        BlocProvider(create: (context) => ExamCubit(),),
         BlocProvider(
           create: (context) => WebStaffCubit()..showStaff(),
         ),

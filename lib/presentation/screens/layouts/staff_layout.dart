@@ -109,56 +109,67 @@ class DashBoardStaff extends StatelessWidget {
               ),
               child: Stack(
                 children: [
-                  NavigationRail(
-                    trailing: ConditionalBuilder(
-                      condition: WebStaffCubit.get(context).isExpanded,
-                      builder: (context) => ConditionalBuilder(
-                        condition: state is! StaffLogoutLoadingState,
-                        builder: (context) => MaterialButton(
-                          onPressed: () {
-                            WebStaffCubit.get(context)
-                                .Logout(token: token.toString());
-                          },
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Icon(
-                                Icons.logout,
-                                color: Colors.white,
+                  LayoutBuilder(
+                  builder: (context, constraint)
+                    => SingleChildScrollView(
+                      child: ConstrainedBox(
+                        constraints:
+                        BoxConstraints(minHeight: constraint.maxHeight),
+                        child: IntrinsicHeight(
+                          child: NavigationRail(
+                            trailing: ConditionalBuilder(
+                              condition: WebStaffCubit.get(context).isExpanded,
+                              builder: (context) => ConditionalBuilder(
+                                condition: state is! StaffLogoutLoadingState,
+                                builder: (context) => MaterialButton(
+                                  onPressed: () {
+                                    WebStaffCubit.get(context)
+                                        .Logout(token: token.toString());
+                                  },
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      Icon(
+                                        Icons.logout,
+                                        color: Colors.white,
+                                      ),
+                                      SizedBox(
+                                        width: 25,
+                                      ),
+                                      text('LOGOUT', size: 22, color: Colors.white),
+                                    ],
+                                  ),
+                                ),
+                                fallback: (context) => CircularProgressIndicator(
+                                  color: Colors.white,
+                                ),
                               ),
-                              SizedBox(
-                                width: 25,
-                              ),
-                              text('LOGOUT', size: 22, color: Colors.white),
-                            ],
+                              fallback: (context) => SizedBox(height: 15),
+                            ),
+                            extended: WebStaffCubit.get(context).isExpanded,
+                            backgroundColor: Colors.white.withOpacity(0),
+                            unselectedIconTheme:
+                                IconThemeData(color: Colors.white, opacity: 0.9),
+                            unselectedLabelTextStyle: TextStyle(
+                              color: Colors.white,
+                              fontSize: webFont,
+                            ),
+                            selectedIconTheme: IconThemeData(
+                                color: Color.fromARGB(255, 21, 41, 68), opacity: 0.9),
+                            selectedLabelTextStyle: TextStyle(
+                              color: Color.fromARGB(255, 21, 41, 68),
+                              fontSize: webFont + 3,
+                              fontWeight: FontWeight.bold,
+                            ),
+                            destinations: WebStaffCubit.get(context).dashBoardElements,
+                            selectedIndex: WebStaffCubit.get(context).currentInd,
+                            onDestinationSelected: (ind) {
+                              WebStaffCubit.get(context).ChangeScreen(ind);
+                            },
                           ),
                         ),
-                        fallback: (context) => CircularProgressIndicator(
-                          color: Colors.white,
-                        ),
                       ),
-                      fallback: (context) => SizedBox(height: 15),
                     ),
-                    extended: WebStaffCubit.get(context).isExpanded,
-                    backgroundColor: Colors.white.withOpacity(0),
-                    unselectedIconTheme:
-                        IconThemeData(color: Colors.white, opacity: 0.9),
-                    unselectedLabelTextStyle: TextStyle(
-                      color: Colors.white,
-                      fontSize: webFont,
-                    ),
-                    selectedIconTheme: IconThemeData(
-                        color: Color.fromARGB(255, 21, 41, 68), opacity: 0.9),
-                    selectedLabelTextStyle: TextStyle(
-                      color: Color.fromARGB(255, 21, 41, 68),
-                      fontSize: webFont + 3,
-                      fontWeight: FontWeight.bold,
-                    ),
-                    destinations: WebStaffCubit.get(context).dashBoardElements,
-                    selectedIndex: WebStaffCubit.get(context).currentInd,
-                    onDestinationSelected: (ind) {
-                      WebStaffCubit.get(context).ChangeScreen(ind);
-                    },
                   ),
                   Column(
                     children: [

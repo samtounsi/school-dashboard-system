@@ -12,20 +12,24 @@ import 'package:web_schoolapp/presentation/screens/layouts/layout1.dart';
 
 import '../../business logic/cubits/student_cubit/cubit.dart';
 import '../../business logic/cubits/student_cubit/states.dart';
+import '../../business logic/cubits/student_profile/student_profile_cubit.dart';
+import '../../business logic/cubits/student_profile/student_profile_state.dart';
 import '../../data/models/certificate_model.dart';
+import '../components and constants/components.dart';
+import '../components and constants/dropdown.dart';
 
 
-
+//var model;
 final columns=['Subject','Max','Monthly test','Final test','Quiz\'s  Prizes'];
-
+String?yearValue;
 
 class ShowStudentsMarks extends StatelessWidget {
-  CertificateModel?model;
-   ShowStudentsMarks({super.key, required CertificateModel this.model});
+  int id;
+   ShowStudentsMarks({super.key,required this.id});
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<StudentCubit,DashBoardState>(
+    return BlocConsumer<StudentProfileCubit,StudentProfileState>(
       listener: (context,state)
       {
 
@@ -52,60 +56,96 @@ class ShowStudentsMarks extends StatelessWidget {
                                   fontWeight: FontWeight.bold
                               ),
                             ),
-                            SizedBox(height: 50,),
-                            Center(
-                              child: Row(
-                                children: [
-                                  Column(
-                                    children: [
-                                      Text('FIRST SEMESTER',
-                                        style: TextStyle(
-                                            color: AppColors.darkBlue,
-                                            fontSize: 30,
-                                            fontWeight: FontWeight.bold
-                                        ),
+                            SizedBox(height: 10,),
+                            Row(
+                              children: [
+                                buildDropdown(label: 'Year',
+                                    labelColor: AppColors.lightOrange,
+                                    list:StudentProfileCubit.get(context).getYearsModel!.years!,
+                                    hintText: Text('Select Year',
+                                      style: TextStyle(fontSize: 15,color: AppColors.darkBlue),),
+                                    onChanged: (value){
+                                      StudentProfileCubit.get(context).changeYear(value!);
+                                      yearValue =StudentProfileCubit.get(context).yearValue;
+                                    },
+                                    maxLength: StudentProfileCubit.get(context).getYearsModel!.years!.length ,
+                                    value: yearValue
+                                ),
+                                SizedBox(
+                                  width: 40,
+                                ),
+                                Padding(
+                                      padding:  EdgeInsetsDirectional.only(start:20,top:40),
+                                      child: ConditionalBuilder(
+                                        condition: state is ! AppStaffWebGetCertificateLoadingState,
+                                        builder:(context)=> defaultTextButton(text: 'show schedule', function: ()
+                                        {
+                                          StudentProfileCubit.get(context).getCertificate(id: id,year: yearValue);
+                                        }, radius: 10, height: 52,textColor: AppColors.darkBlue,
+                                            fontWeight: FontWeight.bold,
+                                            background: AppColors.borderColor),
+                                        fallback: (context)=>Center(child: CircularProgressIndicator()),
                                       ),
-                                      SizedBox(height: 20,),
-                                      DataTable(
-                                        columns: getColumns1(columns,),
-                                        rows: getRows1(model!.firstSemester!),
-                                        border: TableBorder.all(width: 1, color: AppColors.darkBlue),
-                                        columnSpacing: 40,
-                                        dataRowHeight: 60,
-                                        headingRowColor:
-                                        MaterialStateColor.resolveWith((states) =>
-                                        AppColors.lightOrange),
-                                        // dataRowColor: MaterialStateColor.resolveWith((states) => AppColors.lightOrange),
-                                      ),
-                                    ],
-                                  ),
-                                  SizedBox(width: 50,),
-                                  Column(
-                                    children: [
-                                      Text('SECOND SEMESTER',
-                                        style: TextStyle(
-                                            color: AppColors.darkBlue,
-                                            fontSize: 30,
-                                            fontWeight: FontWeight.bold
-                                        ),
-                                      ),
-                                      SizedBox(height: 20,),
-                                      DataTable(
-                                        columns: getColumns2(columns,),
-                                        rows: getRows2(model!.secondSemester!),
-                                        border: TableBorder.all(width: 1, color: AppColors.darkBlue),
-                                        columnSpacing: 40,
-                                        dataRowHeight: 60,
-                                        headingRowColor:
-                                        MaterialStateColor.resolveWith((states) =>
-                                        AppColors.lightOrange),
-                                        // dataRowColor: MaterialStateColor.resolveWith((states) => AppColors.lightOrange),
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
+                                    ),
+                              ],
                             ),
+                            SizedBox(
+                              width: 5,
+                            ),
+                            Center(
+                                  child: Row(
+                                    children: [
+                                      Column(
+                                        children: [
+                                          Text('FIRST SEMESTER',
+                                            style: TextStyle(
+                                                color: AppColors.darkBlue,
+                                                fontSize: 30,
+                                                fontWeight: FontWeight.bold
+                                            ),
+                                          ),
+                                          SizedBox(height: 20,),
+                                          DataTable(
+                                            columns: getColumns1(columns,),
+                                            rows: getRows1(StudentProfileCubit.get(context).certificateModel!.firstSemester!),
+                                            border: TableBorder.all(width: 1, color: AppColors.darkBlue),
+                                            columnSpacing: 40,
+                                            dataRowHeight: 60,
+                                            headingRowColor:
+                                            MaterialStateColor.resolveWith((states) =>
+                                            AppColors.lightOrange),
+                                            // dataRowColor: MaterialStateColor.resolveWith((states) => AppColors.lightOrange),
+                                          ),
+                                        ],
+                                      ),
+                                      SizedBox(width: 50,),
+                                      Column(
+                                        children: [
+                                          Text('SECOND SEMESTER',
+                                            style: TextStyle(
+                                                color: AppColors.darkBlue,
+                                                fontSize: 30,
+                                                fontWeight: FontWeight.bold
+                                            ),
+                                          ),
+                                          SizedBox(height: 20,),
+                                          DataTable(
+                                            columns: getColumns2(columns,),
+                                            rows: getRows2(StudentProfileCubit.get(context).certificateModel!.secondSemester!),
+                                            border: TableBorder.all(width: 1, color: AppColors.darkBlue),
+                                            columnSpacing: 40,
+                                            dataRowHeight: 60,
+                                            headingRowColor:
+                                            MaterialStateColor.resolveWith((states) =>
+                                            AppColors.lightOrange),
+                                            // dataRowColor: MaterialStateColor.resolveWith((states) => AppColors.lightOrange),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                ),
+
                             SizedBox(height: 30,),
 
                           ],
@@ -141,9 +181,9 @@ class ShowStudentsMarks extends StatelessWidget {
           final cells = [
            mark.subject,
             mark.totalMark,
-            mark.marks?.midMarkSecondSemester,
-            mark.marks?.finalMarkSecondSemester,
-            mark.marks?.quizPrizeSecondSemester
+            mark.marks?.midMarkFirstSemester,
+            mark.marks?.midMarkFirstSemester,
+            mark.marks?.midMarkFirstSemester
           ];
           return DataRow(
               cells: Utils.modelBuilder(cells, (index, cell) {

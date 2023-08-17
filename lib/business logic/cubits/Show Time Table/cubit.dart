@@ -85,6 +85,10 @@ class  ShowTimetableCubit extends Cubit< ShowTimetableStates>{
     http.StreamedResponse response = await request.send();
 
     if (response.statusCode == 200) {
+      if(showTimetableModel!=null)
+      {
+        showTimetableModel=null;
+      }
       showTimetableModel=GetTimetableModel.fromJson(jsonDecode(await response.stream.bytesToString()));
       print(response.statusCode);
       print(showTimetableModel?.toJson().toString());

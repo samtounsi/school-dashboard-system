@@ -16,6 +16,7 @@ import '../../../data/models/active_send_student_model.dart';
 import '../../../data/models/certificate_model.dart';
 import '../../../data/models/delete_attendance_model.dart';
 import '../../../data/models/editprofile_student_success_model.dart';
+import '../../../data/models/get_years_model.dart';
 import '../../../data/models/send_parent_edit_model.dart';
 import '../../../data/models/student_profile_model.dart';
 import '../../../data/models/success_parent_edit_model.dart';
@@ -233,24 +234,465 @@ class StudentProfileCubit extends Cubit<StudentProfileState> {
 
     emit(ChangeIconState());
   }
-  CertificateModel? certificateModel;
-  getCertificate({int? id})async
+  CertificateModel certificateModel=CertificateModel
+    (
+    message: ' ',
+      firstSemester:[
+        FirstSemester(subject: '',
+          marks:Mark(
+            midMarkFirstSemester: ' ',
+            finalMarkFirstSemester: ' ',
+            quizPrizeFirstSemester: ' '
+          )
+          ,totalMark:''),
+        FirstSemester(subject: '',
+            marks:Mark(
+                midMarkFirstSemester: ' ',
+                finalMarkFirstSemester: ' ',
+                quizPrizeFirstSemester: ' '
+            )
+            ,totalMark:''),
+        FirstSemester(subject: '',
+            marks:Mark(
+                midMarkFirstSemester: ' ',
+                finalMarkFirstSemester: ' ',
+                quizPrizeFirstSemester: ' '
+            )
+            ,totalMark:''),
+        FirstSemester(subject: '',
+            marks:Mark(
+                midMarkFirstSemester: ' ',
+                finalMarkFirstSemester: ' ',
+                quizPrizeFirstSemester: ' '
+            )
+            ,totalMark:''),
+        FirstSemester(subject: '',
+            marks:Mark(
+                midMarkFirstSemester: ' ',
+                finalMarkFirstSemester: ' ',
+                quizPrizeFirstSemester: ' '
+            )
+            ,totalMark:''),
+        FirstSemester(subject: '',
+            marks:Mark(
+                midMarkFirstSemester: ' ',
+                finalMarkFirstSemester: ' ',
+                quizPrizeFirstSemester: ' '
+            )
+            ,totalMark:''),
+        FirstSemester(subject: '',
+            marks:Mark(
+                midMarkFirstSemester: ' ',
+                finalMarkFirstSemester: ' ',
+                quizPrizeFirstSemester: ' '
+            )
+            ,totalMark:''),
+        FirstSemester(subject: '',
+            marks:Mark(
+                midMarkFirstSemester: ' ',
+                finalMarkFirstSemester: ' ',
+                quizPrizeFirstSemester: ' '
+            )
+            ,totalMark:''),
+        FirstSemester(subject: '',
+            marks:Mark(
+                midMarkFirstSemester: ' ',
+                finalMarkFirstSemester: ' ',
+                quizPrizeFirstSemester: ' '
+            )
+            ,totalMark:''),
+        FirstSemester(subject: '',
+            marks:Mark(
+                midMarkFirstSemester: ' ',
+                finalMarkFirstSemester: ' ',
+                quizPrizeFirstSemester: ' '
+            )
+            ,totalMark:''),
+        FirstSemester(subject: '',
+            marks:Mark(
+                midMarkFirstSemester: ' ',
+                finalMarkFirstSemester: ' ',
+                quizPrizeFirstSemester: ' '
+            )
+            ,totalMark:''),
+        FirstSemester(subject: '',
+            marks:Mark(
+                midMarkFirstSemester: ' ',
+                finalMarkFirstSemester: ' ',
+                quizPrizeFirstSemester: ' '
+            )
+            ,totalMark:''),
+        FirstSemester(subject: '',
+            marks:Mark(
+                midMarkFirstSemester: ' ',
+                finalMarkFirstSemester: ' ',
+                quizPrizeFirstSemester: ' '
+            )
+            ,totalMark:''),
+        FirstSemester(subject: '',
+            marks:Mark(
+                midMarkFirstSemester: ' ',
+                finalMarkFirstSemester: ' ',
+                quizPrizeFirstSemester: ' '
+            )
+            ,totalMark:''),
+        FirstSemester(subject: '',
+            marks:Mark(
+                midMarkFirstSemester: ' ',
+                finalMarkFirstSemester: ' ',
+                quizPrizeFirstSemester: ' '
+            )
+            ,totalMark:''),
+      ],
+      secondSemester:[
+      SecondSemester(subject: '',
+        marks:Marks(
+        midMarkSecondSemester: ' ',
+        finalMarkSecondSemester: ' ',
+        quizPrizeSecondSemester: ' '
+        )
+        ,totalMark:' '),
+      SecondSemester(subject: '',
+          marks:Marks(
+              midMarkSecondSemester: ' ',
+              finalMarkSecondSemester: ' ',
+              quizPrizeSecondSemester: ' '
+          )
+          ,totalMark:' '),
+      SecondSemester(subject: '',
+          marks:Marks(
+              midMarkSecondSemester: ' ',
+              finalMarkSecondSemester: ' ',
+              quizPrizeSecondSemester: ' '
+          )
+          ,totalMark:' '),
+      SecondSemester(subject: '',
+          marks:Marks(
+              midMarkSecondSemester: ' ',
+              finalMarkSecondSemester: ' ',
+              quizPrizeSecondSemester: ' '
+          )
+          ,totalMark:' '),
+      SecondSemester(subject: '',
+          marks:Marks(
+              midMarkSecondSemester: ' ',
+              finalMarkSecondSemester: ' ',
+              quizPrizeSecondSemester: ' '
+          )
+          ,totalMark:' '),
+      SecondSemester(subject: '',
+          marks:Marks(
+              midMarkSecondSemester: ' ',
+              finalMarkSecondSemester: ' ',
+              quizPrizeSecondSemester: ' '
+          )
+          ,totalMark:' '),
+      SecondSemester(subject: '',
+          marks:Marks(
+              midMarkSecondSemester: ' ',
+              finalMarkSecondSemester: ' ',
+              quizPrizeSecondSemester: ' '
+          )
+          ,totalMark:' '),
+      SecondSemester(subject: '',
+          marks:Marks(
+              midMarkSecondSemester: ' ',
+              finalMarkSecondSemester: ' ',
+              quizPrizeSecondSemester: ' '
+          )
+          ,totalMark:' '),
+      SecondSemester(subject: '',
+          marks:Marks(
+              midMarkSecondSemester: ' ',
+              finalMarkSecondSemester: ' ',
+              quizPrizeSecondSemester: ' '
+          )
+          ,totalMark:' '),
+      SecondSemester(subject: '',
+          marks:Marks(
+              midMarkSecondSemester: ' ',
+              finalMarkSecondSemester: ' ',
+              quizPrizeSecondSemester: ' '
+          )
+          ,totalMark:' '),
+      SecondSemester(subject: '',
+          marks:Marks(
+              midMarkSecondSemester: ' ',
+              finalMarkSecondSemester: ' ',
+              quizPrizeSecondSemester: ' '
+          )
+          ,totalMark:' '),
+      SecondSemester(subject: '',
+          marks:Marks(
+              midMarkSecondSemester: ' ',
+              finalMarkSecondSemester: ' ',
+              quizPrizeSecondSemester: ' '
+          )
+          ,totalMark:' '),
+      SecondSemester(subject: '',
+          marks:Marks(
+              midMarkSecondSemester: ' ',
+              finalMarkSecondSemester: ' ',
+              quizPrizeSecondSemester: ' '
+          )
+          ,totalMark:' '),
+      SecondSemester(subject: '',
+          marks:Marks(
+              midMarkSecondSemester: ' ',
+              finalMarkSecondSemester: ' ',
+              quizPrizeSecondSemester: ' '
+          )
+          ,totalMark:' '),
+      SecondSemester(subject: '',
+          marks:Marks(
+              midMarkSecondSemester: ' ',
+              finalMarkSecondSemester: ' ',
+              quizPrizeSecondSemester: ' '
+          )
+          ,totalMark:' ')
+    ],
+    );
+  getCertificate({int? id,year})async
   {
     emit(AppStaffWebGetCertificateLoadingState());
     var headers = {
       'Accept': '*/*',
       'Authorization': 'Bearer $token'
     };
-    var request = http.Request('GET', Uri.parse('https://new-school-management-system.onrender.com/web/get_student_marks/$id'));
-
+    var request = http.MultipartRequest('POST', Uri.parse('https://new-school-management-system.onrender.com/web/get_student_marks'));
+    request.fields.addAll({
+      'year_date': year,
+      'id': id.toString()
+    });
     request.headers.addAll(headers);
-
-    http.StreamedResponse response = await request.send();
+    var response = await request.send();
 
     if (response.statusCode == 201) {
       print(response.statusCode);
       certificateModel=CertificateModel.fromJson(jsonDecode(await response.stream.bytesToString()));
       print(certificateModel?.toJson().toString());
+      emit( AppStaffWebGetCertificateSuccessState(certificateModel!));
+    }
+    else if(response.statusCode==422)
+    {
+      certificateModel=CertificateModel
+        (
+        message: ' ',
+        firstSemester:[
+          FirstSemester(subject: '',
+              marks:Mark(
+                  midMarkFirstSemester: ' ',
+                  finalMarkFirstSemester: ' ',
+                  quizPrizeFirstSemester: ' '
+              )
+              ,totalMark:''),
+          FirstSemester(subject: '',
+              marks:Mark(
+                  midMarkFirstSemester: ' ',
+                  finalMarkFirstSemester: ' ',
+                  quizPrizeFirstSemester: ' '
+              )
+              ,totalMark:''),
+          FirstSemester(subject: '',
+              marks:Mark(
+                  midMarkFirstSemester: ' ',
+                  finalMarkFirstSemester: ' ',
+                  quizPrizeFirstSemester: ' '
+              )
+              ,totalMark:''),
+          FirstSemester(subject: '',
+              marks:Mark(
+                  midMarkFirstSemester: ' ',
+                  finalMarkFirstSemester: ' ',
+                  quizPrizeFirstSemester: ' '
+              )
+              ,totalMark:''),
+          FirstSemester(subject: '',
+              marks:Mark(
+                  midMarkFirstSemester: ' ',
+                  finalMarkFirstSemester: ' ',
+                  quizPrizeFirstSemester: ' '
+              )
+              ,totalMark:''),
+          FirstSemester(subject: '',
+              marks:Mark(
+                  midMarkFirstSemester: ' ',
+                  finalMarkFirstSemester: ' ',
+                  quizPrizeFirstSemester: ' '
+              )
+              ,totalMark:''),
+          FirstSemester(subject: '',
+              marks:Mark(
+                  midMarkFirstSemester: ' ',
+                  finalMarkFirstSemester: ' ',
+                  quizPrizeFirstSemester: ' '
+              )
+              ,totalMark:''),
+          FirstSemester(subject: '',
+              marks:Mark(
+                  midMarkFirstSemester: ' ',
+                  finalMarkFirstSemester: ' ',
+                  quizPrizeFirstSemester: ' '
+              )
+              ,totalMark:''),
+          FirstSemester(subject: '',
+              marks:Mark(
+                  midMarkFirstSemester: ' ',
+                  finalMarkFirstSemester: ' ',
+                  quizPrizeFirstSemester: ' '
+              )
+              ,totalMark:''),
+          FirstSemester(subject: '',
+              marks:Mark(
+                  midMarkFirstSemester: ' ',
+                  finalMarkFirstSemester: ' ',
+                  quizPrizeFirstSemester: ' '
+              )
+              ,totalMark:''),
+          FirstSemester(subject: '',
+              marks:Mark(
+                  midMarkFirstSemester: ' ',
+                  finalMarkFirstSemester: ' ',
+                  quizPrizeFirstSemester: ' '
+              )
+              ,totalMark:''),
+          FirstSemester(subject: '',
+              marks:Mark(
+                  midMarkFirstSemester: ' ',
+                  finalMarkFirstSemester: ' ',
+                  quizPrizeFirstSemester: ' '
+              )
+              ,totalMark:''),
+          FirstSemester(subject: '',
+              marks:Mark(
+                  midMarkFirstSemester: ' ',
+                  finalMarkFirstSemester: ' ',
+                  quizPrizeFirstSemester: ' '
+              )
+              ,totalMark:''),
+          FirstSemester(subject: '',
+              marks:Mark(
+                  midMarkFirstSemester: ' ',
+                  finalMarkFirstSemester: ' ',
+                  quizPrizeFirstSemester: ' '
+              )
+              ,totalMark:''),
+          FirstSemester(subject: '',
+              marks:Mark(
+                  midMarkFirstSemester: ' ',
+                  finalMarkFirstSemester: ' ',
+                  quizPrizeFirstSemester: ' '
+              )
+              ,totalMark:''),
+        ],
+        secondSemester:[
+          SecondSemester(subject: '',
+              marks:Marks(
+                  midMarkSecondSemester: ' ',
+                  finalMarkSecondSemester: ' ',
+                  quizPrizeSecondSemester: ' '
+              )
+              ,totalMark:' '),
+          SecondSemester(subject: '',
+              marks:Marks(
+                  midMarkSecondSemester: ' ',
+                  finalMarkSecondSemester: ' ',
+                  quizPrizeSecondSemester: ' '
+              )
+              ,totalMark:' '),
+          SecondSemester(subject: '',
+              marks:Marks(
+                  midMarkSecondSemester: ' ',
+                  finalMarkSecondSemester: ' ',
+                  quizPrizeSecondSemester: ' '
+              )
+              ,totalMark:' '),
+          SecondSemester(subject: '',
+              marks:Marks(
+                  midMarkSecondSemester: ' ',
+                  finalMarkSecondSemester: ' ',
+                  quizPrizeSecondSemester: ' '
+              )
+              ,totalMark:' '),
+          SecondSemester(subject: '',
+              marks:Marks(
+                  midMarkSecondSemester: ' ',
+                  finalMarkSecondSemester: ' ',
+                  quizPrizeSecondSemester: ' '
+              )
+              ,totalMark:' '),
+          SecondSemester(subject: '',
+              marks:Marks(
+                  midMarkSecondSemester: ' ',
+                  finalMarkSecondSemester: ' ',
+                  quizPrizeSecondSemester: ' '
+              )
+              ,totalMark:' '),
+          SecondSemester(subject: '',
+              marks:Marks(
+                  midMarkSecondSemester: ' ',
+                  finalMarkSecondSemester: ' ',
+                  quizPrizeSecondSemester: ' '
+              )
+              ,totalMark:' '),
+          SecondSemester(subject: '',
+              marks:Marks(
+                  midMarkSecondSemester: ' ',
+                  finalMarkSecondSemester: ' ',
+                  quizPrizeSecondSemester: ' '
+              )
+              ,totalMark:' '),
+          SecondSemester(subject: '',
+              marks:Marks(
+                  midMarkSecondSemester: ' ',
+                  finalMarkSecondSemester: ' ',
+                  quizPrizeSecondSemester: ' '
+              )
+              ,totalMark:' '),
+          SecondSemester(subject: '',
+              marks:Marks(
+                  midMarkSecondSemester: ' ',
+                  finalMarkSecondSemester: ' ',
+                  quizPrizeSecondSemester: ' '
+              )
+              ,totalMark:' '),
+          SecondSemester(subject: '',
+              marks:Marks(
+                  midMarkSecondSemester: ' ',
+                  finalMarkSecondSemester: ' ',
+                  quizPrizeSecondSemester: ' '
+              )
+              ,totalMark:' '),
+          SecondSemester(subject: '',
+              marks:Marks(
+                  midMarkSecondSemester: ' ',
+                  finalMarkSecondSemester: ' ',
+                  quizPrizeSecondSemester: ' '
+              )
+              ,totalMark:' '),
+          SecondSemester(subject: '',
+              marks:Marks(
+                  midMarkSecondSemester: ' ',
+                  finalMarkSecondSemester: ' ',
+                  quizPrizeSecondSemester: ' '
+              )
+              ,totalMark:' '),
+          SecondSemester(subject: '',
+              marks:Marks(
+                  midMarkSecondSemester: ' ',
+                  finalMarkSecondSemester: ' ',
+                  quizPrizeSecondSemester: ' '
+              )
+              ,totalMark:' '),
+          SecondSemester(subject: '',
+              marks:Marks(
+                  midMarkSecondSemester: ' ',
+                  finalMarkSecondSemester: ' ',
+                  quizPrizeSecondSemester: ' '
+              )
+              ,totalMark:' ')
+        ],
+      );
       emit( AppStaffWebGetCertificateSuccessState(certificateModel!));
     }
     else {
@@ -261,4 +703,39 @@ class StudentProfileCubit extends Cubit<StudentProfileState> {
     }
   }
 
+  String? yearValue;
+  String changeYear(yearValue)
+  {
+    this.yearValue=yearValue;
+    emit(ChangeYearState());
+    print(yearValue);
+    return yearValue;
+  }
+  GetYearsModel? getYearsModel;
+  Future getYears({studentId})async
+  {
+    emit(GetYearsLoadingState());
+    var headers = {
+      'Authorization': 'Bearer $token'
+    };
+    var request = http.Request('GET', Uri.parse('https://new-school-management-system.onrender.com/get_years/$studentId'));
+
+    request.headers.addAll(headers);
+
+    var response = await request.send();
+
+    if (response.statusCode == 200) {
+      getYearsModel=GetYearsModel.fromJson(jsonDecode(await response.stream.bytesToString()));
+      print(response.statusCode);
+      print(getYearsModel?.toJson().toString());
+      emit(GetYearsSuccessState(getYearsModel!));
+    }
+    else {
+      String error=jsonDecode(await response.stream.bytesToString())['message'];
+      print(response.statusCode);
+      print(error);
+      emit(GetYearsErrorState(error));
+    }
+
+  }
 }
