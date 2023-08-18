@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:bloc/bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:web_schoolapp/business%20logic/cubits/exam_table_cubit/state.dart';
+import 'package:web_schoolapp/data/models/add_exam_table_message_model.dart';
 import 'package:web_schoolapp/data/models/exam_table_model_send.dart';
 import 'package:http/http.dart' as http;
 
@@ -14,6 +15,7 @@ class AddExamTableCubit extends Cubit<ExamTableState>
 {
   AddExamTableCubit():super(InitialExamTableState());
   static AddExamTableCubit get(context)=>BlocProvider.of(context);
+  AddExamTableMessage? addExamTableMessage;
   postExamTable( {required ExamTableSendModel data})async
   {
     emit(ExamTableAddLoadingState());
@@ -28,11 +30,14 @@ class AddExamTableCubit extends Cubit<ExamTableState>
     );
 
     var response = await request;
+    final Map<String, dynamic> json = jsonDecode(response.body);
+
 
     if (response.statusCode == 200) {
       print(response.statusCode);
       print(response.body);
-      emit(ExamTableAddSuccessState());
+      addExamTableMessage=AddExamTableMessage.fromJson(json);
+      emit(ExamTableAddSuccessState(addExamTableMessage!));
     }
     else {
       String error=jsonDecode(jsonDecode(await response.body)['message']);

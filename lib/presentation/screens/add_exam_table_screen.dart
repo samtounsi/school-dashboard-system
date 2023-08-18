@@ -854,7 +854,53 @@ class ExamTableScreen extends StatelessWidget {
               ),
             ));
       },
-      listener: (context, state) {},
+      listener: (context, state) {
+        if(state is ExamTableAddSuccessState)
+          {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(content: Padding(
+                padding: EdgeInsetsDirectional.symmetric(horizontal: 550,vertical: 16),
+
+                child: Container(
+                    height: 50,
+                    constraints: const BoxConstraints(maxWidth: 400),
+                    decoration: BoxDecoration(color: AppColors.lightOrange,borderRadius: BorderRadius.all(Radius.circular(20))),
+                    child: Center(
+                      child: Text(state.ex.message,
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(color: AppColors.darkBlue,fontSize: 20,fontWeight: FontWeight.bold),),
+                    )),
+              ),
+                behavior: SnackBarBehavior.floating,
+                backgroundColor: Colors.transparent,
+                elevation: 0,
+              ),
+            );
+          }
+        else if(state is ExamTableAddSuccessState)
+          {
+            ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(content: Padding(
+                  padding: EdgeInsetsDirectional.symmetric(horizontal: 550,vertical: 16),
+
+                  child: Container(
+                      height: 50,
+                      constraints: const BoxConstraints(maxWidth: 400),
+                      decoration: BoxDecoration(color: Colors.red,borderRadius: BorderRadius.all(Radius.circular(20))),
+                      child: Center(
+                        child: Text(state.ex.message,
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(color: AppColors.darkBlue,fontSize: 20,fontWeight: FontWeight.bold),),
+                      )),
+                ),
+                  behavior: SnackBarBehavior.floating,
+                  backgroundColor: Colors.transparent,
+                  elevation: 0,
+                ));
+          }
+      },
     );
   }
 }

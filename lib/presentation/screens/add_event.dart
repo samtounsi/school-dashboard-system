@@ -295,7 +295,7 @@ class AddEvent extends StatelessWidget {
                                           eventTime: timeController.text,
                                           userId: '1'
                                       );
-                                      EventWebCubit.get(context).postEvent(data: model)
+                                      EventWebCubit.get(context).postEvent(data: model,body: descriptionController.text,title: titleController.text)
                                           .then((value) => EventWebCubit.get(context).showEvents());
                                       print(model.toJson(model).toString());
                                     },

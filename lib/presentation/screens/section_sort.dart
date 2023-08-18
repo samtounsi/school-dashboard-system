@@ -4,7 +4,6 @@ import 'package:conditional_builder_null_safety/conditional_builder_null_safety.
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:web_schoolapp/business%20logic/cubits/sort_student_cubit/cubit.dart';
 import 'package:web_schoolapp/business%20logic/cubits/sort_student_cubit/state.dart';
 import '../../data/models/student_sort_model.dart';
@@ -45,6 +44,37 @@ class SectionSort extends StatelessWidget {
                         child: Center(
                           child: Text(
                            'success sort all students by their GPA',
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold),
+                          ),
+                        )),
+                  ),
+                  behavior: SnackBarBehavior.floating,
+                  backgroundColor: Colors.transparent,
+                  elevation: 0,
+                ));
+          }
+        if(state is ErrorSortStudentState)
+          {
+            ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Padding(
+                    padding: EdgeInsetsDirectional.symmetric(
+                        horizontal: 500, vertical: 16),
+                    child: Container(
+                        height: 80,
+
+                        constraints: const BoxConstraints(maxWidth: 700),
+                        decoration: BoxDecoration(
+                            color: Colors.red,
+                            borderRadius: BorderRadius.all(Radius.circular(20))),
+                        child: Center(
+                          child: Text(
+                            'students has already been sorted',
                             maxLines: 2,
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(

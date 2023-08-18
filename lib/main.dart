@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:web_schoolapp/business%20logic/cubits/Show%20Time%20Table/cubit.dart';
+import 'package:web_schoolapp/business%20logic/cubits/edit_profile_backup_cubit/cubit.dart';
 import 'package:web_schoolapp/business%20logic/cubits/event_cubit/cubit.dart';
 import 'package:web_schoolapp/business%20logic/cubits/home_cubit_owner/cubit.dart';
 import 'package:web_schoolapp/business%20logic/cubits/home_cubit_staff/cubit.dart';
@@ -15,9 +16,9 @@ import 'package:web_schoolapp/presentation/components%20and%20constants/constant
 import 'package:web_schoolapp/presentation/screens/layouts/layout1.dart';
 import 'package:web_schoolapp/presentation/screens/layouts/staff_layout.dart';
 import 'package:web_schoolapp/presentation/screens/login_screen.dart';
-import 'package:web_schoolapp/presentation/screens/show_staff.dart';
 
 import 'business logic/cubits/exam_schedule_cubit/cubit.dart';
+import 'business logic/cubits/exam_table_cubit/cubit.dart';
 import 'business logic/cubits/feedback_cubit/cubit.dart';
 import 'business logic/cubits/sort_student_cubit/cubit.dart';
 import 'business logic/cubits/staff_profile/cubit.dart';
@@ -33,8 +34,8 @@ void main() async {
   type = CacheHelper.getData(key: 'type');
   print(token);
   print(type);
-  //CacheHelper.removeData(key: 'token');
-  //CacheHelper.removeData(key: 'type');
+  // CacheHelper.removeData(key: 'token');
+  // CacheHelper.removeData(key: 'type');
 
   if (token != null) {
     if (type == 'owner') {
@@ -117,6 +118,12 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => FeedbackCubit(),
+        ),
+        BlocProvider(
+          create: (context) => EditBackUpCubit(),
+        ),
+        BlocProvider(
+          create: (context) => AddExamTableCubit(),
         ),
       ],
       child: MaterialApp(

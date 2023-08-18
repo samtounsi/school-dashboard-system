@@ -527,7 +527,7 @@ class _AddStudentState extends State<AddStudent> {
                                                   return 'This field is required';
                                                 }
                                                 if (!RegExp(
-                                                        r'(^(?:[+0]9)?[0-9]{7}$)')
+                                                        r'(^(?:[+0]9)?[0-9]{10}$)')
                                                     .hasMatch(value!)) {
                                                   return ' Enter correct number';
                                                 }

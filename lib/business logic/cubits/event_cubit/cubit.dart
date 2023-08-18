@@ -27,7 +27,7 @@ class EventWebCubit extends Cubit<EventWebStates> {
   ];
 
   AddEventResponseModel? addEventResponseModel;
-  Future postEvent({required AddEventModel data})async
+  Future postEvent({required AddEventModel data,required String title,required String body})async
   {
    emit(AddEventWebLoadingState());
     var request = http.post( Uri.parse('https://new-school-management-system.onrender.com/web/add_event'),
@@ -46,7 +46,9 @@ class EventWebCubit extends Cubit<EventWebStates> {
       addEventResponseModel=AddEventResponseModel.fromJson(jsonDecode(await response.body));
       print(addEventResponseModel?.message.toString());
       emit(AddEventWebSuccessState(addEventResponseModel!));
-  }
+      sendNotification(title,body);
+
+    }
   else {
       print(response.statusCode);
       print(response.body);
@@ -109,5 +111,26 @@ class EventWebCubit extends Cubit<EventWebStates> {
   }
 
   }
+  Future<void> sendNotification(String title,String body)
+  async {
+    var request=http.MultipartRequest('POST',Uri.parse('https://new-school-management-system.onrender.com/send_notifications'));
+    request.headers.addAll({
+      'Accept': '*/*',
+      'Authorization': 'Bearer $token',
+      'Content-type': 'multipart/form-data'
+    });
+    request.fields.addAll({
+      'title':title,
+      'body':body,
+      'topic':'all',
+    });
+    final response = await request.send();
+    var responseString = await response.stream.bytesToString();
+    final myResponse = http.Response(responseString, response.statusCode);
+    final json = jsonDecode(myResponse.body);
+    print(json);
+    print(response.statusCode);
 
+
+  }
 }
