@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:web_schoolapp/business%20logic/cubits/student_cubit/cubit.dart';
 import 'package:web_schoolapp/business%20logic/cubits/student_cubit/states.dart';
-import '../../data/models/active_success_student_model.dart';
 import '../../data/models/search_student_parameters.dart';
 import '../../data/models/student_model.dart';
 import 'package:web_schoolapp/presentation/components%20and%20constants/constants.dart';

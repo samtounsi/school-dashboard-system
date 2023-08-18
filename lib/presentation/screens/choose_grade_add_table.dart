@@ -4,10 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:web_schoolapp/business%20logic/cubits/timetable_cubit/cubit.dart';
-import 'package:web_schoolapp/data/models/add_time_table_model.dart';
 import 'package:web_schoolapp/presentation/components%20and%20constants/components.dart';
 import 'package:web_schoolapp/presentation/components%20and%20constants/constants.dart';
-import 'package:web_schoolapp/presentation/screens/add_attendance_screen.dart';
 import 'package:web_schoolapp/presentation/screens/time_table.dart';
 
 import '../../business logic/cubits/timetable_cubit/states.dart';

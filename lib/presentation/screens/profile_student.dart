@@ -5,13 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:image_picker_web/image_picker_web.dart';
 import 'package:intl/intl.dart';
-import 'package:table_calendar/table_calendar.dart';
 
 import 'package:web_schoolapp/business%20logic/cubits/student_profile/student_profile_cubit.dart';
 import 'package:web_schoolapp/business%20logic/cubits/student_profile/student_profile_state.dart';
-import '../../business logic/cubits/student_cubit/cubit.dart';
 import '../../data/models/active_send_student_model.dart';
 import '../../data/models/certificate_model.dart';
 import '../../data/models/send_edit_student_profile_model.dart';
@@ -19,7 +16,6 @@ import '../../data/models/student_profile_model.dart';
 
 import 'package:web_schoolapp/presentation/components%20and%20constants/components.dart';
 import 'package:web_schoolapp/presentation/components%20and%20constants/constants.dart';
-import 'add_student.dart';
 import 'package:web_schoolapp/presentation/screens/add_teacher.dart';
 import 'parent_profile.dart';
 

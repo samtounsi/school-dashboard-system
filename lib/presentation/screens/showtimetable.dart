@@ -6,8 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:web_schoolapp/business%20logic/cubits/Show%20Time%20Table/cubit.dart';
 import 'package:web_schoolapp/business%20logic/cubits/Show%20Time%20Table/states.dart';
-import 'package:web_schoolapp/business%20logic/cubits/timetable_cubit/states.dart';
-import 'package:web_schoolapp/presentation/classes/lessons.dart';
+
 import 'package:web_schoolapp/presentation/components%20and%20constants/components.dart';
 import 'package:web_schoolapp/presentation/components%20and%20constants/constants.dart';
 import 'package:web_schoolapp/presentation/components%20and%20constants/dropdown.dart';

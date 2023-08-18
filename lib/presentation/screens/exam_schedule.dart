@@ -3,7 +3,6 @@ import 'package:conditional_builder_null_safety/conditional_builder_null_safety.
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:mdi/mdi.dart';
 
 import '../../business logic/cubits/exam_schedule_cubit/cubit.dart';
 import '../../business logic/cubits/exam_schedule_cubit/states.dart';

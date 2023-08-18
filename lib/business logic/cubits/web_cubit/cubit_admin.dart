@@ -27,6 +27,8 @@ import 'package:http/http.dart' as http;
 import '../../../data/models/activate_user_model.dart';
 import '../../../data/models/show_staff.dart';
 import '../../../presentation/components and constants/constants.dart';
+import '../../../presentation/screens/add_exam_table_screen.dart';
+import '../../../presentation/screens/edit_profile_owner.dart';
 import '../../../presentation/screens/search_student_screen.dart';
 import '../../../presentation/screens/section_sort.dart';
 
@@ -57,7 +59,9 @@ class WebSchoolCubit extends Cubit<WebSchoolStates> {
     ChooseGradeAddTableScreen(),
     AddEvent(),
     FeedBack(),
-    ExamSchedule()
+    ExamSchedule(),
+    ExamTableScreen(),
+    EditProfileOwner(),
   ];
 
   int currentInd = 0;
@@ -92,6 +96,10 @@ class WebSchoolCubit extends Cubit<WebSchoolStates> {
         icon: Icon(Icons.feedback), label: Text('Feedback')),
     NavigationRailDestination(
         icon: Icon(Icons.feedback), label: Text('Exam Schedule')),
+    NavigationRailDestination(
+        icon: Icon(Icons.schedule_rounded), label: Text('Add Exam Schedule')),
+    NavigationRailDestination(
+        icon: Icon(Icons.edit), label: Text('Edit Profile')),
   ];
 
 

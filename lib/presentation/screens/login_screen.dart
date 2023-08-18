@@ -4,12 +4,10 @@ import 'package:conditional_builder_null_safety/conditional_builder_null_safety.
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:web_schoolapp/business%20logic/cubits/login_cubit/cubit.dart';
 import 'package:web_schoolapp/business%20logic/cubits/login_cubit/states.dart';
 import 'package:web_schoolapp/business%20logic/cubits/web_cubit/cubit_admin.dart';
 import 'package:web_schoolapp/business%20logic/cubits/web_cubit/cubit_staff.dart';
-import 'package:web_schoolapp/data/models/login_model.dart';
 import 'package:web_schoolapp/presentation/components%20and%20constants/components.dart';
 import 'package:web_schoolapp/presentation/components%20and%20constants/constants.dart';
 import 'package:web_schoolapp/presentation/screens/layouts/layout1.dart';

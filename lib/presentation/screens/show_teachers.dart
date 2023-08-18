@@ -10,7 +10,6 @@ import 'package:web_schoolapp/presentation/screens/teacher_profile.dart';
 
 import '../../business logic/cubits/teacher_cubit/cubit.dart';
 import '../../data/models/show_teachers_model.dart';
-import '../../data/models/teacher_show_model.dart';
 import '../components and constants/components.dart';
 import '../components and constants/dropdown.dart';
 

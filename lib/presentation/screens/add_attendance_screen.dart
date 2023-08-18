@@ -7,8 +7,6 @@ import 'package:intl/intl.dart';
 import '../../business logic/cubits/student_cubit/cubit.dart';
 import '../../business logic/cubits/student_cubit/states.dart';
 import '../../data/models/add_attendance_student_model.dart';
-import '../../data/models/student_model.dart';
-import 'package:web_schoolapp/presentation/components%20and%20constants/components.dart';
 import 'package:web_schoolapp/presentation/components%20and%20constants/constants.dart';
 import '../../data/models/search_student_parameters.dart';
 

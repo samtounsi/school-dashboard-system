@@ -1,11 +1,7 @@
-
-import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:web_schoolapp/presentation/components%20and%20constants/logComponent.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-
 import '../../data/models/registerModel.dart';
 class UserNamePasswordScreen extends StatelessWidget {
   RegisterModel? registerModel;

@@ -10,12 +10,9 @@ import 'package:web_schoolapp/business%20logic/cubits/staff_profile/states.dart'
 import 'package:web_schoolapp/presentation/components%20and%20constants/components.dart';
 
 import 'package:web_schoolapp/presentation/components%20and%20constants/constants.dart';
-import 'package:web_schoolapp/presentation/screens/usernamePasswordScreen.dart';
 
 import '../../business logic/cubits/staff_profile/cubit.dart';
-import 'package:intl/intl.dart';
 
-import '../../data/models/staffRegisterModel.dart';
 import '../../data/models/staff_edit_profile_model.dart';
 
 TextEditingController firstNameController = TextEditingController();

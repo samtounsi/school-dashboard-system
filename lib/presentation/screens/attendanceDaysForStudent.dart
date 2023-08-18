@@ -4,7 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:web_schoolapp/business%20logic/cubits/student_profile/student_profile_cubit.dart';
 import '../../business logic/cubits/student_profile/student_profile_state.dart';
 import '../../data/models/delete_attendance_model.dart';
-import '../../data/models/student_profile_model.dart';
 import '../components and constants/constants.dart';
 
 class AttendanceDaysStudent extends StatelessWidget {

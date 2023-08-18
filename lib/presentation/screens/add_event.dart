@@ -7,7 +7,6 @@ import 'package:intl/intl.dart';
 import 'package:web_schoolapp/business%20logic/cubits/event_cubit/cubit.dart';
 import 'package:web_schoolapp/business%20logic/cubits/event_cubit/states.dart';
 import 'package:web_schoolapp/data/models/add_event_model.dart';
-import 'package:web_schoolapp/presentation/classes/event.dart';
 import 'package:web_schoolapp/presentation/components%20and%20constants/components.dart';
 import 'package:web_schoolapp/presentation/components%20and%20constants/constants.dart';
 

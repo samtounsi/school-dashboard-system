@@ -18,8 +18,10 @@ import '../../../data/models/activate_user_model.dart';
 import '../../../data/models/show_staff.dart';
 import '../../../presentation/components and constants/constants.dart';
 import '../../../presentation/screens/add_attendance_screen.dart';
+import '../../../presentation/screens/add_exam_table_screen.dart';
 import '../../../presentation/screens/choose_grade_add_table.dart';
 import '../../../presentation/screens/choose_grade_show_table.dart';
+import '../../../presentation/screens/exam_schedule.dart';
 import '../../../presentation/screens/search_student_screen.dart';
 import '../../../presentation/screens/show_staff.dart';
 
@@ -72,6 +74,10 @@ class WebStaffCubit extends Cubit<WebStaffStates> {
     ChooseGradeAddTableScreen(),
     AddEvent(),
     FeedBack(),
+    ExamSchedule(),
+    ExamTableScreen(),
+
+
   ];
 
   int currentInd = 0;
@@ -101,6 +107,11 @@ class WebStaffCubit extends Cubit<WebStaffStates> {
         icon: Icon(Icons.notifications), label: Text('Events')),
     NavigationRailDestination(
         icon: Icon(Icons.feedback), label: Text('Feedback')),
+
+    NavigationRailDestination(
+        icon: Icon(Icons.schedule_rounded), label: Text('Add Exam Schedule')),
+    NavigationRailDestination(
+        icon: Icon(Icons.feedback), label: Text('Exam Schedule')),
   ];
 
   bool isPassword = true;

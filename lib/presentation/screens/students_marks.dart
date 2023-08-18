@@ -3,15 +3,11 @@
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:web_schoolapp/business%20logic/cubits/web_cubit/cubit_staff.dart';
-import 'package:web_schoolapp/business%20logic/cubits/web_cubit/states_staff.dart';
-import 'package:web_schoolapp/presentation/classes/marks.dart';
+
 import 'package:web_schoolapp/presentation/components%20and%20constants/constants.dart';
 import 'package:web_schoolapp/presentation/components%20and%20constants/utils.dart';
-import 'package:web_schoolapp/presentation/screens/layouts/layout1.dart';
 
-import '../../business logic/cubits/student_cubit/cubit.dart';
-import '../../business logic/cubits/student_cubit/states.dart';
+
 import '../../business logic/cubits/student_profile/student_profile_cubit.dart';
 import '../../business logic/cubits/student_profile/student_profile_state.dart';
 import '../../data/models/certificate_model.dart';

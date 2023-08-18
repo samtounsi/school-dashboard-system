@@ -1,6 +1,5 @@
 // ignore_for_file: prefer_const_constructors
 
-import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
@@ -8,7 +7,6 @@ import 'package:web_schoolapp/business%20logic/cubits/Show%20Time%20Table/cubit.
 import 'package:web_schoolapp/business%20logic/cubits/Show%20Time%20Table/states.dart';
 import 'package:web_schoolapp/presentation/components%20and%20constants/components.dart';
 import 'package:web_schoolapp/presentation/components%20and%20constants/constants.dart';
-import 'package:web_schoolapp/presentation/screens/add_attendance_screen.dart';
 import 'package:web_schoolapp/presentation/screens/showtimetable.dart';
 
 
