@@ -24,7 +24,7 @@ class  ShowTimetableCubit extends Cubit< ShowTimetableStates>{
     print(gradeValue);
     return gradeValue;
   }
-  String sectionValue='1';
+  String? sectionValue;
   String changeSection(value) {
     this.sectionValue = value;
     print(value);
@@ -43,17 +43,20 @@ class  ShowTimetableCubit extends Cubit< ShowTimetableStates>{
       'Authorization': 'Bearer $token'
     };
 
-    var request = http.Request('GET', Uri.parse('https://new-school-management-system.onrender.com/web/get_sections/$gradeValue'));
+    var request = http.Request('GET', Uri.parse('https://new-school-management-system.onrender.com/web/get_sections/$grade'));
 
     request.headers.addAll(headers);
 
     http.StreamedResponse response = await request.send();
 
     if (response.statusCode == 200) {
+      if(showSection!=null)
+      {
+        showSection=null;
+      }
       showSection=ShowSections.fromJson(jsonDecode(await response.stream.bytesToString()));
       print(showSection?.toJson().toString());
-      sectionValue=showSection!.sectionNumbers![0].toString();
-      sections=showSection?.sectionNumbers;
+      //sections=showSection?.sectionNumbers;
       print(grade);
       emit(ShowSectionsSuccessState(showSection!));
     }
@@ -68,7 +71,7 @@ class  ShowTimetableCubit extends Cubit< ShowTimetableStates>{
 
   GetTimetableModel? showTimetableModel;
   GetTimetableModel? emptyTable;
-  showTimetable({grade,section})async
+  Future showTimetable({grade,section})async
   {
     emit(AppShowTimetableLoadingState());
     var headers = {
@@ -76,7 +79,7 @@ class  ShowTimetableCubit extends Cubit< ShowTimetableStates>{
     };
     var request = http.MultipartRequest('POST', Uri.parse('https://new-school-management-system.onrender.com/web/get_time_table'));
     request.fields.addAll({
-      'section': sectionValue,
+      'section': section,
       'grade': grade
     });
 
@@ -87,7 +90,63 @@ class  ShowTimetableCubit extends Cubit< ShowTimetableStates>{
     if (response.statusCode == 200) {
       if(showTimetableModel!=null)
       {
-        showTimetableModel=null;
+        showTimetableModel=GetTimetableModel
+          (
+            exist: 0,
+            daysLessons:  [
+              DaysLessons( day: "Sun",
+                  first: " ",
+                  second: " ",
+                  third: " ",
+                  fourth: " ",
+                  fifth: " ",
+                  sixth: " "),
+              DaysLessons( day: "Mon",
+                  first: " ",
+                  second: " ",
+                  third: " ",
+                  fourth: " ",
+                  fifth: " ",
+                  sixth: " "),
+              DaysLessons( day: "Tue",
+                  first: " ",
+                  second: " ",
+                  third: " ",
+                  fourth: " ",
+                  fifth: " ",
+                  sixth: " "),
+              DaysLessons( day: "Wed",
+                  first: " ",
+                  second: " ",
+                  third: " ",
+                  fourth: " ",
+                  fifth: " ",
+                  sixth: " "),
+              DaysLessons( day: "Thu",
+                  first: " ",
+                  second: " ",
+                  third: " ",
+                  fourth: " ",
+                  fifth: " ",
+                  sixth: " "),
+            ],
+            arabicTeacher:' ',
+            englishTeacher:' ',
+            frenchTeacher:' ',
+            mathTeacher:' ',
+            physicsTeacher:' ',
+            chemistryTeacher: ' ',
+            artTeacher: ' ',
+            musicTeacher:' ',
+            sportsTeacher:' ',
+            socialTeacher:' ',
+            cultureTeacher:' ',
+            religionTeacher:' ',
+            philosophyTeacher:' ',
+            scienceTeacher:' ',
+            technologyTeacher:' ',
+            message: "time table has not been added yet"
+        );
       }
       showTimetableModel=GetTimetableModel.fromJson(jsonDecode(await response.stream.bytesToString()));
       print(response.statusCode);

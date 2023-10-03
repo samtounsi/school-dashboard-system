@@ -17,7 +17,7 @@ import '../../data/models/get_timetable_model.dart';
 
 
  String classValue = 'seventh';
-String sectionValue = '1';
+String? sectionValue ;
 
 final columns = ['Day', '1', '2', '3', '4', '5', '6'];
 var model;
@@ -133,6 +133,8 @@ class ShowTimetable extends StatelessWidget {
                                                   ShowTimetableCubit.get(context).changeSection(value!);
                                                   sectionValue = ShowTimetableCubit.get(context).sectionValue;
                                                 },
+                                                hintText: Text('select section',
+                                                  style: TextStyle(color: AppColors.darkBlue,fontSize: 20),),
                                                 maxLength:  ShowTimetableCubit.get(context).showSection!.sectionNumbers!.length,
                                                 value: sectionValue
                                             ),

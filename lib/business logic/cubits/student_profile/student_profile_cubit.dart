@@ -461,7 +461,7 @@ class StudentProfileCubit extends Cubit<StudentProfileState> {
     };
     var request = http.MultipartRequest('POST', Uri.parse('https://new-school-management-system.onrender.com/web/get_student_marks'));
     request.fields.addAll({
-      'year_date': year,
+      'year_date': '2022-2023',
       'id': id.toString()
     });
     request.headers.addAll(headers);
@@ -470,11 +470,13 @@ class StudentProfileCubit extends Cubit<StudentProfileState> {
     if (response.statusCode == 201) {
       print(response.statusCode);
       certificateModel=CertificateModel.fromJson(jsonDecode(await response.stream.bytesToString()));
-      print(certificateModel?.toJson().toString());
+     print(certificateModel?.toJson().toString());
       emit( AppStaffWebGetCertificateSuccessState(certificateModel!));
     }
     else if(response.statusCode==422)
     {
+      print(id);
+      print(year);
       certificateModel=CertificateModel
         (
         message: ' ',
@@ -693,6 +695,7 @@ class StudentProfileCubit extends Cubit<StudentProfileState> {
               ,totalMark:' ')
         ],
       );
+      print(response.statusCode);
       emit( AppStaffWebGetCertificateSuccessState(certificateModel!));
     }
     else {

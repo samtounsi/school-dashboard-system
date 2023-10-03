@@ -54,7 +54,7 @@ class EditBackUpCubit extends Cubit<EditBackupState> {
     }
   }
   BackupModel? backupModel;
-  Future<void> backUp(String successAverage,String currentYear)
+  Future<void> backUp(String successAverage)
   async {
     emit(BackUpStateLoading());
     try {
@@ -64,7 +64,6 @@ class EditBackUpCubit extends Cubit<EditBackupState> {
               'https://new-school-management-system.onrender.com/web/backup'));
       request.fields.addAll({
         'success_avg':successAverage,
-        'year_date':currentYear,
       });
       request.headers.addAll({
         'Content-Type': 'application/json',

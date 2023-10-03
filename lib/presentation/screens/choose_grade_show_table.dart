@@ -39,7 +39,9 @@ class _ChooseGradeShowTableScreenState extends State<ChooseGradeShowTableScreen>
                         ShowTimetableCubit.get(context).getGrade('seventh');
                         ShowTimetableCubit.get(context).showSections(grade: 'seventh').then((value)
                         {
-                          navigateTo(context, ShowTimetable(grade: 'seventh',));
+                          ShowTimetableCubit.get(context).showTimetable(grade: 'seventh',section: '1').then((value) =>
+                              navigateTo(context, ShowTimetable(grade: 'seventh',)));
+
                         }) ;
                       },
                       radius: 20,
@@ -57,7 +59,8 @@ class _ChooseGradeShowTableScreenState extends State<ChooseGradeShowTableScreen>
 
                         ShowTimetableCubit.get(context).showSections(grade: 'eighth').then((value)
                         {
-                          navigateTo(context, ShowTimetable(grade: 'eighth',));
+                          ShowTimetableCubit.get(context).showTimetable(grade: 'eighth',section: '1').then((value)
+                          => navigateTo(context, ShowTimetable(grade: 'eighth',)));
                         }) ;
                       },
                       radius: 20,
@@ -75,7 +78,8 @@ class _ChooseGradeShowTableScreenState extends State<ChooseGradeShowTableScreen>
 
                         ShowTimetableCubit.get(context).showSections(grade: 'ninth').then((value)
                         {
-                          navigateTo(context, ShowTimetable(grade: 'ninth',));
+                          ShowTimetableCubit.get(context).showTimetable(grade: 'ninth',section: '1')
+                              .then((value) =>  navigateTo(context, ShowTimetable(grade: 'ninth',)));
                         }) ;
                       },
                       radius: 20,

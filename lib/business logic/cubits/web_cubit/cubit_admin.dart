@@ -95,7 +95,7 @@ class WebSchoolCubit extends Cubit<WebSchoolStates> {
     NavigationRailDestination(
         icon: Icon(Icons.feedback), label: Text('Feedback')),
     NavigationRailDestination(
-        icon: Icon(Icons.feedback), label: Text('Exam Schedule')),
+        icon: Icon(Icons.access_alarm_outlined), label: Text('Exam Schedule')),
     NavigationRailDestination(
         icon: Icon(Icons.schedule_rounded), label: Text('Add Exam Schedule')),
     NavigationRailDestination(

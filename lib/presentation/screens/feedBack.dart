@@ -65,7 +65,7 @@ class _FeedBackState extends State<FeedBack> {
                           ),
                           child: Container(
                             width: 200,
-                            height: 200,
+                            height: 250,
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(20),
                                 border: Border.all(color: AppColors.darkBlue,width: 2)

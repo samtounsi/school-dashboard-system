@@ -661,9 +661,6 @@ class _TeacherProfileState extends State<TeacherProfile> {
                                       ),
                                     ],
                                   ),
-                                  SizedBox(
-                                    height: 50,
-                                  ),
                                   Padding(
                                     padding: EdgeInsetsDirectional.only(
                                         start: 230, end: 150),

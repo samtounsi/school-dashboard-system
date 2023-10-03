@@ -95,35 +95,36 @@ class ShowStaff extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Expanded(
-                      child: SingleChildScrollView(
-                        scrollDirection: Axis.vertical,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          mainAxisSize: MainAxisSize.min,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Container(
-                              width: 500,
-                              height: 80,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(50),
-                                color: Colors.transparent,
-                              ),
-                              child: Center(
-                                child: Padding(
-                                  padding: const EdgeInsets.all(10.0),
-                                  child: text(
-                                      'All School\'s Admins ',
-                                      color: AppColors.darkBlue,
-                                      size: 40,
-                                      weight: FontWeight.w600
-                                  ),
+                    SingleChildScrollView(
+                      scrollDirection: Axis.vertical,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                            width: 500,
+                            height: 80,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(50),
+                              color: Colors.transparent,
+                            ),
+                            child: Center(
+                              child: Padding(
+                                padding: const EdgeInsets.all(10.0),
+                                child: text(
+                                    'All School\'s Admins ',
+                                    color: AppColors.darkBlue,
+                                    size: 40,
+                                    weight: FontWeight.w600
                                 ),
                               ),
                             ),
-                            SizedBox(height: 20,),
-                            Column(
+                          ),
+                          SizedBox(height: 20,),
+                          Container(
+                            width: 600,
+                            child: Column(
                               mainAxisAlignment: MainAxisAlignment.start,
                               mainAxisSize: MainAxisSize.min,
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -137,8 +138,8 @@ class ShowStaff extends StatelessWidget {
                                     itemCount: model!.staff!.length),
                               ],
                             ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
                     ),
                     Column(
@@ -161,8 +162,8 @@ class ShowStaff extends StatelessWidget {
                           padding: const EdgeInsets.only(right:150.0),
                           child: SvgPicture.asset(
                             'images/In the office-cuate.svg',
-                            width: 350.0,
-                            height: 400.0,
+                            width: 150.0,
+                            height: 300.0,
                           ),
                         ),
                       ],

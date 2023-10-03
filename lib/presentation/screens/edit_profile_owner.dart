@@ -119,27 +119,14 @@ class EditProfileOwner extends StatelessWidget {
                                       type: TextInputType.text,
                                       validate: (value) {},
                                     ),
-                                    SizedBox(
-                                      height: 30,
-                                    ),
-                                    defaultformfeild(
-                                      label: 'current year',
-                                        controller: yearsDate,
-                                        type: TextInputType.text,
-                                        validate: (value) {}),
                                     SizedBox(height: 30,),
-                                    ConditionalBuilder(
-                                      condition: state is ! BackUpStateLoading,
-                                      builder: (context) {
-                                        return defaultTextButton(text: 'send', function: (){
-                                          EditBackUpCubit.get(context).backUp(successAvg.text, yearsDate.text);
+                                     defaultTextButton(text: 'send', function: (){
+                                          EditBackUpCubit.get(context).backUp(successAvg.text);
+                                          Navigator.pop(context);
                                         }, radius: 30,
                                             width: 150,
-                                            background: AppColors.darkBlue);
-                                      },
-                                      fallback: (context) =>Center(child: CircularProgressIndicator(),),
-
-                                    )
+                                            background: AppColors.darkBlue)
+                                      ,
                                   ],
                                 ),
                               ),
@@ -169,7 +156,7 @@ class EditProfileOwner extends StatelessWidget {
                               height: 30,
                             ),
                             Text(
-                              'You can modify the usename and password',
+                              'You can modify the username and password',
                               style: TextStyle(
                                 fontWeight: FontWeight.w600,
                                 fontSize: 40,
@@ -251,7 +238,7 @@ class EditProfileOwner extends StatelessWidget {
                                   condition: state is! EditProfileOwnerLoading,
                                   builder: (BuildContext context) {
                                     return defaultTextButton(
-                                      text: 'Edit',
+                                      text: 'CONFIRM',
                                       function: () {
                                         EditBackUpCubit.get(context)
                                             .editProfileOwner(

@@ -136,8 +136,59 @@ class ExamSchedule extends StatelessWidget {
                          ),
                          Column(
                            children: [
+                             Center(
+                               child: Column(
+                                 children: [
+                                   Padding(
+                                     padding: const EdgeInsets.all(8.0),
+                                     child: Text(
+                                       'Education is the most ',
+                                       style: TextStyle(
+                                           fontWeight: FontWeight.bold,
+                                           fontSize: 25,
+                                           color: AppColors.aqua),
+                                     ),
+                                   ),
+                                   Padding(
+                                     padding: const EdgeInsets.all(8.0),
+                                     child: Text(
+                                       'powerful weapon which you',
+                                       style: TextStyle(
+                                           fontWeight: FontWeight.bold,
+                                           fontSize: 25,
+                                           color: AppColors.aqua),
+                                     ),
+                                   ),
+                                   Padding(
+                                     padding: const EdgeInsets.all(8.0),
+                                     child: Text(
+                                       ' can use to change the world',
+                                       style: TextStyle(
+                                           fontWeight: FontWeight.bold,
+                                           fontSize: 25,
+                                           color: AppColors.aqua),
+                                     ),
+                                   ),
+      Padding(
+      padding: const EdgeInsets.only(bottom: 8.0,right: 8,top: 8,left:150 ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.end,
+        crossAxisAlignment: CrossAxisAlignment.end,
+        children: [
+          Text(
+          'Nelson Mandela',
+            style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 25,
+            color: AppColors.lightOrange),
+          ),
+        ],
+      ),)
+                                 ],
+                               ),
+                             ),
                              SvgPicture.asset(
-                               'images/Exams-amico (1).svg',
+                               'images/college entrance exam-amico.svg',
                                width: 300.0,
                                height:300.0,
                              ),

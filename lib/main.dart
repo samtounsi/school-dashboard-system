@@ -16,7 +16,6 @@ import 'package:web_schoolapp/presentation/components%20and%20constants/constant
 import 'package:web_schoolapp/presentation/screens/layouts/layout1.dart';
 import 'package:web_schoolapp/presentation/screens/layouts/staff_layout.dart';
 import 'package:web_schoolapp/presentation/screens/login_screen.dart';
-
 import 'business logic/cubits/exam_schedule_cubit/cubit.dart';
 import 'business logic/cubits/exam_table_cubit/cubit.dart';
 import 'business logic/cubits/feedback_cubit/cubit.dart';
@@ -34,8 +33,8 @@ void main() async {
   type = CacheHelper.getData(key: 'type');
   print(token);
   print(type);
-  // CacheHelper.removeData(key: 'token');
-  // CacheHelper.removeData(key: 'type');
+ //CacheHelper.removeData(key: 'token');
+ // CacheHelper.removeData(key: 'type');
 
   if (token != null) {
     if (type == 'owner') {
@@ -73,13 +72,13 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) =>
-              ShowTimetableCubit()..showTimetable(grade: 'seventh', section: 1),
+              ShowTimetableCubit(),
         ),
         BlocProvider(
           create: (context) => StudentCubit(),
         ),
         BlocProvider(
-          create: (context) => AppTeacherWebCubit()..showTeachers(),
+          create: (context) => AppTeacherWebCubit()..showTeachers(activeValue:'true' ),
         ),
         BlocProvider(
           create: (context) => TimetableCubit()

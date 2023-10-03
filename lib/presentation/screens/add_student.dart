@@ -502,11 +502,10 @@ class _AddStudentState extends State<AddStudent> {
                                               if (value!.isEmpty) {
                                                 return 'This field is required';
                                               }
-                                              if (!RegExp(
-                                                      r'(^(?:[+0]9)?[0-9]{10}$)')
+                                               if (!RegExp(
+                                                       r'(^(?:[+0]9)?[0-9]{10}$)')
                                                   .hasMatch(value!)) {
-                                                return ' Enter correct number';
-                                              }
+                                              return ' Enter correct number';}
 
                                               return null;
                                             },

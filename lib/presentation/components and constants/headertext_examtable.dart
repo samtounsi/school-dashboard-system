@@ -19,7 +19,7 @@ class HeaderExamTableText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsetsDirectional.all(20),
+      padding: EdgeInsetsDirectional.only(bottom: 20,start: 20,end: 20),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

@@ -117,7 +117,7 @@ else {
     };
     var request = http.MultipartRequest('POST', Uri.parse('https://new-school-management-system.onrender.com/web/view_teachers'));
     request.fields.addAll({
-      'is_active': activeT
+      'is_active': activeValue
     });
 
     request.headers.addAll(headers);

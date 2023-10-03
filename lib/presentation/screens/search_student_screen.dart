@@ -30,7 +30,7 @@ class _SearchStudentState extends State<SearchStudent> {
     'eighth',
     'ninth',
   ];
-  String gradeValue = 'seventh';
+  String? gradeValue;
 
   @override
   void initState() {
@@ -96,6 +96,7 @@ class _SearchStudentState extends State<SearchStudent> {
                                   DropdownMenuItem(
                                       child: Text("ninth"), value: "ninth"),
                                 ],
+                                hint: Text('Select Grade',style: TextStyle(color: AppColors.aqua,fontSize: 20),),
                                 onChanged: (value) {
                                   StudentCubit.get(context).changeGrade(value!);
                                   gradeValue =

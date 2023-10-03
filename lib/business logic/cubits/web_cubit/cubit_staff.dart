@@ -74,8 +74,8 @@ class WebStaffCubit extends Cubit<WebStaffStates> {
     ChooseGradeAddTableScreen(),
     AddEvent(),
     FeedBack(),
-    ExamSchedule(),
     ExamTableScreen(),
+    ExamSchedule(),
 
 
   ];
@@ -111,7 +111,7 @@ class WebStaffCubit extends Cubit<WebStaffStates> {
     NavigationRailDestination(
         icon: Icon(Icons.schedule_rounded), label: Text('Add Exam Schedule')),
     NavigationRailDestination(
-        icon: Icon(Icons.feedback), label: Text('Exam Schedule')),
+        icon: Icon(Icons.access_alarm_outlined), label: Text('Exam Schedule')),
   ];
 
   bool isPassword = true;
